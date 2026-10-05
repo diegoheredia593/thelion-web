@@ -1,0 +1,221 @@
+---
+/**
+ * §6 Atracciones: tarjetas con ícono (o foto) y filtro Todo · De día · De noche. Sin JavaScript se
+ * ven todas y el filtro no aparece. «Día y noche» sale en los dos filtros; «Por confirmar» solo en
+ * «Todo» y sin etiqueta de horario.
+ */
+import Icono from '../Icono.astro';
+import { atributosFoto } from '../../lib/fotos';
+import type { Bloques, Colecciones } from '../../lib/content';
+
+interface Props {
+  b: Bloques;
+  atracciones: Colecciones['atracciones'][];
+}
+const { b, atracciones } = Astro.props;
+const enlace = b.t('global.entradas.enlace');
+const etiqueta = {
+  dia: b.t('inicio.atracciones.filtroDia'),
+  noche: b.t('inicio.atracciones.filtroNoche'),
+  ambos: b.t('inicio.atracciones.ambos'),
+  porConfirmar: null,
+};
+const filtros = [
+  { valor: 'todo', texto: b.t('inicio.atracciones.filtroTodo') },
+  { valor: 'dia', texto: b.t('inicio.atracciones.filtroDia') },
+  { valor: 'noche', texto: b.t('inicio.atracciones.filtroNoche') },
+].filter((f) => f.texto);
+---
+
+{
+  atracciones.length > 0 && (
+    <section class="seccion" id="atracciones" aria-labelledby="titulo-atracciones">
+      <div class="contenedor">
+        <div class="cabeza">
+          <h2 class="h2" id="titulo-atracciones">{b.t('inicio.atracciones.titulo')}</h2>
+          {b.t('inicio.atracciones.subtitulo') && <p class="lead">{b.t('inicio.atracciones.subtitulo')}</p>}
+        </div>
+
+        {filtros.length === 3 && (
+          <div class="filtro" role="group" aria-label={b.t('inicio.atracciones.titulo') ?? undefined} hidden data-filtro>
+            {filtros.map((f, i) => (
+              <button type="button" class:list={['opcion', f.valor]} data-valor={f.valor} aria-pressed={i === 0 ? 'true' : 'false'}>
+                {f.texto}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <ul class="tarjetas" role="list" data-tarjetas>
+          {atracciones.map((a) => (
+            <li class:list={['tarjeta', a.horario]} data-horario={a.horario}>
+              {a.foto ? (
+                <img class="foto" {...atributosFoto(a.foto, { sizes: '(min-width: 1100px) 280px, (min-width: 640px) 45vw, 92vw' })} />
+              ) : (
+                <span class="icono">
+                  <Icono nombre={a.icono} tamano={34} />
+                </span>
+              )}
+              <div class="cuerpo">
+                {etiqueta[a.horario] && <span class="rotulo horario">{etiqueta[a.horario]}</span>}
+                <h3>{a.nombre}</h3>
+                <p>{a.texto}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {enlace && b.t('inicio.atracciones.boton') && (
+          <a class="boton noche" href={enlace}>{b.t('inicio.atracciones.boton')}</a>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<script>
+  const filtro = document.querySelector<HTMLElement>('[data-filtro]');
+  const tarjetas = [...document.querySelectorAll<HTMLElement>('[data-tarjetas] > li')];
+  if (filtro) {
+    filtro.hidden = false;
+    const botones = [...filtro.querySelectorAll<HTMLButtonElement>('button')];
+    const entra = (horario: string, valor: string) =>
+      valor === 'todo' || horario === valor || horario === 'ambos';
+    botones.forEach((boton) =>
+      boton.addEventListener('click', () => {
+        const valor = boton.dataset.valor!;
+        botones.forEach((b) => b.setAttribute('aria-pressed', String(b === boton)));
+        tarjetas.forEach((t) => (t.hidden = !entra(t.dataset.horario!, valor)));
+      }),
+    );
+  }
+</script>
+
+<style>
+  .cabeza {
+    display: grid;
+    gap: 1rem;
+  }
+  .filtro {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  .filtro[hidden],
+  .tarjeta[hidden] {
+    display: none;
+  }
+  .opcion {
+    --acento-opcion: var(--texto);
+    min-height: 2.75rem;
+    padding: 0.55rem 1.2rem 0.45rem;
+    border: 1px solid var(--linea);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--texto-2);
+    font-family: var(--f-rotulo);
+    font-size: 1.15rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+  }
+  .opcion.dia {
+    --acento-opcion: var(--cian);
+  }
+  .opcion.noche {
+    --acento-opcion: var(--magenta);
+  }
+  .opcion[aria-pressed='true'] {
+    border-color: var(--acento-opcion);
+    background: var(--acento-opcion);
+    color: var(--fondo);
+  }
+  .tarjetas {
+    list-style: none;
+    margin: 2rem 0 2.5rem;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .tarjeta {
+    --acento-t: var(--naranja);
+    display: flex;
+    gap: 1rem;
+    padding: 1.1rem;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    background: var(--superficie);
+  }
+  .tarjeta.dia {
+    --acento-t: var(--cian);
+  }
+  .tarjeta.noche {
+    --acento-t: var(--magenta);
+  }
+  .tarjeta.ambos {
+    --acento-t: var(--texto);
+  }
+  .icono {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 12px;
+    border: 1px solid color-mix(in srgb, var(--acento-t) 45%, transparent);
+    color: var(--acento-t);
+  }
+  .foto {
+    flex: none;
+    width: 5.5rem;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  .cuerpo {
+    display: grid;
+    gap: 0.2rem;
+    align-content: start;
+  }
+  .horario {
+    font-size: 0.95rem;
+    color: var(--acento-t);
+  }
+  .tarjeta.ambos .horario {
+    background: linear-gradient(90deg, var(--cian), var(--magenta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  h3 {
+    font-family: var(--f-rotulo);
+    font-weight: 400;
+    font-size: 1.45rem;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+  .cuerpo p {
+    color: var(--texto-2);
+    font-size: 0.97rem;
+    line-height: 1.45;
+  }
+  @media (min-width: 640px) {
+    .tarjetas {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1100px) {
+    .tarjetas {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .tarjeta {
+      flex-direction: column;
+      padding: 1.5rem;
+    }
+    .foto {
+      width: 100%;
+    }
+  }
+</style>

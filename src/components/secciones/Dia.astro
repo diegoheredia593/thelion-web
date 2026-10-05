@@ -1,0 +1,197 @@
+---
+/** §4 De día: Halloween en familia. Destacados con ícono, programa de la tarde y nota. */
+import Icono from '../Icono.astro';
+import { real } from '../../lib/pendiente';
+import type { Bloques, Colecciones } from '../../lib/content';
+
+interface Props {
+  b: Bloques;
+  destacados: Colecciones['destacados'][];
+  programa: Colecciones['programaDia'][];
+}
+const { b, destacados, programa } = Astro.props;
+const enlace = b.t('global.entradas.enlace');
+---
+
+<section class="seccion dia" id="dia" aria-labelledby="titulo-dia">
+  <div class="fondo" aria-hidden="true"></div>
+  <div class="contenedor">
+    <div class="cabeza">
+      {b.t('inicio.dia.etiqueta') && <p class="rotulo etiqueta">{b.t('inicio.dia.etiqueta')}</p>}
+      <h2 class="h2" id="titulo-dia">{b.t('inicio.dia.titulo')}</h2>
+      {b.t('inicio.dia.texto') && <p class="lead">{b.t('inicio.dia.texto')}</p>}
+    </div>
+
+    {
+      destacados.length > 0 && (
+        <ul class="destacados" role="list">
+          {destacados.map((d) => (
+            <li>
+              <Icono nombre={d.icono ?? 'calabaza'} tamano={30} />
+              <span>{d.texto}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      programa.length > 0 && (
+        <div class="programa">
+          {b.t('inicio.dia.programaTitulo') && <h3 class="rotulo subtitulo">{b.t('inicio.dia.programaTitulo')}</h3>}
+          <ol class="linea" role="list">
+            {programa.map((p) => {
+              const hora = real(p.hora);
+              const detalle = real(p.detalle);
+              return (
+                <li>
+                  {hora && <span class="hora">{hora}</span>}
+                  <span class="que">{p.titulo}</span>
+                  {detalle && <span class="detalle">{detalle}</span>}
+                </li>
+              );
+            })}
+          </ol>
+          {b.t('inicio.dia.nota') && <p class="nota">{b.t('inicio.dia.nota')}</p>}
+        </div>
+      )
+    }
+
+    {enlace && b.t('inicio.dia.boton') && <a class="boton" href={enlace}>{b.t('inicio.dia.boton')}</a>}
+  </div>
+</section>
+
+<style>
+  .dia {
+    isolation: isolate;
+  }
+  .fondo {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(46rem 26rem at 100% 0%, rgb(255 107 18 / 0.16), transparent 65%),
+      linear-gradient(180deg, transparent, rgb(46 230 255 / 0.03) 50%, transparent);
+  }
+  .cabeza {
+    display: grid;
+    gap: 1rem;
+  }
+  .etiqueta {
+    color: var(--cian);
+  }
+  .h2 {
+    color: var(--texto);
+    text-shadow: var(--brillo-cian);
+  }
+  .destacados {
+    list-style: none;
+    margin: clamp(2rem, 5vw, 3rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .destacados li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid color-mix(in srgb, var(--cian) 35%, var(--linea));
+    border-radius: 12px;
+    background: var(--superficie);
+    font-weight: 600;
+    font-size: 0.98rem;
+    line-height: 1.25;
+  }
+  .destacados :global(svg) {
+    flex: none;
+    color: var(--cian);
+  }
+  .programa {
+    margin-top: clamp(3rem, 7vw, 4.5rem);
+  }
+  .subtitulo {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--cian);
+    margin-bottom: 1.25rem;
+  }
+  .linea {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: paso;
+    display: grid;
+  }
+  .linea li {
+    position: relative;
+    display: grid;
+    gap: 0.15rem;
+    padding: 0 0 1.4rem 2.25rem;
+    counter-increment: paso;
+  }
+  .linea li::before {
+    content: counter(paso);
+    position: absolute;
+    left: 0;
+    top: 0.05rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--cian);
+    color: var(--fondo);
+    font-family: var(--f-rotulo);
+    font-size: 0.95rem;
+    line-height: 1;
+    padding-top: 0.1rem;
+  }
+  .linea li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: calc(0.75rem - 1px);
+    top: 1.75rem;
+    bottom: 0.25rem;
+    width: 2px;
+    background: color-mix(in srgb, var(--cian) 35%, transparent);
+  }
+  .hora {
+    font-family: var(--f-rotulo);
+    letter-spacing: 0.08em;
+    color: var(--cian);
+  }
+  .que {
+    font-weight: 700;
+  }
+  .detalle {
+    color: var(--texto-2);
+    font-size: 0.98rem;
+  }
+  .nota {
+    margin-top: 0.5rem;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--cian);
+    background: var(--superficie);
+    border-radius: 0 12px 12px 0;
+    color: var(--texto-2);
+  }
+  .boton {
+    margin-top: 2.5rem;
+  }
+  @media (min-width: 700px) {
+    .destacados {
+      grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+    }
+    .linea {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-flow: column;
+      grid-template-rows: repeat(5, auto);
+      column-gap: 3rem;
+    }
+    .linea li:nth-child(5)::after {
+      display: none;
+    }
+  }
+</style>

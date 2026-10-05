@@ -1,0 +1,200 @@
+---
+/**
+ * §5 De noche: Back to the Old School. El line-up (artistas y DJs) solo aparece con elementos
+ * visibles; la edad mínima, solo cuando está confirmada.
+ */
+import Icono from '../Icono.astro';
+import { atributosFoto } from '../../lib/fotos';
+import type { Bloques, Colecciones } from '../../lib/content';
+
+interface Props {
+  b: Bloques;
+  destacados: Colecciones['destacados'][];
+  artistas: Colecciones['artistas'][];
+}
+const { b, destacados, artistas } = Astro.props;
+const enlace = b.t('global.entradas.enlace');
+const edad = b.t('inicio.noche.edadMinima');
+---
+
+<section class="seccion noche" id="noche" aria-labelledby="titulo-noche">
+  <div class="fondo grano" aria-hidden="true"></div>
+  <div class="contenedor rejilla">
+    <div class="cabeza">
+      <p class="rotulo etiqueta">
+        {b.t('inicio.noche.etiqueta')}
+        {edad && <span class="edad">{edad}</span>}
+      </p>
+      <h2 class="h2" id="titulo-noche">{b.t('inicio.noche.titulo')}</h2>
+      {b.t('inicio.noche.subtitulo') && <p class="subtitulo">{b.t('inicio.noche.subtitulo')}</p>}
+      {b.t('inicio.noche.texto') && <p class="lead">{b.t('inicio.noche.texto')}</p>}
+    </div>
+
+    {
+      destacados.length > 0 && (
+        <ul class="destacados" role="list">
+          {destacados.map((d) => (
+            <li>
+              <Icono nombre={d.icono ?? 'disco'} tamano={22} />
+              <span>{d.texto}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+
+  {
+    artistas.length > 0 && (
+      <div class="contenedor lineup">
+        {b.t('inicio.noche.lineupTitulo') && <h3 class="rotulo titulo-lineup">{b.t('inicio.noche.lineupTitulo')}</h3>}
+        <ul role="list">
+          {artistas.map((a) => (
+            <li>
+              <img {...atributosFoto(a.foto, { sizes: '(min-width: 1100px) 220px, (min-width: 700px) 25vw, 45vw' })} />
+              <span class="nombre">{a.nombre}</span>
+              <span class="rol">{a.rol === 'dj' ? 'DJ' : null}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  <div class="contenedor cierre">
+    {b.t('inicio.noche.cierre') && <p class="frase">{b.t('inicio.noche.cierre')}</p>}
+    {enlace && b.t('inicio.noche.boton') && <a class="boton" href={enlace}>{b.t('inicio.noche.boton')}</a>}
+  </div>
+</section>
+
+<style>
+  .noche {
+    isolation: isolate;
+  }
+  .fondo {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(50rem 30rem at 0% 20%, rgb(255 107 18 / 0.18), transparent 65%),
+      radial-gradient(36rem 24rem at 100% 100%, rgb(255 43 214 / 0.08), transparent 60%),
+      #050408;
+  }
+  .rejilla {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+  .cabeza {
+    display: grid;
+    gap: 1rem;
+  }
+  .etiqueta {
+    color: var(--magenta);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    align-items: center;
+  }
+  .edad {
+    padding: 0.15rem 0.5rem 0.05rem;
+    border: 1px solid var(--magenta);
+    border-radius: 6px;
+  }
+  .h2 {
+    text-shadow: var(--brillo-magenta);
+  }
+  .subtitulo {
+    font-family: var(--f-rotulo);
+    font-size: clamp(1.5rem, 4.4vw, 2rem);
+    letter-spacing: 0.03em;
+    line-height: 1.05;
+    color: var(--magenta);
+  }
+  .destacados {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    align-content: start;
+  }
+  .destacados li {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--linea);
+    line-height: 1.4;
+  }
+  .destacados li:first-child {
+    border-top: 1px solid var(--linea);
+  }
+  .destacados :global(svg) {
+    flex: none;
+    color: var(--magenta);
+    margin-top: 0.05rem;
+  }
+  .lineup {
+    margin-top: clamp(3rem, 7vw, 4.5rem);
+  }
+  .titulo-lineup {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--magenta);
+    margin-bottom: 1.25rem;
+  }
+  .lineup ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .lineup li {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .lineup img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radio);
+    border: 1px solid color-mix(in srgb, var(--magenta) 40%, transparent);
+  }
+  .nombre {
+    font-family: var(--f-rotulo);
+    font-size: 1.4rem;
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+  .rol {
+    color: var(--magenta);
+    font-family: var(--f-rotulo);
+    letter-spacing: 0.1em;
+  }
+  .cierre {
+    margin-top: clamp(3rem, 7vw, 4.5rem);
+    display: grid;
+    gap: 1.5rem;
+    justify-items: start;
+  }
+  .frase {
+    font-family: var(--f-rotulo);
+    font-size: clamp(1.7rem, 5vw, 2.6rem);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    max-width: 30ch;
+  }
+  @media (min-width: 700px) {
+    .lineup ul {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1000px) {
+    .rejilla {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      align-items: start;
+    }
+  }
+</style>

@@ -1,0 +1,14 @@
+---
+/** Página legal `terminos` (Términos y condiciones). Mientras su texto esté vacío o pendiente, no existe (404). */
+import Base from '../layouts/Base.astro';
+import PaginaLegal from '../components/PaginaLegal.astro';
+import { cargarBloques } from '../lib/content';
+
+const b = await cargarBloques(Astro.url);
+const html = b.rico('terminos.contenido.texto');
+if (!html) return Astro.rewrite('/404');
+---
+
+<Base b={b} titulo={b.t('terminos.seo.titulo')} descripcion={b.t('terminos.seo.descripcion')}>
+  <PaginaLegal titulo={b.t('terminos.contenido.titulo')} html={html} />
+</Base>

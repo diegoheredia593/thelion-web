@@ -1,0 +1,92 @@
+---
+/** §13 Cómo llegar: dirección, referencia y parqueo (si están confirmados), mapa de Google y botones. */
+import Icono from '../Icono.astro';
+import type { Bloques } from '../../lib/content';
+
+interface Props {
+  b: Bloques;
+}
+const { b } = Astro.props;
+const referencia = b.t('inicio.ubicacion.referencia');
+const parqueo = b.t('inicio.ubicacion.parqueo');
+const mapa = b.t('inicio.ubicacion.mapa');
+const maps = b.t('inicio.ubicacion.googleMaps');
+const waze = b.t('inicio.ubicacion.waze');
+---
+
+<section class="seccion" id="ubicacion" aria-labelledby="titulo-ubicacion">
+  <div class="contenedor rejilla">
+    <div class="datos">
+      <h2 class="h2" id="titulo-ubicacion">{b.t('inicio.ubicacion.titulo')}</h2>
+      <p class="lugar"><Icono nombre="pin" tamano={26} /><span><strong>{b.t('inicio.ubicacion.lugar')}</strong><br />{b.t('inicio.ubicacion.direccion')}</span></p>
+      {referencia && <p><strong>{b.t('inicio.ubicacion.referenciaEtiqueta')}</strong> {referencia}</p>}
+      {parqueo && <p><strong>{b.t('inicio.ubicacion.parqueoEtiqueta')}</strong> {parqueo}</p>}
+      <div class="botones">
+        {maps && b.t('inicio.ubicacion.botonMaps') && <a class="boton boton--contorno dia" href={maps} rel="noopener" target="_blank"><Icono nombre="pin" tamano={20} />{b.t('inicio.ubicacion.botonMaps')}</a>}
+        {waze && b.t('inicio.ubicacion.botonWaze') && <a class="boton boton--contorno dia" href={waze} rel="noopener" target="_blank"><Icono nombre="waze" tamano={20} />{b.t('inicio.ubicacion.botonWaze')}</a>}
+      </div>
+    </div>
+    {
+      mapa && (
+        <div class="mapa">
+          <iframe src={mapa} title={`${b.t('inicio.ubicacion.lugar') ?? ''} — ${b.t('inicio.ubicacion.direccion') ?? ''}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .rejilla {
+    display: grid;
+    gap: 2rem;
+  }
+  .datos {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    color: var(--texto-2);
+  }
+  .datos strong {
+    color: var(--texto);
+  }
+  .lugar {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+  }
+  .lugar :global(svg) {
+    flex: none;
+    color: var(--cian);
+    margin-top: 0.2rem;
+  }
+  .botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+  .mapa {
+    border-radius: var(--radio);
+    overflow: hidden;
+    border: 1px solid var(--linea);
+    aspect-ratio: 4 / 3;
+    background: var(--superficie);
+  }
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: invert(0.9) hue-rotate(180deg) saturate(0.6);
+  }
+  @media (min-width: 900px) {
+    .rejilla {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 4rem;
+      align-items: center;
+    }
+    .mapa {
+      aspect-ratio: 16 / 10;
+    }
+  }
+</style>

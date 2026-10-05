@@ -1,0 +1,129 @@
+---
+/**
+ * §15 Cuenta regresiva final (versión grande del mismo componente que la portada), con el botón de
+ * cada estado: antes → comprar entradas; durante → cómo llegar; después → fotos del evento y correo
+ * para avisos de la próxima edición (formulario `avisos`, solo cuando sus textos están definidos).
+ */
+import Cuenta from '../Cuenta.astro';
+import avisos from '../../../plataforma/formularios/avisos.json';
+import type { Bloques } from '../../lib/content';
+
+interface Props {
+  b: Bloques;
+}
+const { b } = Astro.props;
+const enlace = b.t('global.entradas.enlace');
+const correo = avisos.fields[0]!;
+const rotuloCorreo = b.t('inicio.final.avisosCorreo');
+const botonCorreo = b.t('inicio.final.avisosBoton');
+---
+
+<section class="seccion final grano" id="final" aria-label={b.t('inicio.final.antesTitulo') ?? undefined}>
+  <div class="contenedor">
+    <Cuenta
+      variante="grande"
+      inicio={b.t('global.evento.inicio')}
+      fin={b.t('global.evento.fin')}
+      fecha={b.t('inicio.datos.fecha')}
+      titulo={b.t('inicio.final.antesTitulo')}
+      unidades={[b.t('inicio.final.dias'), b.t('inicio.final.horas'), b.t('inicio.final.minutos'), b.t('inicio.final.segundos')]}
+      durante={b.t('inicio.final.durante')}
+      despues={b.t('inicio.final.despues')}
+    >
+      <Fragment slot="antes">
+        {b.t('inicio.final.antesTexto') && <p class="texto">{b.t('inicio.final.antesTexto')}</p>}
+        {enlace && b.t('inicio.final.antesBoton') && <a class="boton noche" href={enlace}>{b.t('inicio.final.antesBoton')}</a>}
+      </Fragment>
+      <Fragment slot="durante">
+        {b.t('inicio.final.duranteBoton') && <a class="boton dia" href="#ubicacion">{b.t('inicio.final.duranteBoton')}</a>}
+      </Fragment>
+      <Fragment slot="despues">
+        {b.t('inicio.final.despuesBoton') && <a class="boton noche" href="#galeria">{b.t('inicio.final.despuesBoton')}</a>}
+        {
+          rotuloCorreo && botonCorreo && (
+            <div class="avisos">
+              <p id="avisos-enviado" class="aviso-sin-js">{b.t('inicio.participar.exito')}</p>
+              <p id="avisos-error" class="aviso-sin-js">{b.t('inicio.participar.error')}</p>
+              <form action={`/api/formularios/${avisos.key}`} method="post" data-formulario="avisos" data-exito={b.t('inicio.participar.exito')} data-error={b.t('inicio.participar.error')}>
+                <input type="hidden" name="_origen" value="/" />
+                <input class="senuelo" type="text" name="sitioWeb" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                <label for="avisos-email">{rotuloCorreo}</label>
+                <div class="fila">
+                  <input id="avisos-email" type="email" name={correo.name} required={correo.required} autocomplete="email" />
+                  <button class="boton" type="submit">{botonCorreo}</button>
+                </div>
+                <p class="campo-error" data-error-de={correo.name} hidden />
+                <p class="estado" data-estado tabindex="-1" role="status" hidden />
+              </form>
+            </div>
+          )
+        }
+      </Fragment>
+    </Cuenta>
+  </div>
+</section>
+
+<script>
+  import '../../scripts/formularios';
+</script>
+
+<style>
+  .final {
+    isolation: isolate;
+    background:
+      radial-gradient(60rem 30rem at 50% 120%, rgb(255 107 18 / 0.32), transparent 65%),
+      #050408;
+    border-top: 1px solid var(--linea);
+  }
+  .texto {
+    margin: 2rem auto 1.5rem;
+    max-width: 34rem;
+    font-size: 1.15rem;
+    color: var(--texto-2);
+  }
+  .final :global([data-para]) {
+    display: grid;
+    justify-items: center;
+    gap: 1.5rem;
+  }
+  .final :global([data-para][hidden]) {
+    display: none;
+  }
+  .avisos {
+    width: 100%;
+    max-width: 30rem;
+    text-align: left;
+  }
+  .avisos form {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .senuelo {
+    position: absolute;
+    left: -10000px;
+  }
+  .fila {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .fila input {
+    flex: 1;
+    min-height: 3rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid #4a4158;
+    border-radius: 999px;
+    background: var(--fondo);
+    color: var(--texto);
+    font: inherit;
+  }
+  .campo-error {
+    color: #ff9a9a;
+    font-size: 0.92rem;
+  }
+  .aviso-sin-js {
+    display: none;
+  }
+  .aviso-sin-js:target {
+    display: block;
+  }
+</style>

@@ -10,7 +10,7 @@ const lista = rutas.length ? rutas : ['/'];
 mkdirSync('capturas', { recursive: true });
 let navegador;
 try {
-  navegador = await chromium.launch();
+  navegador = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 } catch {
   navegador = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 }

@@ -213,6 +213,7 @@ export interface Cifras extends BaseElemento {
 
 export interface Concursos extends BaseElemento {
   nombre: string;
+  experiencia: 'dia' | 'noche';
   publico: string | null;
   cuando: string;
   premios: string;

@@ -55,7 +55,7 @@ if (!existsSync(join(SRC, 'pages'))) {
   for (const k of definidos) if (!usados.has(k)) err(`bloques.json: el bloque "${k}" no se usa en src/`);
 
   // Formularios: cada <form data-formulario="clave"> envía solo campos de su definición.
-  const TECNICOS = new Set(['sitioWeb', 'cf-turnstile-response']);
+  const TECNICOS = new Set(['sitioWeb', '_origen', 'cf-turnstile-response']);
   for (const { ruta, texto } of codigo) {
     for (const m of texto.matchAll(/data-formulario=["']([a-zA-Z0-9-]+)["']/g)) {
       const def = modelo.formularios.get(m[1]!);

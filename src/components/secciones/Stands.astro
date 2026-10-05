@@ -1,0 +1,254 @@
+---
+/**
+ * §9 Stands para emprendedores: contador «Quedan {n} stands» (bloque que el cliente actualiza a
+ * mano), paquetes, horario, pasos para reservar y botones (formulario y WhatsApp).
+ */
+import Icono from '../Icono.astro';
+import { alFormulario, enlaceWhatsapp } from '../../lib/enlaces';
+import { dolares } from '../../lib/formato';
+import { real } from '../../lib/pendiente';
+import type { Bloques, Colecciones } from '../../lib/content';
+
+interface Props {
+  b: Bloques;
+  paquetes: Colecciones['paquetesStand'][];
+  pasos: Colecciones['pasos'][];
+}
+const { b, paquetes, pasos } = Astro.props;
+const disponibles = b.t('inicio.stands.disponibles')?.replace(/\D/g, '') || null;
+const contador = disponibles ? b.plantilla('inicio.stands.contador', { n: disponibles }) : null;
+const whatsapp = enlaceWhatsapp(b.t('global.contacto.whatsapp'), b.t('global.whatsapp.stand'));
+const letra = [b.t('inicio.stands.letraPequena'), b.t('inicio.stands.reglas')].filter(Boolean).join(' ');
+---
+
+<section class="seccion stands dia" id="stands" data-whatsapp="stand" aria-labelledby="titulo-stands">
+  <div class="contenedor">
+    <div class="cabeza">
+      {b.t('inicio.stands.etiqueta') && <p class="rotulo etiqueta">{b.t('inicio.stands.etiqueta')}</p>}
+      <h2 class="h2" id="titulo-stands">{b.t('inicio.stands.titulo')}</h2>
+      {b.t('inicio.stands.texto') && <p class="lead">{b.t('inicio.stands.texto')}</p>}
+      {contador && <p class="contador"><span class="punto" aria-hidden="true"></span>{contador}</p>}
+    </div>
+
+    {
+      paquetes.length > 0 && (
+        <ul class="paquetes" role="list">
+          {paquetes.map((p) => (
+            <li class:list={['paquete', { adicional: p.adicional }]}>
+              <h3>{p.nombre}</h3>
+              {p.adicional && b.t('inicio.stands.adicional') && <p class="nota-adicional">{b.t('inicio.stands.adicional')}</p>}
+              <p class="precio">{p.adicional ? '+' : ''}{dolares(p.precio)}</p>
+              <dl>
+                <div>
+                  <dt class="rotulo">{b.t('inicio.stands.espacio')}</dt>
+                  <dd>{p.espacio}</dd>
+                </div>
+                <div>
+                  <dt class="rotulo">{b.t('inicio.stands.incluye')}</dt>
+                  <dd>{p.incluye}</dd>
+                </div>
+              </dl>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {b.t('inicio.stands.horario') && <p class="horario"><Icono nombre="reloj" tamano={22} /><span>{b.t('inicio.stands.horario')}</span></p>}
+
+    {
+      pasos.length > 0 && (
+        <div class="pasos">
+          {b.t('inicio.stands.pasosTitulo') && <h3 class="rotulo subtitulo">{b.t('inicio.stands.pasosTitulo')}</h3>}
+          <ol role="list">
+            {pasos.map((p, i) => (
+              <li>
+                <span class="n" aria-hidden="true">{i + 1}</span>
+                <p>
+                  {p.titulo}
+                  {real(p.detalle) && <span class="detalle"> {p.detalle}</span>}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )
+    }
+
+    <div class="botones">
+      {b.t('inicio.stands.botonReservar') && <a class="boton" href={alFormulario('emprendedor')}>{b.t('inicio.stands.botonReservar')}</a>}
+      {
+        whatsapp && b.t('inicio.stands.botonWhatsapp') && (
+          <a class="boton boton--contorno" href={whatsapp} rel="noopener" target="_blank">
+            <Icono nombre="whatsapp" tamano={20} />
+            {b.t('inicio.stands.botonWhatsapp')}
+          </a>
+        )
+      }
+    </div>
+    {letra && <p class="letra">{letra}</p>}
+  </div>
+</section>
+
+<style>
+  .stands {
+    background: linear-gradient(180deg, transparent, rgb(255 107 18 / 0.07) 60%, transparent);
+  }
+  .cabeza {
+    display: grid;
+    gap: 1rem;
+  }
+  .etiqueta {
+    color: var(--cian);
+  }
+  .contador {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    justify-self: start;
+    margin-top: 0.5rem;
+    padding: 0.6rem 1.1rem 0.5rem;
+    border: 1px solid var(--naranja);
+    border-radius: 999px;
+    font-family: var(--f-rotulo);
+    font-size: 1.35rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+  .punto {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--naranja);
+    box-shadow: 0 0 0.6rem var(--naranja);
+  }
+  .paquetes {
+    list-style: none;
+    margin: clamp(2rem, 5vw, 3rem) 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .paquete {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    padding: 1.5rem;
+    border: 1px solid color-mix(in srgb, var(--cian) 40%, var(--linea));
+    border-radius: var(--radio);
+    background: var(--superficie);
+  }
+  .paquete.adicional {
+    border-style: dashed;
+    border-color: color-mix(in srgb, var(--magenta) 55%, var(--linea));
+  }
+  h3 {
+    font-family: var(--f-rotulo);
+    font-weight: 400;
+    font-size: 1.7rem;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+  .nota-adicional {
+    color: var(--magenta);
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .precio {
+    font-family: var(--f-display);
+    font-size: 3rem;
+    line-height: 1;
+    margin-block: 0.25rem 0.5rem;
+  }
+  dl {
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  dt {
+    font-size: 0.95rem;
+    color: var(--texto-3);
+  }
+  dd {
+    margin: 0;
+    color: var(--texto-2);
+  }
+  .horario {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+    color: var(--texto-2);
+    max-width: 52rem;
+  }
+  .horario :global(svg) {
+    flex: none;
+    color: var(--cian);
+    margin-top: 0.15rem;
+  }
+  .pasos {
+    margin-top: clamp(3rem, 7vw, 4rem);
+  }
+  .subtitulo {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--cian);
+    margin-bottom: 1.25rem;
+  }
+  .pasos ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .pasos li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .n {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: var(--cian);
+    color: var(--fondo);
+    font-family: var(--f-display);
+    font-size: 1.2rem;
+  }
+  .pasos p {
+    padding-top: 0.35rem;
+  }
+  .detalle {
+    color: var(--texto-2);
+  }
+  .botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+  }
+  .letra {
+    margin-top: 1.25rem;
+    color: var(--texto-3);
+    font-size: 0.92rem;
+  }
+  @media (min-width: 800px) {
+    .paquetes {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .pasos ol {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+    .pasos li {
+      flex-direction: column;
+    }
+    .pasos p {
+      padding-top: 0;
+    }
+  }
+</style>

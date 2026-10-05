@@ -1,0 +1,355 @@
+---
+/**
+ * §12 ¿Cómo quieres ser parte? Un solo formulario (`participar`) para asistentes, emprendedores,
+ * sponsors y concursantes. Campos, etiquetas y opciones salen de su definición
+ * (`plataforma/formularios/participar.json`): los `name` son exactamente los de la plataforma.
+ *
+ * - `?perfil=emprendedor|sponsor|concursante|asistente` preelige el perfil (lo lee el servidor).
+ * - Con JavaScript, `empresa`, `paquete` y `categoria` aparecen solo con su perfil; sin JavaScript
+ *   se ven todos.
+ * - En lugar de casilla de aceptación (la plataforma no tiene ese tipo de campo) va el aviso de
+ *   privacidad bajo el botón.
+ */
+import { env } from 'cloudflare:workers';
+import definicion from '../../../plataforma/formularios/participar.json';
+import { PERFILES, type Perfil } from '../../lib/enlaces';
+import type { Bloques } from '../../lib/content';
+
+interface Props {
+  b: Bloques;
+  /** La página de privacidad tiene texto: «Política de privacidad» del aviso se vuelve enlace. */
+  hayPrivacidad: boolean;
+}
+const { b, hayPrivacidad } = Astro.props;
+const ID = 'participar';
+
+/** Qué perfiles ven cada campo condicional (valores del campo `perfil`). */
+const SOLO_PARA: Record<string, string[]> = {
+  empresa: [PERFILES.emprendedor, PERFILES.sponsor],
+  paquete: [PERFILES.emprendedor],
+  categoria: [PERFILES.concursante],
+};
+const pedido = Astro.url.searchParams.get('perfil') as Perfil | null;
+const perfilInicial = pedido && pedido in PERFILES ? PERFILES[pedido] : null;
+
+const campos = definicion.fields;
+const perfil = campos.find((c) => c.name === 'perfil');
+const resto = campos.filter((c) => c.name !== 'perfil');
+const antes = resto.filter((c) => ['nombre', 'telefono', 'email'].includes(c.name));
+const despues = resto.filter((c) => !['nombre', 'telefono', 'email'].includes(c.name));
+
+const aviso = b.t('inicio.participar.aviso');
+const textoPrivacidad = b.t('global.pie.privacidad');
+const partes = aviso && textoPrivacidad && hayPrivacidad && aviso.includes(textoPrivacidad) ? aviso.split(textoPrivacidad) : null;
+const claveTurnstile = env.TURNSTILE_SITE_KEY || null;
+const tipoInput = (tipo: string) => (tipo === 'email' ? 'email' : tipo === 'phone' ? 'tel' : 'text');
+const autocompletar: Record<string, string> = { nombre: 'name', telefono: 'tel', email: 'email', empresa: 'organization' };
+---
+
+<section class="seccion participar" id={ID} aria-labelledby="titulo-participar">
+  <div class="contenedor rejilla">
+    <div class="cabeza">
+      <h2 class="h2" id="titulo-participar">{b.t('inicio.participar.titulo')}</h2>
+      {b.t('inicio.participar.texto') && <p class="lead">{b.t('inicio.participar.texto')}</p>}
+    </div>
+
+    <div class="caja">
+      <p id={`${ID}-enviado`} class="aviso-sin-js exito" role="status">{b.t('inicio.participar.exito')}</p>
+      <p id={`${ID}-error`} class="aviso-sin-js error" role="alert">{b.t('inicio.participar.error')}</p>
+
+      <form
+        action={`/api/formularios/${definicion.key}`}
+        method="post"
+        data-formulario="participar"
+        data-exito={b.t('inicio.participar.exito')}
+        data-error={b.t('inicio.participar.error')}
+        data-enviando="Enviando…"
+        novalidate={false}
+      >
+        <input type="hidden" name="_origen" value="/" />
+        <div class="senuelo" aria-hidden="true">
+          <label>No llenes este campo <input type="text" name="sitioWeb" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        {
+          perfil && (
+            <fieldset class="perfiles">
+              <legend class="etiqueta">{perfil.label}</legend>
+              <div class="opciones">
+                {perfil.options?.map((o, i) => (
+                  <label class="perfil">
+                    <input
+                      type="radio"
+                      name={perfil.name}
+                      value={o.value}
+                      required={perfil.required}
+                      checked={perfilInicial ? perfilInicial === o.value : false}
+                      data-primero={i === 0 ? '' : undefined}
+                    />
+                    <span>{o.label}</span>
+                  </label>
+                ))}
+              </div>
+              <p class="campo-error" data-error-de={perfil.name} hidden />
+            </fieldset>
+          )
+        }
+
+        <div class="campos">
+          {
+            [...antes, ...despues].map((c) => {
+              const id = `${ID}-${c.name}`;
+              const comun = {
+                id,
+                name: c.name,
+                required: c.required,
+                'aria-describedby': `${id}-error`,
+              };
+              return (
+                <div class:list={['campo', { ancho: c.type === 'textLong' }]} data-solo-para={SOLO_PARA[c.name]?.join('|')}>
+                  <label class="etiqueta" for={id}>
+                    {c.label}
+                    {!c.required && <span class="opcional"> (opcional)</span>}
+                  </label>
+                  {c.type === 'option' ? (
+                    <select {...comun}>
+                      <option value="">Elige una opción</option>
+                      {c.options?.map((o) => (
+                        <option value={o.value}>{o.label}</option>
+                      ))}
+                    </select>
+                  ) : c.type === 'textLong' ? (
+                    <textarea {...comun} rows="4" maxlength={c.max ?? 2000} />
+                  ) : (
+                    <input {...comun} type={tipoInput(c.type)} maxlength={c.max ?? (c.type === 'phone' ? 30 : 200)} autocomplete={autocompletar[c.name]} inputmode={c.type === 'phone' ? 'tel' : undefined} />
+                  )}
+                  <p class="campo-error" id={`${id}-error`} data-error-de={c.name} hidden />
+                </div>
+              );
+            })
+          }
+        </div>
+
+        {claveTurnstile && <div class="cf-turnstile" data-sitekey={claveTurnstile} data-theme="dark" />}
+
+        <p class="estado" data-estado tabindex="-1" role="status" hidden></p>
+        <button class="boton noche enviar" type="submit">{b.t('inicio.participar.boton')}</button>
+        {
+          aviso && (
+            <p class="privacidad">
+              {partes ? (
+                <>
+                  {partes[0]}
+                  <a href="/privacidad">{textoPrivacidad}</a>
+                  {partes.slice(1).join(textoPrivacidad ?? "")}
+                </>
+              ) : (
+                aviso
+              )}
+            </p>
+          )
+        }
+      </form>
+    </div>
+  </div>
+</section>
+
+{claveTurnstile && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />}
+
+<script>
+  import '../../scripts/formularios';
+
+  // Campos según el perfil: solo con JavaScript (sin él se ven todos).
+  const form = document.querySelector<HTMLFormElement>('form[data-formulario="participar"]');
+  if (form) {
+    const condicionales = [...form.querySelectorAll<HTMLElement>('[data-solo-para]')];
+    const aplicar = () => {
+      const elegido = form.querySelector<HTMLInputElement>('input[name="perfil"]:checked')?.value;
+      for (const campo of condicionales) {
+        const visible = !!elegido && campo.dataset.soloPara!.split('|').includes(elegido);
+        campo.hidden = !visible;
+        campo.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input, select, textarea').forEach((c) => (c.disabled = !visible));
+      }
+    };
+    form.addEventListener('change', aplicar);
+    aplicar();
+  }
+</script>
+
+<style>
+  .participar {
+    background:
+      radial-gradient(44rem 28rem at 100% 100%, rgb(255 107 18 / 0.14), transparent 65%),
+      linear-gradient(180deg, transparent, #0c0a12);
+  }
+  .rejilla {
+    display: grid;
+    gap: 2rem;
+  }
+  .cabeza {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+  .caja {
+    padding: clamp(1.25rem, 4vw, 2.25rem);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    background: var(--superficie);
+  }
+  form {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .senuelo {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+  .etiqueta {
+    display: block;
+    margin-bottom: 0.45rem;
+    font-weight: 600;
+    font-size: 0.97rem;
+  }
+  legend.etiqueta {
+    padding: 0;
+  }
+  .opcional {
+    font-weight: 400;
+    color: var(--texto-3);
+  }
+  .opciones {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .perfil {
+    position: relative;
+  }
+  .perfil input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  .perfil span {
+    display: grid;
+    place-items: center;
+    min-height: 3rem;
+    padding: 0.55rem 0.75rem 0.45rem;
+    border: 1px solid var(--linea);
+    border-radius: 12px;
+    font-family: var(--f-rotulo);
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    line-height: 1.05;
+    text-align: center;
+    cursor: pointer;
+  }
+  .perfil input:checked + span {
+    border-color: var(--magenta);
+    background: color-mix(in srgb, var(--magenta) 18%, transparent);
+    box-shadow: inset 0 0 0 1px var(--magenta);
+  }
+  .perfil input:focus-visible + span {
+    outline: 3px solid var(--texto);
+    outline-offset: 2px;
+  }
+  .campos {
+    display: grid;
+    gap: 1.1rem;
+  }
+  .campo[hidden] {
+    display: none;
+  }
+  input:not([type='radio']),
+  select,
+  textarea {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid #4a4158;
+    border-radius: 10px;
+    background: var(--fondo);
+    color: var(--texto);
+    font: inherit;
+    font-size: 1rem;
+  }
+  textarea {
+    resize: vertical;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 2px solid var(--magenta);
+    outline-offset: 1px;
+  }
+  [aria-invalid='true'] {
+    border-color: #ff6b6b;
+  }
+  .campo-error {
+    margin-top: 0.35rem;
+    color: #ff9a9a;
+    font-size: 0.92rem;
+  }
+  .enviar {
+    justify-self: stretch;
+  }
+  .privacidad {
+    color: var(--texto-3);
+    font-size: 0.9rem;
+  }
+  .estado,
+  .aviso-sin-js {
+    padding: 0.9rem 1.1rem;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .estado[data-tipo='exito'],
+  .aviso-sin-js.exito {
+    background: rgb(46 230 255 / 0.12);
+    border: 1px solid var(--cian);
+  }
+  .estado[data-tipo='error'],
+  .aviso-sin-js.error {
+    background: rgb(255 107 107 / 0.12);
+    border: 1px solid #ff6b6b;
+  }
+  .aviso-sin-js {
+    display: none;
+    margin: 0 0 1.25rem;
+  }
+  .aviso-sin-js:target {
+    display: block;
+  }
+  @media (min-width: 640px) {
+    .opciones {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .campos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .campo.ancho {
+      grid-column: 1 / -1;
+    }
+    .enviar {
+      justify-self: start;
+    }
+  }
+  @media (min-width: 1000px) {
+    .rejilla {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 4rem;
+    }
+  }
+</style>

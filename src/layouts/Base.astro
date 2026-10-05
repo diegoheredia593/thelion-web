@@ -8,6 +8,8 @@ import '@fontsource/bebas-neue/latin-400.css';
 import '@fontsource-variable/inter/wght.css';
 import '../styles/global.css';
 import Cabecera from '../components/Cabecera.astro';
+import Pie from '../components/Pie.astro';
+import WhatsappFlotante from '../components/WhatsappFlotante.astro';
 import type { Bloques } from '../lib/content';
 import { urlFoto } from '../lib/fotos';
 
@@ -59,7 +61,8 @@ const canonica = new URL(Astro.url.pathname, Astro.url.origin).href;
     <main id="contenido">
       <slot />
     </main>
-    <slot name="pie" />
+    <Pie b={b} legales={{ privacidad: !!b.rico('privacidad.contenido.texto'), terminos: !!b.rico('terminos.contenido.texto'), bases: !!b.rico('bases.contenido.texto') }} />
+    <WhatsappFlotante b={b} />
   </body>
 </html>
 

@@ -15,6 +15,23 @@
       "max": 60
     },
     {
+      "name": "experiencia",
+      "control": "option",
+      "label": "Experiencia",
+      "help": "Define el color de la tarjeta: cian de día, magenta de noche.",
+      "required": true,
+      "options": [
+        {
+          "value": "dia",
+          "label": "De día"
+        },
+        {
+          "value": "noche",
+          "label": "De noche"
+        }
+      ]
+    },
+    {
       "name": "publico",
       "control": "text",
       "label": "Para quién",

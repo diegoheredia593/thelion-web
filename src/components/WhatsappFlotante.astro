@@ -1,0 +1,73 @@
+---
+/**
+ * Botón flotante de WhatsApp en toda la página. El mensaje prellenado depende de la sección que se
+ * está viendo (`data-whatsapp="stand|sponsor|concursante"`; general en las demás). Sin número, no
+ * aparece. Sin JavaScript, lleva siempre el mensaje general.
+ */
+import Icono from './Icono.astro';
+import { enlaceWhatsapp } from '../lib/enlaces';
+import type { Bloques } from '../lib/content';
+
+interface Props {
+  b: Bloques;
+}
+const { b } = Astro.props;
+const numero = b.t('global.contacto.whatsapp');
+const enlaces = {
+  general: enlaceWhatsapp(numero, b.t('global.whatsapp.general')),
+  stand: enlaceWhatsapp(numero, b.t('global.whatsapp.stand')),
+  sponsor: enlaceWhatsapp(numero, b.t('global.whatsapp.sponsor')),
+  concursante: enlaceWhatsapp(numero, b.t('global.whatsapp.concursante')),
+};
+---
+
+{
+  enlaces.general && (
+    <a class="whatsapp" href={enlaces.general} rel="noopener" target="_blank" aria-label="Escribir por WhatsApp" data-whatsapp-flotante data-enlaces={JSON.stringify(enlaces)}>
+      <Icono nombre="whatsapp" tamano={30} />
+    </a>
+  )
+}
+
+<script>
+  const boton = document.querySelector<HTMLAnchorElement>('[data-whatsapp-flotante]');
+  if (boton) {
+    const enlaces = JSON.parse(boton.dataset.enlaces!) as Record<string, string | null>;
+    const visibles = new Map<Element, string>();
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        for (const e of entradas) {
+          if (e.isIntersecting) visibles.set(e.target, (e.target as HTMLElement).dataset.whatsapp!);
+          else visibles.delete(e.target);
+        }
+        const tipo = [...visibles.values()].at(-1) ?? 'general';
+        boton.href = enlaces[tipo] ?? enlaces.general!;
+      },
+      { rootMargin: '-40% 0px -40% 0px' },
+    );
+    document.querySelectorAll('[data-whatsapp]').forEach((s) => observador.observe(s));
+  }
+</script>
+
+<style>
+  .whatsapp {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 40;
+    display: grid;
+    place-items: center;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 50%;
+    background: #25d366;
+    color: #06200f;
+    box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 0.45);
+  }
+  @media (min-width: 768px) {
+    .whatsapp {
+      right: 1.5rem;
+      bottom: 1.5rem;
+    }
+  }
+</style>

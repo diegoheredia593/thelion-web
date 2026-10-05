@@ -1,0 +1,103 @@
+---
+/** §14 Preguntas frecuentes: acordeón nativo (`<details>`), funciona sin JavaScript. */
+import { real } from '../../lib/pendiente';
+import { textoEnriquecidoAHtml } from '../../lib/plataforma/sdk';
+import type { Bloques, Colecciones } from '../../lib/content';
+
+interface Props {
+  b: Bloques;
+  preguntas: Colecciones['preguntas'][];
+}
+const { b, preguntas } = Astro.props;
+const visibles = preguntas
+  .map((p) => ({ pregunta: p.pregunta, respuesta: real(p.respuesta) }))
+  .filter((p): p is { pregunta: string; respuesta: NonNullable<typeof p.respuesta> } => p.respuesta !== null)
+  .map((p) => ({ pregunta: p.pregunta, html: typeof p.respuesta === 'string' ? p.respuesta : textoEnriquecidoAHtml(p.respuesta as Parameters<typeof textoEnriquecidoAHtml>[0]) }));
+---
+
+{
+  visibles.length > 0 && (
+    <section class="seccion" id="preguntas" aria-labelledby="titulo-preguntas">
+      <div class="contenedor rejilla">
+        <h2 class="h2" id="titulo-preguntas">{b.t('inicio.preguntas.titulo')}</h2>
+        <div class="lista">
+          {visibles.map((p) => (
+            <details>
+              <summary>
+                <span>{p.pregunta}</span>
+                <span class="signo" aria-hidden="true" />
+              </summary>
+              <div class="respuesta" set:html={p.html} />
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .rejilla {
+    display: grid;
+    gap: 2rem;
+  }
+  details {
+    border-bottom: 1px solid var(--linea);
+  }
+  details:first-child {
+    border-top: 1px solid var(--linea);
+  }
+  summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    padding: 1.15rem 0;
+    font-weight: 600;
+    font-size: 1.07rem;
+    cursor: pointer;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .signo {
+    flex: none;
+    position: relative;
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+  .signo::before,
+  .signo::after {
+    content: '';
+    position: absolute;
+    inset: 50% 0 auto;
+    height: 2px;
+    margin-top: -1px;
+    background: var(--naranja);
+    transition: transform 0.2s ease;
+  }
+  .signo::after {
+    transform: rotate(90deg);
+  }
+  details[open] .signo::after {
+    transform: rotate(0deg);
+  }
+  .respuesta {
+    padding-bottom: 1.25rem;
+    color: var(--texto-2);
+    max-width: 46rem;
+  }
+  .respuesta :global(p + p) {
+    margin-top: 0.75rem;
+  }
+  .respuesta :global(a) {
+    color: var(--cian);
+  }
+  @media (min-width: 900px) {
+    .rejilla {
+      grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+      gap: 4rem;
+    }
+  }
+</style>

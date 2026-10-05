@@ -6,6 +6,7 @@
     "orden": 0,
     "datos": {
       "nombre": "Disfraces de día",
+      "experiencia": "dia",
       "publico": "Niños, adolescentes y familias",
       "cuando": "12:00–18:00, dos pasarelas",
       "premios": "Parte de los $1.000 de la tarde",
@@ -20,6 +21,7 @@
     "orden": 1,
     "datos": {
       "nombre": "Talentos de día",
+      "experiencia": "dia",
       "publico": null,
       "cuando": "12:00–18:00, dos rondas de shows",
       "premios": "Parte de los $1.000 de la tarde",
@@ -34,6 +36,7 @@
     "orden": 2,
     "datos": {
       "nombre": "Disfraces de noche",
+      "experiencia": "noche",
       "publico": null,
       "cuando": "20:00–02:00",
       "premios": "$2.000",

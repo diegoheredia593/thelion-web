@@ -1,0 +1,85 @@
+---
+/**
+ * §11 Galería: fotos subidas a la plataforma (hasta 9; sin widgets de Instagram) y botón a la cuenta.
+ * Sin fotos, la sección queda con título, texto y botón.
+ */
+import Icono from '../Icono.astro';
+import { atributosFoto } from '../../lib/fotos';
+import type { Bloques, Colecciones } from '../../lib/content';
+
+interface Props {
+  b: Bloques;
+  fotos: Colecciones['fotosGaleria'][];
+}
+const { b, fotos } = Astro.props;
+const instagram = b.t('global.redes.instagramEnlace');
+const muestra = fotos.slice(0, 9);
+---
+
+<section class="seccion galeria" id="galeria" aria-labelledby="titulo-galeria">
+  <div class="contenedor">
+    <div class="cabeza">
+      <div>
+        <h2 class="h2" id="titulo-galeria">{b.t('inicio.galeria.titulo')}</h2>
+        {b.t('inicio.galeria.texto') && <p class="lead">{b.t('inicio.galeria.texto')}</p>}
+      </div>
+      {
+        instagram && b.t('inicio.galeria.boton') && (
+          <a class="boton boton--contorno noche" href={instagram} rel="noopener" target="_blank">
+            <Icono nombre="instagram" tamano={20} />
+            {b.t('inicio.galeria.boton')}
+          </a>
+        )
+      }
+    </div>
+    {
+      muestra.length > 0 && (
+        <ul class="fotos" role="list">
+          {muestra.map((f) => (
+            <li>
+              <img {...atributosFoto(f.foto, { sizes: '(min-width: 1100px) 390px, 33vw' })} />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .cabeza {
+    display: grid;
+    gap: 1.5rem;
+    align-items: end;
+  }
+  .cabeza > div {
+    display: grid;
+    gap: 1rem;
+  }
+  .boton {
+    justify-self: start;
+  }
+  .fotos {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+  .fotos img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  @media (min-width: 800px) {
+    .cabeza {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+    .fotos {
+      gap: 0.75rem;
+    }
+  }
+</style>

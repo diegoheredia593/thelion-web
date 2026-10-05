@@ -1,0 +1,33 @@
+---
+/** 404: textos técnicos de interfaz (no son contenido del evento; ver REPORTE-PLATAFORMA.md). */
+import Base from '../layouts/Base.astro';
+import { cargarBloques } from '../lib/content';
+
+Astro.response.status = 404;
+const b = await cargarBloques(Astro.url);
+---
+
+<Base b={b} titulo="Página no encontrada" descripcion={null}>
+  <section class="seccion no-encontrada">
+    <div class="contenedor">
+      <p class="rotulo">404</p>
+      <h1 class="h2">Esta página no existe.</h1>
+      <a class="boton noche" href="/">Volver al inicio</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .no-encontrada {
+    min-height: 70svh;
+    padding-top: calc(var(--alto-menu) + 4rem);
+  }
+  .contenedor {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: start;
+  }
+  .rotulo {
+    color: var(--naranja);
+  }
+</style>

@@ -163,6 +163,7 @@ const Titulo = variante === 'grande' ? 'h2' : 'p';
     text-align: center;
   }
   .cuenta--grande .titulo {
+    font-family: var(--f-display);
     color: var(--texto);
     letter-spacing: 0.01em;
     text-transform: none;
@@ -175,12 +176,12 @@ const Titulo = variante === 'grande' ? 'h2' : 'p';
   }
   .cuenta--grande .unidades li {
     padding: 1.1rem 0.25rem 0.9rem;
-    border-color: color-mix(in srgb, var(--magenta) 45%, var(--linea));
+    border-color: color-mix(in srgb, var(--naranja) 50%, var(--linea));
   }
   .cuenta--grande .numero {
     font-size: clamp(2.5rem, 10vw, 5.5rem);
     color: var(--texto);
-    text-shadow: var(--brillo-magenta);
+    text-shadow: 0 0 0.6em rgb(255 107 18 / 0.55);
   }
   .cuenta--grande .fecha {
     font-size: clamp(1.8rem, 6vw, 3rem);

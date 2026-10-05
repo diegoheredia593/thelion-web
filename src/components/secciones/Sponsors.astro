@@ -1,0 +1,268 @@
+---
+/**
+ * §10 Sponsors: por qué patrocinar, paquetes (el precio solo cuando está definido), patrocina una
+ * atracción, botones y la franja de marcas aliadas (solo con 3 o más visibles).
+ */
+import Icono from '../Icono.astro';
+import { atributosFoto } from '../../lib/fotos';
+import { alFormulario } from '../../lib/enlaces';
+import { real } from '../../lib/pendiente';
+import type { Bloques, Colecciones } from '../../lib/content';
+
+interface Props {
+  b: Bloques;
+  razones: Colecciones['razonesSponsor'][];
+  paquetes: Colecciones['paquetesSponsor'][];
+  patrocinables: Colecciones['experienciasPatrocinables'][];
+  marcas: Colecciones['marcasAliadas'][];
+}
+const { b, razones, paquetes, patrocinables, marcas } = Astro.props;
+const mediaKit = b.t('inicio.sponsors.mediaKit');
+---
+
+<section class="seccion sponsors grano" id="sponsors" data-whatsapp="sponsor" aria-labelledby="titulo-sponsors">
+  <div class="contenedor">
+    <div class="cabeza">
+      <h2 class="h2" id="titulo-sponsors">{b.t('inicio.sponsors.titulo')}</h2>
+      {b.t('inicio.sponsors.texto') && <p class="lead">{b.t('inicio.sponsors.texto')}</p>}
+    </div>
+
+    {
+      razones.length > 0 && (
+        <div class="bloque">
+          {b.t('inicio.sponsors.razonesTitulo') && <h3 class="rotulo subtitulo">{b.t('inicio.sponsors.razonesTitulo')}</h3>}
+          <ul class="razones" role="list">
+            {razones.map((r) => (
+              <li>
+                <Icono nombre={r.icono} tamano={32} />
+                <span>{r.texto}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    {
+      paquetes.length > 0 && (
+        <div class="bloque">
+          {b.t('inicio.sponsors.paquetesTitulo') && <h3 class="rotulo subtitulo">{b.t('inicio.sponsors.paquetesTitulo')}</h3>}
+          <ul class="paquetes" role="list">
+            {paquetes.map((p, i) => {
+              const precio = real(p.precio);
+              const beneficios = real(p.beneficios);
+              return (
+                <li class:list={['paquete', { principal: i === 0 }]}>
+                  <h4>{p.nombre}</h4>
+                  {real(p.subtitulo) && <p class="sub">{p.subtitulo}</p>}
+                  {precio && <p class="precio">{precio}</p>}
+                  {beneficios && (
+                    <ul class="beneficios">
+                      {beneficios.map((x) => (
+                        <li>{x}</li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )
+    }
+
+    {
+      patrocinables.length > 0 && (
+        <div class="bloque atraccion">
+          {b.t('inicio.sponsors.atraccionTitulo') && <h3 class="rotulo subtitulo">{b.t('inicio.sponsors.atraccionTitulo')}</h3>}
+          {b.t('inicio.sponsors.atraccionTexto') && <p class="texto">{b.t('inicio.sponsors.atraccionTexto')}</p>}
+          <ul class="chips" role="list">
+            {patrocinables.map((x) => (
+              <li>{x.nombre}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    <div class="botones">
+      {b.t('inicio.sponsors.botonSponsor') && <a class="boton noche" href={alFormulario('sponsor')}>{b.t('inicio.sponsors.botonSponsor')}</a>}
+      {
+        mediaKit && b.t('inicio.sponsors.botonMediaKit') && (
+          <a class="boton boton--contorno noche" href={mediaKit} download>
+            <Icono nombre="descarga" tamano={20} />
+            {b.t('inicio.sponsors.botonMediaKit')}
+          </a>
+        )
+      }
+    </div>
+
+    {
+      marcas.length >= 3 && (
+        <div class="aliados">
+          {b.t('inicio.sponsors.aliadosTitulo') && <h3 class="rotulo subtitulo">{b.t('inicio.sponsors.aliadosTitulo')}</h3>}
+          <ul role="list">
+            {marcas.map((m) => {
+              const logo = <img {...atributosFoto(m.logo, { sizes: '160px', alt: m.nombre })} />;
+              return <li>{real(m.enlace) ? <a href={m.enlace!} rel="noopener" target="_blank">{logo}</a> : logo}</li>;
+            })}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .sponsors {
+    isolation: isolate;
+    background: radial-gradient(52rem 30rem at 0% 0%, rgb(255 107 18 / 0.15), transparent 65%);
+  }
+  .cabeza {
+    display: grid;
+    gap: 1rem;
+  }
+  .bloque {
+    margin-top: clamp(2.5rem, 6vw, 3.5rem);
+  }
+  .subtitulo {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--naranja);
+    margin-bottom: 1.25rem;
+  }
+  .razones {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 1rem;
+  }
+  .razones li {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    font-weight: 600;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+  .razones :global(svg) {
+    color: var(--naranja);
+  }
+  .paquetes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .paquete {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+    padding: 1.5rem;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    background: var(--superficie);
+  }
+  .paquete.principal {
+    border-color: var(--magenta);
+    box-shadow: 0 0 2.5rem -1.2rem var(--magenta);
+  }
+  h4 {
+    margin: 0;
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 2.4rem;
+    line-height: 1;
+  }
+  .sub {
+    font-family: var(--f-rotulo);
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    color: var(--magenta);
+  }
+  .precio {
+    font-family: var(--f-display);
+    font-size: 1.8rem;
+  }
+  .beneficios {
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+    color: var(--texto-2);
+    font-size: 0.97rem;
+  }
+  .beneficios li {
+    padding-left: 1.4rem;
+    position: relative;
+  }
+  .beneficios li::before {
+    content: '';
+    position: absolute;
+    left: 0.15rem;
+    top: 0.55em;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 2px;
+    background: var(--magenta);
+    transform: rotate(45deg);
+  }
+  .texto {
+    color: var(--texto-2);
+    max-width: 42rem;
+  }
+  .chips {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .chips li {
+    padding: 0.45rem 0.95rem 0.35rem;
+    border: 1px solid color-mix(in srgb, var(--naranja) 55%, var(--linea));
+    border-radius: 999px;
+    font-family: var(--f-rotulo);
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+  }
+  .botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+  }
+  .aliados {
+    margin-top: clamp(3rem, 7vw, 4rem);
+    padding-top: 2rem;
+    border-top: 1px solid var(--linea);
+  }
+  .aliados ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2.5rem;
+    align-items: center;
+  }
+  .aliados img {
+    height: 3rem;
+    width: auto;
+    max-width: 10rem;
+    object-fit: contain;
+  }
+  @media (min-width: 900px) {
+    .razones {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .paquetes {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -1,0 +1,50 @@
+---
+/**
+ * JSON-LD `Event` de schema.org armado desde bloques y colecciones: nombre, fechas, lugar con
+ * dirección, un `offers` por localidad visible (precio en USD y enlace) e imagen.
+ */
+import { urlFoto } from '../lib/fotos';
+import type { Bloques, Colecciones } from '../lib/content';
+
+interface Props {
+  b: Bloques;
+  localidades: Colecciones['localidades'][];
+}
+const { b, localidades } = Astro.props;
+const direccion = b.t('inicio.ubicacion.direccion') ?? '';
+const partes = direccion.split(',').map((p) => p.trim());
+const imagen = b.foto('inicio.portada.imagen') ?? b.foto('global.seo.imagen');
+const datos = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: b.t('inicio.portada.titulo') ?? b.t('global.marca.nombre'),
+  description: b.t('inicio.seo.descripcion') ?? undefined,
+  startDate: b.t('global.evento.inicio'),
+  endDate: b.t('global.evento.fin'),
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  location: {
+    '@type': 'Place',
+    name: b.t('inicio.ubicacion.lugar'),
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: partes.length > 1 ? partes.slice(0, -1).join(', ') : direccion,
+      addressLocality: partes.length > 1 ? partes.at(-1) : undefined,
+      addressCountry: 'EC',
+    },
+  },
+  image: imagen ? [urlFoto(imagen)] : undefined,
+  url: new URL('/', Astro.url.origin).href,
+  offers: localidades.map((l) => ({
+    '@type': 'Offer',
+    name: l.nombre,
+    price: l.precio,
+    priceCurrency: 'USD',
+    url: l.enlace,
+    availability: 'https://schema.org/InStock',
+  })),
+  organizer: { '@type': 'Organization', name: b.t('global.marca.nombre'), url: b.t('global.redes.instagramEnlace') ?? undefined },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(datos).replace(/</g, '\\u003c')} />

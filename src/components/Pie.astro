@@ -1,0 +1,137 @@
+---
+/** §16 Footer: marca y línea, menú, legales (solo las páginas con texto), redes, derechos y crédito. */
+import Icono from './Icono.astro';
+import Marca from './Marca.astro';
+import { enlaceWhatsapp } from '../lib/enlaces';
+import type { Bloques } from '../lib/content';
+
+interface Props {
+  b: Bloques;
+  /** Páginas legales con texto real (las demás no existen todavía). */
+  legales: { privacidad: boolean; terminos: boolean; bases: boolean };
+}
+const { b, legales } = Astro.props;
+const menu = [
+  { href: '/#evento', texto: b.t('global.pie.evento') },
+  { href: '/#entradas', texto: b.t('global.pie.entradas') },
+  { href: '/#stands', texto: b.t('global.pie.stands') },
+  { href: '/#sponsors', texto: b.t('global.pie.sponsors') },
+  { href: '/#preguntas', texto: b.t('global.pie.preguntas') },
+  { href: '/#participar', texto: b.t('global.pie.contacto') },
+].filter((e) => e.texto);
+const legal = [
+  { href: '/privacidad', texto: b.t('global.pie.privacidad'), hay: legales.privacidad },
+  { href: '/terminos', texto: b.t('global.pie.terminos'), hay: legales.terminos },
+  { href: '/bases-concursos', texto: b.t('global.pie.bases'), hay: legales.bases },
+].filter((e) => e.texto && e.hay);
+const instagram = b.t('global.redes.instagramEnlace');
+const usuario = b.t('global.redes.instagram');
+const numero = b.t('global.contacto.whatsapp');
+const whatsapp = enlaceWhatsapp(numero, b.t('global.whatsapp.general'));
+---
+
+<footer class="pie">
+  <div class="contenedor rejilla">
+    <div class="marca">
+      <Marca b={b} grande />
+      {b.t('global.pie.linea') && <p class="linea">{b.t('global.pie.linea')}</p>}
+    </div>
+    <nav aria-label="Pie de página">
+      <ul>{menu.map((e) => <li><a href={e.href}>{e.texto}</a></li>)}</ul>
+    </nav>
+    <div class="redes">
+      {
+        instagram && (
+          <a href={instagram} rel="noopener" target="_blank">
+            <Icono nombre="instagram" tamano={22} />
+            <span><span class="sr-only">Instagram </span>{usuario}</span>
+          </a>
+        )
+      }
+      {
+        whatsapp && (
+          <a href={whatsapp} rel="noopener" target="_blank">
+            <Icono nombre="whatsapp" tamano={22} />
+            <span><span class="sr-only">WhatsApp </span>{numero}</span>
+          </a>
+        )
+      }
+    </div>
+  </div>
+  <div class="contenedor base">
+    {b.t('global.pie.copyright') && <p>{b.t('global.pie.copyright')}</p>}
+    {legal.length > 0 && <ul class="legal">{legal.map((e) => <li><a href={e.href}>{e.texto}</a></li>)}</ul>}
+    {b.t('global.pie.credito') && <p>{b.t('global.pie.credito')}</p>}
+  </div>
+</footer>
+
+<style>
+  .pie {
+    border-top: 1px solid var(--linea);
+    padding-block: 3.5rem 2rem;
+    background: #050408;
+  }
+  .rejilla {
+    display: grid;
+    gap: 2.5rem;
+  }
+  .linea {
+    margin-top: 1rem;
+    font-family: var(--f-rotulo);
+    font-size: 1.4rem;
+    letter-spacing: 0.04em;
+    color: var(--texto-2);
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  nav ul {
+    display: grid;
+    gap: 0.6rem;
+  }
+  nav a {
+    font-family: var(--f-rotulo);
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--texto-2);
+  }
+  nav a:hover,
+  .redes a:hover {
+    color: var(--texto);
+  }
+  .redes {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+  }
+  .redes a {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    color: var(--texto-2);
+    text-decoration: none;
+  }
+  .base {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--linea);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    color: var(--texto-3);
+    font-size: 0.9rem;
+  }
+  .legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+  @media (min-width: 800px) {
+    .rejilla {
+      grid-template-columns: 1.4fr 1fr 1fr;
+    }
+  }
+</style>
