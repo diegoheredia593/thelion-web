@@ -1,0 +1,81 @@
+---
+/**
+ * Esqueleto de toda página: `<head>` (SEO y fuentes alojadas en el sitio, con `font-display: swap`
+ * de Fontsource), menú fijo y pie. Las páginas le pasan los bloques ya cargados.
+ */
+import '@fontsource/rubik-dirt/latin-400.css';
+import '@fontsource/bebas-neue/latin-400.css';
+import '@fontsource-variable/inter/wght.css';
+import '../styles/global.css';
+import Cabecera from '../components/Cabecera.astro';
+import type { Bloques } from '../lib/content';
+import { urlFoto } from '../lib/fotos';
+
+interface Props {
+  b: Bloques;
+  titulo: string | null;
+  descripcion: string | null;
+  compartirTitulo?: string | null;
+  compartirDescripcion?: string | null;
+}
+const { b, titulo, descripcion, compartirTitulo, compartirDescripcion } = Astro.props;
+const nombre = b.t('global.marca.nombre') ?? '';
+const imagenCompartir = b.foto('global.seo.imagen');
+const canonica = new URL(Astro.url.pathname, Astro.url.origin).href;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo ?? nombre}</title>
+    {descripcion && <meta name="description" content={descripcion} />}
+    <link rel="canonical" href={canonica} />
+    <meta name="theme-color" content="#08070c" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_EC" />
+    <meta property="og:site_name" content={nombre} />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:title" content={compartirTitulo ?? titulo ?? nombre} />
+    {(compartirDescripcion ?? descripcion) && <meta property="og:description" content={compartirDescripcion ?? descripcion} />}
+    {
+      imagenCompartir && (
+        <>
+          <meta property="og:image" content={urlFoto(imagenCompartir)} />
+          <meta property="og:image:width" content={String(imagenCompartir.width)} />
+          <meta property="og:image:height" content={String(imagenCompartir.height)} />
+          <meta property="og:image:alt" content={imagenCompartir.alt} />
+        </>
+      )
+    }
+    <meta name="twitter:card" content={imagenCompartir ? 'summary_large_image' : 'summary'} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="saltar" href="#contenido">Ir al contenido</a>
+    <Cabecera b={b} />
+    <main id="contenido">
+      <slot />
+    </main>
+    <slot name="pie" />
+  </body>
+</html>
+
+<style>
+  .saltar {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    background: var(--texto);
+    color: var(--fondo);
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  .saltar:focus {
+    top: 1rem;
+  }
+</style>

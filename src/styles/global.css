@@ -1,0 +1,192 @@
+/*
+ * Estilos base de The Lion Halloween Party. Paleta provisional (falta comparar con los flyers):
+ * negro de fondo, cian = De día, magenta = De noche, dorado = premios. El neón va en títulos,
+ * bordes y botones; el texto de lectura, en blanco o gris claro (contraste AA sobre --fondo).
+ */
+:root {
+  --fondo: #08070c;
+  --superficie: #120f19;
+  --superficie-2: #1a1524;
+  --linea: #2c2538;
+  --texto: #f5f2fa;
+  --texto-2: #cbc4d8; /* 11,5:1 sobre --fondo */
+  --texto-3: #a39bb3; /* 7:1 */
+  --cian: #2ee6ff; /* De día */
+  --magenta: #ff2bd6; /* De noche y marca: 6,3:1 sobre --fondo */
+  --dorado: #ffb326; /* premios */
+  --brillo-cian: 0 0 0.6em rgb(46 230 255 / 0.55);
+  --brillo-magenta: 0 0 0.6em rgb(255 43 214 / 0.6);
+
+  --f-display: 'Rubik Dirt', 'Impact', system-ui, sans-serif;
+  --f-rotulo: 'Bebas Neue', 'Arial Narrow', system-ui, sans-serif;
+  --f-cuerpo: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --ancho: 1200px;
+  --margen: 1rem;
+  --alto-menu: 4rem;
+  --radio: 14px;
+  --seccion: clamp(4.5rem, 10vw, 8rem);
+
+  color-scheme: dark;
+}
+@media (min-width: 768px) {
+  :root {
+    --margen: 2rem;
+    --alto-menu: 4.5rem;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--alto-menu) + 1rem);
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--f-cuerpo);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+a {
+  color: inherit;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+:focus-visible {
+  outline: 3px solid var(--texto);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: calc(var(--ancho) + 2 * var(--margen));
+  margin-inline: auto;
+  padding-inline: var(--margen);
+}
+.seccion {
+  padding-block: var(--seccion);
+  position: relative;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Tipografía */
+.h2 {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 6.4vw, 3.75rem);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+.rotulo {
+  font-family: var(--f-rotulo);
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.lead {
+  color: var(--texto-2);
+  font-size: 1.125rem;
+  max-width: 40rem;
+  text-wrap: pretty;
+}
+.dia {
+  --acento: var(--cian);
+  --brillo: var(--brillo-cian);
+}
+.noche {
+  --acento: var(--magenta);
+  --brillo: var(--brillo-magenta);
+}
+
+/* Botones */
+.boton {
+  --acento-boton: var(--acento, var(--magenta));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 3rem;
+  padding: 0.7rem 1.5rem 0.6rem;
+  border: 2px solid var(--acento-boton);
+  border-radius: 999px;
+  background: var(--acento-boton);
+  color: #08070c;
+  font-family: var(--f-rotulo);
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 0 1.4rem -0.3rem var(--acento-boton);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.boton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 2rem -0.2rem var(--acento-boton);
+}
+.boton--contorno {
+  background: transparent;
+  color: var(--texto);
+  box-shadow: none;
+}
+.boton--contorno:hover {
+  background: color-mix(in srgb, var(--acento-boton) 14%, transparent);
+  box-shadow: none;
+}
+.boton--chico {
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem 0.4rem;
+  font-size: 1.1rem;
+}
+
+/* Fondo con grano (textura) reutilizable */
+.grano::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}

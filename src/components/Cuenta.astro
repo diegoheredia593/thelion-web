@@ -1,0 +1,188 @@
+---
+/**
+ * Cuenta regresiva: un solo componente para la versión corta (portada) y la grande (sección final).
+ *
+ * - Fechas de los bloques `global.evento.inicio` / `global.evento.fin`, en ISO con el desfase de
+ *   Ecuador (-05:00): se comparan instantes absolutos, nunca la hora local del navegador.
+ * - Tres estados (antes, durante, después). El servidor ya renderiza el correcto; el script solo
+ *   cambia de estado si el momento llega con la página abierta.
+ * - Sin JavaScript, en el estado «antes» se ve la fecha en texto en lugar de los números (unos
+ *   números fijos quedarían viejos). Sin animaciones: solo cambia el texto cada segundo.
+ */
+interface Props {
+  variante: 'corta' | 'grande';
+  inicio: string | null;
+  fin: string | null;
+  /** Fecha en texto, para cuando no hay JavaScript. */
+  fecha: string | null;
+  titulo: string | null;
+  unidades: [string | null, string | null, string | null, string | null];
+  durante: string | null;
+  despues: string | null;
+  class?: string;
+}
+const { variante, inicio, fin, fecha, titulo, unidades, durante, despues, class: clase } = Astro.props;
+
+const tInicio = inicio ? Date.parse(inicio) : NaN;
+const tFin = fin ? Date.parse(fin) : NaN;
+const valida = Number.isFinite(tInicio) && Number.isFinite(tFin);
+const ahora = Date.now();
+const estado = !valida || ahora < tInicio ? 'antes' : ahora < tFin ? 'durante' : 'despues';
+
+const resta = Math.max(0, tInicio - ahora);
+const inicial = [Math.floor(resta / 86_400_000), Math.floor(resta / 3_600_000) % 24, Math.floor(resta / 60_000) % 60, Math.floor(resta / 1000) % 60];
+const dos = (n: number) => String(n).padStart(2, '0');
+const Titulo = variante === 'grande' ? 'h2' : 'p';
+---
+
+{
+  valida && (
+    <div class:list={['cuenta', `cuenta--${variante}`, clase]} data-cuenta data-inicio={tInicio} data-fin={tFin} data-estado={estado}>
+      <div data-para="antes" hidden={estado !== 'antes'}>
+        {titulo && <Titulo class:list={['titulo', { h2: variante === 'grande' }]}>{titulo}</Titulo>}
+        {fecha && <p class="fecha" data-sin-js>{fecha}</p>}
+        <ol class="unidades" hidden data-con-js role="timer" aria-live="off">
+          {unidades.map((u, i) => (
+            <li>
+              <span class="numero" data-unidad={i}>{i === 0 ? inicial[i] : dos(inicial[i]!)}</span>
+              {u && <span class="unidad">{u}</span>}
+            </li>
+          ))}
+        </ol>
+        <slot name="antes" />
+      </div>
+      <div data-para="durante" hidden={estado !== 'durante'}>
+        {durante && <p class:list={['estado', { h2: variante === 'grande' }]}>{durante}</p>}
+        <slot name="durante" />
+      </div>
+      <div data-para="despues" hidden={estado !== 'despues'}>
+        {despues && <p class:list={['estado', { h2: variante === 'grande' }]}>{despues}</p>}
+        <slot name="despues" />
+      </div>
+    </div>
+  )
+}
+
+<script>
+  const dos = (n: number) => String(n).padStart(2, '0');
+  for (const cuenta of document.querySelectorAll<HTMLElement>('[data-cuenta]')) {
+    const inicio = Number(cuenta.dataset.inicio);
+    const fin = Number(cuenta.dataset.fin);
+    cuenta.querySelectorAll<HTMLElement>('[data-sin-js]').forEach((el) => (el.hidden = true));
+    cuenta.querySelectorAll<HTMLElement>('[data-con-js]').forEach((el) => (el.hidden = false));
+    const numeros = [...cuenta.querySelectorAll<HTMLElement>('[data-unidad]')];
+    const pintar = () => {
+      const ahora = Date.now();
+      const estado = ahora < inicio ? 'antes' : ahora < fin ? 'durante' : 'despues';
+      if (cuenta.dataset.estado !== estado) {
+        cuenta.dataset.estado = estado;
+        cuenta.querySelectorAll<HTMLElement>('[data-para]').forEach((el) => (el.hidden = el.dataset.para !== estado));
+      }
+      if (estado !== 'antes') return false;
+      const resta = inicio - ahora;
+      const valores = [Math.floor(resta / 86_400_000), Math.floor(resta / 3_600_000) % 24, Math.floor(resta / 60_000) % 60, Math.floor(resta / 1000) % 60];
+      numeros.forEach((el, i) => {
+        const texto = i === 0 ? String(valores[i]) : dos(valores[i]!);
+        if (el.textContent !== texto) el.textContent = texto;
+      });
+      return true;
+    };
+    pintar();
+    const reloj = setInterval(() => {
+      if (!pintar() && cuenta.dataset.estado === 'despues') clearInterval(reloj);
+    }, 1000);
+  }
+</script>
+
+<style>
+  .titulo {
+    font-family: var(--f-rotulo);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--texto-2);
+  }
+  .fecha {
+    font-family: var(--f-rotulo);
+    font-size: 1.6rem;
+    letter-spacing: 0.06em;
+  }
+  .unidades {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .unidades[hidden],
+  [hidden] {
+    display: none;
+  }
+  .unidades li {
+    display: grid;
+    justify-items: center;
+    padding: 0.55rem 0.25rem 0.45rem;
+    border: 1px solid var(--linea);
+    border-radius: 12px;
+    background: rgb(18 15 25 / 0.72);
+  }
+  .numero {
+    font-family: var(--f-display);
+    font-size: 2rem;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .unidad {
+    font-family: var(--f-rotulo);
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    color: var(--texto-3);
+    text-transform: uppercase;
+  }
+  .estado {
+    font-family: var(--f-rotulo);
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  .cuenta--corta [data-para='antes'] {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .cuenta--corta [data-para='antes'][hidden] {
+    display: none;
+  }
+  .cuenta--corta .titulo {
+    font-size: 1rem;
+  }
+  .cuenta--corta .unidades {
+    max-width: 22rem;
+  }
+
+  .cuenta--grande {
+    text-align: center;
+  }
+  .cuenta--grande .titulo {
+    color: var(--texto);
+    letter-spacing: 0.01em;
+    text-transform: none;
+    margin-bottom: 1.5rem;
+  }
+  .cuenta--grande .unidades {
+    max-width: 44rem;
+    margin-inline: auto;
+    gap: clamp(0.5rem, 2vw, 1.25rem);
+  }
+  .cuenta--grande .unidades li {
+    padding: 1.1rem 0.25rem 0.9rem;
+    border-color: color-mix(in srgb, var(--magenta) 45%, var(--linea));
+  }
+  .cuenta--grande .numero {
+    font-size: clamp(2.5rem, 10vw, 5.5rem);
+    color: var(--texto);
+    text-shadow: var(--brillo-magenta);
+  }
+  .cuenta--grande .fecha {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+  }
+</style>

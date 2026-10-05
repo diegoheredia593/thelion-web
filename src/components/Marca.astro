@@ -1,0 +1,59 @@
+---
+/**
+ * Logo del evento: la foto del bloque `global.marca.logo` cuando exista; mientras tanto, un wordmark
+ * tipográfico con el nombre del evento ([PENDIENTE] logo).
+ */
+import { atributosFoto } from '../lib/fotos';
+import type { Bloques } from '../lib/content';
+
+interface Props {
+  b: Bloques;
+  grande?: boolean;
+}
+const { b, grande = false } = Astro.props;
+const logo = b.foto('global.marca.logo');
+const palabras = (b.t('global.marca.nombre') ?? '').split(' ');
+---
+
+{
+  logo ? (
+    <img class:list={['logo', { grande }]} {...atributosFoto(logo, { sizes: grande ? '220px' : '140px', alt: '' })} />
+  ) : (
+    <span class:list={['wordmark', { grande }]} aria-hidden="true">
+      <span class="w1">{palabras.slice(0, 2).join(' ')}</span>
+      <span class="w2">{palabras.slice(2).join(' ')}</span>
+    </span>
+  )
+}
+
+<style>
+  .logo {
+    height: 2.5rem;
+    width: auto;
+  }
+  .logo.grande {
+    height: 4.5rem;
+  }
+  .wordmark {
+    display: grid;
+    font-family: var(--f-rotulo);
+    line-height: 0.92;
+    text-transform: uppercase;
+    color: var(--texto);
+  }
+  .w1 {
+    font-size: 1.45rem;
+    letter-spacing: 0.04em;
+  }
+  .w2 {
+    font-size: 0.86rem;
+    letter-spacing: 0.135em;
+    color: var(--magenta);
+  }
+  .grande .w1 {
+    font-size: 2.6rem;
+  }
+  .grande .w2 {
+    font-size: 1.54rem;
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+/**
+ * La landing completa (página `inicio`). Lee bloques y colecciones de la fuente de contenido.
+ * PARADA DE DISEÑO: por ahora solo portada, «Dos experiencias» y entradas.
+ */
+import Base from '../layouts/Base.astro';
+import Portada from '../components/secciones/Portada.astro';
+import Experiencias from '../components/secciones/Experiencias.astro';
+import Entradas from '../components/secciones/Entradas.astro';
+import { cargarBloques, coleccion } from '../lib/content';
+import { dolares } from '../lib/formato';
+
+const url = Astro.url;
+const [b, localidades] = await Promise.all([cargarBloques(url), coleccion('localidades', url)]);
+const masBarata = localidades.length ? Math.min(...localidades.map((l) => l.precio)) : null;
+---
+
+<Base
+  b={b}
+  titulo={b.t('inicio.seo.titulo')}
+  descripcion={b.t('inicio.seo.descripcion')}
+  compartirTitulo={b.t('inicio.seo.compartirTitulo')}
+  compartirDescripcion={b.t('inicio.seo.compartirDescripcion')}
+>
+  <Portada b={b} desde={masBarata === null ? null : dolares(masBarata)} />
+  <Experiencias b={b} />
+  <Entradas b={b} localidades={localidades} />
+</Base>

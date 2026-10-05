@@ -1,0 +1,44 @@
+---
+/**
+ * Set propio de íconos SVG (trazo, 24 × 24, color del texto). Los nombres del campo `icono` de las
+ * colecciones (`plataforma/colecciones/*.json`) son claves de este set; los demás son de interfaz.
+ * Decorativos por defecto (`aria-hidden`); con `etiqueta` se anuncian.
+ */
+interface Props {
+  nombre: string;
+  tamano?: number;
+  etiqueta?: string;
+  class?: string;
+}
+const { nombre, tamano = 24, etiqueta, class: clase } = Astro.props;
+
+const trazos: Record<string, string> = {
+  sol: '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/>',
+  luna: '<path d="M20.2 14.6A8.5 8.5 0 0 1 9.4 3.8a8.5 8.5 0 1 0 10.8 10.8Z"/><path d="M16.5 3.5l.5 1.3 1.3.5-1.3.5-.5 1.3-.5-1.3-1.3-.5 1.3-.5z" />',
+  ticket: '<path d="M3 8.5V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2.5a2.5 2.5 0 0 0 0 5V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4.5a2.5 2.5 0 0 0 0-5Z"/><path d="M14.5 5v14" stroke-dasharray="2 2.2"/>',
+  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  cerrar: '<path d="M6 6l12 12M18 6L6 18"/>',
+  escudo: '<path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.6"/>',
+  pin: '<path d="M12 21s-6.5-6.1-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.3"/>',
+  flecha: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  calabaza: '<path d="M12 6.5c-1-2-.6-3.3.8-4"/><path d="M12 6.5c-4.8 0-8 2.9-8 6.8s3.2 7 8 7 8-3.1 8-7-3.2-6.8-8-6.8Z"/><path d="M12 6.5c-1.9 1.5-2.6 4.1-2.6 6.8s.7 5.4 2.6 7M12 6.5c1.9 1.5 2.6 4.1 2.6 6.8s-.7 5.4-2.6 7"/>',
+  lapida: '<path d="M6 21V10a6 6 0 0 1 12 0v11"/><path d="M4 21h16M12 9v6M9.5 11.5h5"/>',
+};
+const svg = trazos[nombre] ?? trazos.calabaza;
+---
+
+<svg
+  class={clase}
+  width={tamano}
+  height={tamano}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden={etiqueta ? undefined : 'true'}
+  role={etiqueta ? 'img' : undefined}
+  aria-label={etiqueta}
+  set:html={svg}
+/>

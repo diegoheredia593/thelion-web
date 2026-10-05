@@ -1,0 +1,218 @@
+---
+/**
+ * §1 Portada: etiqueta, H1, subtítulo, texto, botones, «Entradas desde…», contador corto y franja de
+ * datos. La imagen de fondo es la del bloque `inicio.portada.imagen` (sin lazy: es el LCP); mientras
+ * no exista, el fondo es de diseño (degradados y grano).
+ */
+import Cuenta from '../Cuenta.astro';
+import { atributosFoto } from '../../lib/fotos';
+import type { Bloques } from '../../lib/content';
+
+interface Props {
+  b: Bloques;
+  /** Precio ya formateado de la localidad visible más barata, o null si no hay ninguna. */
+  desde: string | null;
+}
+const { b, desde } = Astro.props;
+const imagen = b.foto('inicio.portada.imagen');
+const enlaceEntradas = b.t('global.entradas.enlace');
+const fraseDesde = b.plantilla('inicio.portada.desde', { precio: desde });
+const datos = [
+  { clase: '', rotulo: b.t('inicio.datos.fechaEtiqueta'), valor: b.t('inicio.datos.fecha') },
+  { clase: 'lugar', rotulo: b.t('inicio.datos.lugarEtiqueta'), valor: b.t('inicio.datos.lugar'), enlace: b.t('inicio.datos.verMapa') },
+  { clase: 'dia', rotulo: b.t('inicio.datos.diaEtiqueta'), valor: b.t('inicio.datos.dia') },
+  { clase: 'noche', rotulo: b.t('inicio.datos.nocheEtiqueta'), valor: b.t('inicio.datos.noche') },
+].filter((d) => d.valor);
+---
+
+<section class="portada grano" aria-labelledby="titulo-portada">
+  {imagen && <img class="fondo-foto" {...atributosFoto(imagen, { prioridad: true, alt: '' })} />}
+  <div class="fondo" aria-hidden="true"><span class="luna"></span></div>
+
+  <div class="contenedor rejilla">
+    <div class="texto">
+      {b.t('inicio.portada.etiqueta') && <p class="rotulo etiqueta">{b.t('inicio.portada.etiqueta')}</p>}
+      <h1 id="titulo-portada">{b.t('inicio.portada.titulo')}</h1>
+      {b.t('inicio.portada.subtitulo') && <p class="subtitulo">{b.t('inicio.portada.subtitulo')}</p>}
+      {b.t('inicio.portada.texto') && <p class="lead">{b.t('inicio.portada.texto')}</p>}
+      <div class="botones">
+        {enlaceEntradas && b.t('inicio.portada.botonEntradas') && <a class="boton noche" href={enlaceEntradas}>{b.t('inicio.portada.botonEntradas')}</a>}
+        {b.t('inicio.portada.botonStand') && <a class="boton boton--contorno dia" href="#stands">{b.t('inicio.portada.botonStand')}</a>}
+      </div>
+      {fraseDesde && <p class="desde">{fraseDesde}</p>}
+    </div>
+
+    <Cuenta
+      variante="corta"
+      class="cuenta"
+      inicio={b.t('global.evento.inicio')}
+      fin={b.t('global.evento.fin')}
+      fecha={b.t('inicio.datos.fecha')}
+      titulo={b.t('inicio.portada.faltan')}
+      unidades={[b.t('inicio.portada.dias'), b.t('inicio.portada.horas'), b.t('inicio.portada.min'), b.t('inicio.portada.seg')]}
+      durante={b.t('inicio.final.durante')}
+      despues={b.t('inicio.final.despues')}
+    />
+  </div>
+
+  {
+    datos.length > 0 && (
+      <div class="contenedor">
+        <dl class="franja">
+          {datos.map((d) => (
+            <div class:list={['dato', d.clase]}>
+              <dt class="rotulo">{d.rotulo}</dt>
+              <dd>
+                {d.valor}
+                {d.enlace && (
+                  <>
+                    {' · '}
+                    <a href="#ubicacion">{d.enlace}</a>
+                  </>
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .portada {
+    position: relative;
+    isolation: isolate;
+    min-height: min(100svh, 62rem);
+    padding-top: calc(var(--alto-menu) + clamp(2.5rem, 7vw, 5rem));
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    overflow: hidden;
+  }
+  .fondo-foto {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .fondo {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(60rem 34rem at 92% 108%, rgb(255 43 214 / 0.34), transparent 62%),
+      radial-gradient(40rem 26rem at -8% 10%, rgb(46 230 255 / 0.2), transparent 60%),
+      linear-gradient(180deg, rgb(8 7 12 / 0.55), rgb(8 7 12 / 0.92) 70%, var(--fondo));
+  }
+  .luna {
+    position: absolute;
+    right: -9rem;
+    top: 3rem;
+    width: 26rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid rgb(255 43 214 / 0.55);
+    background: radial-gradient(circle at 30% 30%, rgb(255 43 214 / 0.1), transparent 65%);
+    box-shadow:
+      0 0 3rem rgb(255 43 214 / 0.35),
+      inset 0 0 3rem rgb(255 43 214 / 0.18);
+    opacity: 0.35;
+  }
+  .rejilla {
+    display: grid;
+    gap: 2.5rem;
+    align-items: end;
+  }
+  .texto {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 46rem;
+  }
+  .etiqueta {
+    color: var(--cian);
+    font-size: 1rem;
+  }
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: clamp(3rem, 11vw, 6.6rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+    text-wrap: balance;
+    text-shadow: 0 0 2.2rem rgb(255 43 214 / 0.35);
+  }
+  .subtitulo {
+    font-family: var(--f-rotulo);
+    font-size: clamp(1.9rem, 5.6vw, 2.8rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--magenta);
+    text-shadow: var(--brillo-magenta);
+  }
+  .botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+  .desde {
+    color: var(--texto-2);
+    font-size: 0.95rem;
+  }
+  .franja {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--linea);
+  }
+  .dato {
+    padding: 1rem 0.75rem 0.25rem 0;
+  }
+  .dato dt {
+    font-size: 0.95rem;
+    color: var(--texto-3);
+  }
+  .dato.dia dt {
+    color: var(--cian);
+  }
+  .dato.noche dt {
+    color: var(--magenta);
+  }
+  .dato dd {
+    margin: 0.15rem 0 0;
+    font-size: 0.98rem;
+    line-height: 1.4;
+  }
+  .dato a {
+    color: var(--texto-2);
+    text-underline-offset: 3px;
+  }
+  @media (max-width: 559px) {
+    .botones .boton {
+      flex: 1 1 100%;
+    }
+  }
+  @media (min-width: 900px) {
+    .rejilla {
+      grid-template-columns: minmax(0, 1fr) 22rem;
+      gap: 4rem;
+    }
+    .franja {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .dato {
+      padding: 1.25rem 1.5rem 0 0;
+    }
+    .luna {
+      right: 6%;
+      top: 18%;
+      width: 30rem;
+      opacity: 0.8;
+    }
+  }
+</style>

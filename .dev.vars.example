@@ -1,0 +1,12 @@
+# Copia este archivo a `.dev.vars` (está en .gitignore — nunca se sube).
+#
+# Sin llave: usa la semilla de plataforma/ (solo en `npm run dev`; en producción el sitio falla).
+FUENTE=semilla
+#
+# Con llave: borra FUENTE y pon la llave de API de la plataforma para el cliente "thelionhalloween",
+# con los alcances `contenido:leer` y `formularios:enviar` (consola: /clientes/<id> → pestaña API).
+# En producción es un secreto del Worker: npx wrangler secret put PLATAFORMA_LLAVE
+# PLATAFORMA_LLAVE=pk_...
+#
+# Opcional: clave secreta de Turnstile (si TURNSTILE_SITE_KEY está configurada en wrangler.jsonc).
+# TURNSTILE_SECRET=
