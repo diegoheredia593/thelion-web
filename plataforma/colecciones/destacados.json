@@ -1,0 +1,131 @@
+{
+  "key": "destacados",
+  "label": "Destacados de día y de noche",
+  "singular": "destacado",
+  "gender": "m",
+  "description": "Íconos de la sección De día y lista de la sección De noche.",
+  "titleField": "texto",
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "texto",
+      "control": "text",
+      "label": "Texto",
+      "required": true,
+      "max": 100
+    },
+    {
+      "name": "experiencia",
+      "control": "option",
+      "label": "Sección",
+      "required": true,
+      "options": [
+        {
+          "value": "dia",
+          "label": "De día"
+        },
+        {
+          "value": "noche",
+          "label": "De noche"
+        }
+      ]
+    },
+    {
+      "name": "icono",
+      "control": "option",
+      "label": "Ícono",
+      "help": "Dibujo del set del sitio que acompaña al texto.",
+      "required": false,
+      "options": [
+        {
+          "value": "calabaza",
+          "label": "Calabaza"
+        },
+        {
+          "value": "fantasma",
+          "label": "Fantasma"
+        },
+        {
+          "value": "casa",
+          "label": "Casa embrujada"
+        },
+        {
+          "value": "tienda",
+          "label": "Tienda / feria"
+        },
+        {
+          "value": "mascara",
+          "label": "Máscara / personajes"
+        },
+        {
+          "value": "dulces",
+          "label": "Dulces"
+        },
+        {
+          "value": "dinosaurio",
+          "label": "Dinosaurio"
+        },
+        {
+          "value": "microfono",
+          "label": "Micrófono / concierto"
+        },
+        {
+          "value": "disco",
+          "label": "Disco / DJ"
+        },
+        {
+          "value": "escenario",
+          "label": "Escenario"
+        },
+        {
+          "value": "lapida",
+          "label": "Lápida"
+        },
+        {
+          "value": "bus",
+          "label": "Bus"
+        },
+        {
+          "value": "zombi",
+          "label": "Zombi"
+        },
+        {
+          "value": "toro",
+          "label": "Toro mecánico"
+        },
+        {
+          "value": "pinata",
+          "label": "Piñata"
+        },
+        {
+          "value": "montana",
+          "label": "Juegos mecánicos"
+        },
+        {
+          "value": "cerveza",
+          "label": "Cerveza"
+        },
+        {
+          "value": "trofeo",
+          "label": "Trofeo / premio"
+        },
+        {
+          "value": "estrella",
+          "label": "Estrella / talento"
+        },
+        {
+          "value": "personas",
+          "label": "Público"
+        },
+        {
+          "value": "reloj",
+          "label": "Reloj"
+        },
+        {
+          "value": "megafono",
+          "label": "Megáfono / difusión"
+        }
+      ]
+    }
+  ]
+}

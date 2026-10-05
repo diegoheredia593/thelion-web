@@ -1,0 +1,25 @@
+{
+  "key": "pilares",
+  "label": "Lo que vas a vivir",
+  "singular": "columna",
+  "gender": "f",
+  "description": "Las cuatro columnas de «Más que una fiesta».",
+  "titleField": "titulo",
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "titulo",
+      "control": "text",
+      "label": "Título",
+      "required": true,
+      "max": 60
+    },
+    {
+      "name": "texto",
+      "control": "textLong",
+      "label": "Texto",
+      "required": true,
+      "max": 220
+    }
+  ]
+}

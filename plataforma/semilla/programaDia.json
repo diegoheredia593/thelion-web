@@ -1,0 +1,112 @@
+[
+  {
+    "idOrigen": "programa-inscripcion",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "titulo": "Inscripción oficial",
+      "detalle": "De concursantes de disfraces y de talentos",
+      "hora": "[PENDIENTE: hora]"
+    }
+  },
+  {
+    "idOrigen": "programa-toy-story",
+    "slug": null,
+    "estado": "visible",
+    "orden": 1,
+    "datos": {
+      "titulo": "Show de Toy Story en vivo",
+      "detalle": null,
+      "hora": "[PENDIENTE: hora]"
+    }
+  },
+  {
+    "idOrigen": "programa-talentos-1",
+    "slug": null,
+    "estado": "visible",
+    "orden": 2,
+    "datos": {
+      "titulo": "Show de talentos",
+      "detalle": "Primera ronda: 5 participantes",
+      "hora": "[PENDIENTE: hora]"
+    }
+  },
+  {
+    "idOrigen": "programa-pasarela-1",
+    "slug": null,
+    "estado": "visible",
+    "orden": 3,
+    "datos": {
+      "titulo": "Primera pasarela de disfraces",
+      "detalle": null,
+      "hora": "[PENDIENTE: hora]"
+    }
+  },
+  {
+    "idOrigen": "programa-beetlejuice",
+    "slug": null,
+    "estado": "visible",
+    "orden": 4,
+    "datos": {
+      "titulo": "Show de Beetlejuice en vivo",
+      "detalle": null,
+      "hora": "[PENDIENTE: hora]"
+    }
+  },
+  {
+    "idOrigen": "programa-talentos-2",
+    "slug": null,
+    "estado": "visible",
+    "orden": 5,
+    "datos": {
+      "titulo": "Show de talentos",
+      "detalle": "Segunda ronda: 5 participantes más",
+      "hora": "[PENDIENTE: hora]"
+    }
+  },
+  {
+    "idOrigen": "programa-pasarela-2",
+    "slug": null,
+    "estado": "visible",
+    "orden": 6,
+    "datos": {
+      "titulo": "Segunda pasarela de disfraces",
+      "detalle": null,
+      "hora": "[PENDIENTE: hora]"
+    }
+  },
+  {
+    "idOrigen": "programa-premiacion",
+    "slug": null,
+    "estado": "visible",
+    "orden": 7,
+    "datos": {
+      "titulo": "Premiación",
+      "detalle": "De disfraces y talentos",
+      "hora": "[PENDIENTE: hora]"
+    }
+  },
+  {
+    "idOrigen": "programa-kpop",
+    "slug": null,
+    "estado": "visible",
+    "orden": 8,
+    "datos": {
+      "titulo": "Show de K-pop en vivo",
+      "detalle": null,
+      "hora": "[PENDIENTE: hora]"
+    }
+  },
+  {
+    "idOrigen": "programa-cierre",
+    "slug": null,
+    "estado": "visible",
+    "orden": 9,
+    "datos": {
+      "titulo": "Cierre con concierto en vivo",
+      "detalle": null,
+      "hora": "[PENDIENTE: hora]"
+    }
+  }
+]

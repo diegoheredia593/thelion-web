@@ -1,0 +1,34 @@
+{
+  "key": "marcasAliadas",
+  "label": "Marcas aliadas",
+  "singular": "marca aliada",
+  "gender": "f",
+  "description": "Logos de sponsors confirmados. La franja aparece con 3 o más visibles.",
+  "titleField": "nombre",
+  "searchFields": [
+    "nombre"
+  ],
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "nombre",
+      "control": "text",
+      "label": "Marca",
+      "required": true,
+      "max": 60
+    },
+    {
+      "name": "logo",
+      "control": "image",
+      "label": "Logo",
+      "help": "PNG o WebP con fondo transparente, de preferencia claro.",
+      "required": true
+    },
+    {
+      "name": "enlace",
+      "control": "url",
+      "label": "Sitio web de la marca",
+      "required": false
+    }
+  ]
+}

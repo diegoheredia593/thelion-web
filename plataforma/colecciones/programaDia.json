@@ -1,0 +1,33 @@
+{
+  "key": "programaDia",
+  "label": "Programa de la tarde",
+  "singular": "momento del programa",
+  "gender": "m",
+  "description": "Línea de tiempo de la experiencia De día, en orden.",
+  "titleField": "titulo",
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "titulo",
+      "control": "text",
+      "label": "Qué pasa",
+      "required": true,
+      "max": 80
+    },
+    {
+      "name": "detalle",
+      "control": "text",
+      "label": "Detalle",
+      "required": false,
+      "max": 120
+    },
+    {
+      "name": "hora",
+      "control": "text",
+      "label": "Hora",
+      "help": "Por ejemplo: «12:30».",
+      "required": false,
+      "max": 20
+    }
+  ]
+}

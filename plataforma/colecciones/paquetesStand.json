@@ -1,0 +1,46 @@
+{
+  "key": "paquetesStand",
+  "label": "Paquetes de stand",
+  "singular": "paquete de stand",
+  "gender": "m",
+  "description": "Paquetes para emprendedores y la extensión nocturna.",
+  "titleField": "nombre",
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "nombre",
+      "control": "text",
+      "label": "Nombre",
+      "required": true,
+      "max": 60
+    },
+    {
+      "name": "espacio",
+      "control": "text",
+      "label": "Espacio",
+      "required": true,
+      "max": 100
+    },
+    {
+      "name": "incluye",
+      "control": "textLong",
+      "label": "Incluye",
+      "required": true,
+      "max": 160
+    },
+    {
+      "name": "precio",
+      "control": "number",
+      "label": "Precio (USD)",
+      "required": true,
+      "min": 0
+    },
+    {
+      "name": "adicional",
+      "control": "checkbox",
+      "label": "Es un adicional",
+      "help": "Se muestra con «+» delante del precio.",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "key": "concursos",
+  "label": "Concursos",
+  "singular": "concurso",
+  "gender": "m",
+  "description": "Los concursos de día y de noche.",
+  "titleField": "nombre",
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "nombre",
+      "control": "text",
+      "label": "Nombre",
+      "required": true,
+      "max": 60
+    },
+    {
+      "name": "publico",
+      "control": "text",
+      "label": "Para quién",
+      "required": false,
+      "max": 80
+    },
+    {
+      "name": "cuando",
+      "control": "text",
+      "label": "Cuándo",
+      "required": true,
+      "max": 80
+    },
+    {
+      "name": "premios",
+      "control": "text",
+      "label": "Premios",
+      "required": true,
+      "max": 80
+    },
+    {
+      "name": "reparto",
+      "control": "text",
+      "label": "Reparto de los premios",
+      "help": "Se muestra después de «Premios».",
+      "required": false,
+      "max": 160
+    },
+    {
+      "name": "comoParticipar",
+      "control": "text",
+      "label": "Cómo participar",
+      "required": false,
+      "max": 160
+    }
+  ]
+}

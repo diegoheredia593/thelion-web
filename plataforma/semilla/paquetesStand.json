@@ -1,0 +1,41 @@
+[
+  {
+    "idOrigen": "stand-paquete-1",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "nombre": "Paquete 1 · Completo",
+      "espacio": "3 × 3 m",
+      "incluye": "Carpa, luz, mesa y 2 sillas",
+      "precio": 120,
+      "adicional": false
+    }
+  },
+  {
+    "idOrigen": "stand-paquete-2",
+    "slug": null,
+    "estado": "visible",
+    "orden": 1,
+    "datos": {
+      "nombre": "Paquete 2 · Solo espacio",
+      "espacio": "3 × 3 m",
+      "incluye": "Luz (sin carpa, mesa ni sillas)",
+      "precio": 80,
+      "adicional": false
+    }
+  },
+  {
+    "idOrigen": "stand-extension",
+    "slug": null,
+    "estado": "visible",
+    "orden": 2,
+    "datos": {
+      "nombre": "Extensión nocturna",
+      "espacio": "Área especial de emprendedores en la entrada principal",
+      "incluye": "Seguir vendiendo durante la fiesta, hasta las 02:00",
+      "precio": 50,
+      "adicional": true
+    }
+  }
+]

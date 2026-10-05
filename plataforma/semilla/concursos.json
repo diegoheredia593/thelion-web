@@ -1,0 +1,44 @@
+[
+  {
+    "idOrigen": "concurso-disfraces-dia",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "nombre": "Disfraces de día",
+      "publico": "Niños, adolescentes y familias",
+      "cuando": "12:00–18:00, dos pasarelas",
+      "premios": "Parte de los $1.000 de la tarde",
+      "reparto": "[PENDIENTE: reparto de los premios]",
+      "comoParticipar": "Inscripción oficial al inicio de la jornada"
+    }
+  },
+  {
+    "idOrigen": "concurso-talentos-dia",
+    "slug": null,
+    "estado": "visible",
+    "orden": 1,
+    "datos": {
+      "nombre": "Talentos de día",
+      "publico": null,
+      "cuando": "12:00–18:00, dos rondas de shows",
+      "premios": "Parte de los $1.000 de la tarde",
+      "reparto": "[PENDIENTE: reparto de los premios]",
+      "comoParticipar": "Inscripción oficial al inicio de la jornada"
+    }
+  },
+  {
+    "idOrigen": "concurso-disfraces-noche",
+    "slug": null,
+    "estado": "visible",
+    "orden": 2,
+    "datos": {
+      "nombre": "Disfraces de noche",
+      "publico": null,
+      "cuando": "20:00–02:00",
+      "premios": "$2.000",
+      "reparto": "[PENDIENTE: reparto de los premios]",
+      "comoParticipar": "[PENDIENTE: inscripción y hora de pasarela]"
+    }
+  }
+]

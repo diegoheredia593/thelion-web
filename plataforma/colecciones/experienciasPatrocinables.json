@@ -1,0 +1,18 @@
+{
+  "key": "experienciasPatrocinables",
+  "label": "Atracciones para patrocinar",
+  "singular": "atracción para patrocinar",
+  "gender": "f",
+  "description": "Lista de «Patrocina una atracción».",
+  "titleField": "nombre",
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "nombre",
+      "control": "text",
+      "label": "Nombre",
+      "required": true,
+      "max": 60
+    }
+  ]
+}

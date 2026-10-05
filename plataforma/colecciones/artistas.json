@@ -1,0 +1,45 @@
+{
+  "key": "artistas",
+  "label": "Line-up",
+  "singular": "artista",
+  "gender": "m",
+  "description": "Artistas y DJs de la noche. La sección se oculta mientras no haya ninguno visible.",
+  "titleField": "nombre",
+  "searchFields": [
+    "nombre"
+  ],
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "nombre",
+      "control": "text",
+      "label": "Nombre",
+      "required": true,
+      "max": 60
+    },
+    {
+      "name": "rol",
+      "control": "option",
+      "label": "Rol",
+      "required": true,
+      "options": [
+        {
+          "value": "artista",
+          "label": "Artista"
+        },
+        {
+          "value": "dj",
+          "label": "DJ"
+        }
+      ]
+    },
+    {
+      "name": "foto",
+      "control": "image",
+      "label": "Foto",
+      "help": "Cuadrada, con la cara centrada.",
+      "required": true,
+      "aspectRatio": "1:1"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+[
+  {
+    "idOrigen": "localidad-lion-experience-vip",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "nombre": "The Lion Experience VIP",
+      "precio": 40,
+      "incluye": [
+        "[PENDIENTE: beneficios]"
+      ],
+      "validez": "[PENDIENTE: tarde, noche o ambas]",
+      "enlace": "https://www.ticketshow.com.ec/evento/THE-LION-HALLOWEEN-PARTY-GUAYAQUIL-2026?utm_source=web&utm_medium=landing&utm_campaign=lion2026&utm_content=lion-experience-vip",
+      "textoBoton": "Comprar Lion Experience VIP",
+      "destacada": false
+    }
+  },
+  {
+    "idOrigen": "localidad-miami-style-vip",
+    "slug": null,
+    "estado": "visible",
+    "orden": 1,
+    "datos": {
+      "nombre": "Miami Style VIP",
+      "precio": 30,
+      "incluye": [
+        "[PENDIENTE: beneficios]"
+      ],
+      "validez": "[PENDIENTE: tarde, noche o ambas]",
+      "enlace": "https://www.ticketshow.com.ec/evento/THE-LION-HALLOWEEN-PARTY-GUAYAQUIL-2026?utm_source=web&utm_medium=landing&utm_campaign=lion2026&utm_content=miami-style-vip",
+      "textoBoton": "Comprar Miami Style VIP",
+      "destacada": false
+    }
+  },
+  {
+    "idOrigen": "localidad-santa-ana-vip",
+    "slug": null,
+    "estado": "visible",
+    "orden": 2,
+    "datos": {
+      "nombre": "Santa Ana VIP",
+      "precio": 20,
+      "incluye": [
+        "[PENDIENTE: beneficios]"
+      ],
+      "validez": "[PENDIENTE: tarde, noche o ambas]",
+      "enlace": "https://www.ticketshow.com.ec/evento/THE-LION-HALLOWEEN-PARTY-GUAYAQUIL-2026?utm_source=web&utm_medium=landing&utm_campaign=lion2026&utm_content=santa-ana-vip",
+      "textoBoton": "Comprar Santa Ana VIP",
+      "destacada": false
+    }
+  },
+  {
+    "idOrigen": "localidad-preferencia",
+    "slug": null,
+    "estado": "visible",
+    "orden": 3,
+    "datos": {
+      "nombre": "Preferencia",
+      "precio": 10,
+      "incluye": [
+        "[PENDIENTE: beneficios]"
+      ],
+      "validez": "[PENDIENTE: tarde, noche o ambas]",
+      "enlace": "https://www.ticketshow.com.ec/evento/THE-LION-HALLOWEEN-PARTY-GUAYAQUIL-2026?utm_source=web&utm_medium=landing&utm_campaign=lion2026&utm_content=preferencia",
+      "textoBoton": "Comprar Preferencia",
+      "destacada": false
+    }
+  }
+]

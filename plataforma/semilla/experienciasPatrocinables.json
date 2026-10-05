@@ -1,0 +1,56 @@
+[
+  {
+    "idOrigen": "patrocinable-casa-del-terror",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "nombre": "Casa del Terror"
+    }
+  },
+  {
+    "idOrigen": "patrocinable-party-bus",
+    "slug": null,
+    "estado": "visible",
+    "orden": 1,
+    "datos": {
+      "nombre": "Party Bus"
+    }
+  },
+  {
+    "idOrigen": "patrocinable-cementerio",
+    "slug": null,
+    "estado": "visible",
+    "orden": 2,
+    "datos": {
+      "nombre": "Cementerio Discoteque"
+    }
+  },
+  {
+    "idOrigen": "patrocinable-escenario-360",
+    "slug": null,
+    "estado": "visible",
+    "orden": 3,
+    "datos": {
+      "nombre": "Escenario 360"
+    }
+  },
+  {
+    "idOrigen": "patrocinable-concurso-disfraces",
+    "slug": null,
+    "estado": "visible",
+    "orden": 4,
+    "datos": {
+      "nombre": "Concurso de disfraces"
+    }
+  },
+  {
+    "idOrigen": "patrocinable-pinata",
+    "slug": null,
+    "estado": "visible",
+    "orden": 5,
+    "datos": {
+      "nombre": "Piñata gigante"
+    }
+  }
+]

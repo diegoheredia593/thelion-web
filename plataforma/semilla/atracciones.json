@@ -1,0 +1,197 @@
+[
+  {
+    "idOrigen": "atraccion-casa-del-terror",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "nombre": "Casa del Terror",
+      "texto": "15 × 9 metros de sustos. ¿Entras o te quedas mirando?",
+      "horario": "ambos",
+      "icono": "casa",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-feria",
+    "slug": null,
+    "estado": "visible",
+    "orden": 1,
+    "datos": {
+      "nombre": "Feria de emprendedores",
+      "texto": "Emprendimientos locales con comida, productos y más.",
+      "horario": "ambos",
+      "icono": "tienda",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-personajes",
+    "slug": null,
+    "estado": "visible",
+    "orden": 2,
+    "datos": {
+      "nombre": "Personajes en vivo",
+      "texto": "Shows de Toy Story, Beetlejuice y K-pop para chicos y grandes.",
+      "horario": "dia",
+      "icono": "mascara",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-dulce-o-truco",
+    "slug": null,
+    "estado": "visible",
+    "orden": 3,
+    "datos": {
+      "nombre": "Dulce o truco",
+      "texto": "La tradición de siempre: ningún niño se va con las manos vacías.",
+      "horario": "dia",
+      "icono": "dulces",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-zona-jurasica",
+    "slug": null,
+    "estado": "visible",
+    "orden": 4,
+    "datos": {
+      "nombre": "Zona Jurásica",
+      "texto": "Una zona tomada por dinosaurios. Trae la cámara.",
+      "horario": "dia",
+      "icono": "dinosaurio",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-concierto",
+    "slug": null,
+    "estado": "visible",
+    "orden": 5,
+    "datos": {
+      "nombre": "Concierto Back to the Old School",
+      "texto": "7 artistas en vivo en tributo al reggaetón clásico.",
+      "horario": "noche",
+      "icono": "microfono",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-djs",
+    "slug": null,
+    "estado": "visible",
+    "orden": 6,
+    "datos": {
+      "nombre": "3 DJs de latin music",
+      "texto": "Tres de los mejores DJs de latin music, sin pausa hasta las 2:00.",
+      "horario": "noche",
+      "icono": "disco",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-escenario-360",
+    "slug": null,
+    "estado": "visible",
+    "orden": 7,
+    "datos": {
+      "nombre": "Escenario 360",
+      "texto": "El show pasa a tu alrededor, no solo frente a ti.",
+      "horario": "noche",
+      "icono": "escenario",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-cementerio",
+    "slug": null,
+    "estado": "visible",
+    "orden": 8,
+    "datos": {
+      "nombre": "Cementerio Discoteque",
+      "texto": "Baila entre lápidas en la pista más oscura de la noche.",
+      "horario": "noche",
+      "icono": "lapida",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-party-bus",
+    "slug": null,
+    "estado": "visible",
+    "orden": 9,
+    "datos": {
+      "nombre": "Party Bus",
+      "texto": "Un bus de fiesta dentro de la fiesta. Súbete y sigue bailando.",
+      "horario": "noche",
+      "icono": "bus",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-dinosaurios-zombies",
+    "slug": null,
+    "estado": "visible",
+    "orden": 10,
+    "datos": {
+      "nombre": "Dinosaurios y zombies rondando",
+      "texto": "No se quedan quietos: rondan el evento y te pueden encontrar.",
+      "horario": "porConfirmar",
+      "icono": "zombi",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-toro",
+    "slug": null,
+    "estado": "visible",
+    "orden": 11,
+    "datos": {
+      "nombre": "Toro loco mecánico",
+      "texto": "¿Cuántos segundos aguantas arriba?",
+      "horario": "porConfirmar",
+      "icono": "toro",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-pinata",
+    "slug": null,
+    "estado": "visible",
+    "orden": 12,
+    "datos": {
+      "nombre": "Piñata gigante con premios",
+      "texto": "Una piñata tamaño Halloween, llena de premios.",
+      "horario": "porConfirmar",
+      "icono": "pinata",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-juegos",
+    "slug": null,
+    "estado": "visible",
+    "orden": 13,
+    "datos": {
+      "nombre": "Juegos mecánicos",
+      "texto": "Para que la adrenalina no baje.",
+      "horario": "porConfirmar",
+      "icono": "montana",
+      "foto": null
+    }
+  },
+  {
+    "idOrigen": "atraccion-cerveza",
+    "slug": null,
+    "estado": "visible",
+    "orden": 14,
+    "datos": {
+      "nombre": "Cerveza artesanal y asados",
+      "texto": "Para recargar energía entre show y show.",
+      "horario": "porConfirmar",
+      "icono": "cerveza",
+      "foto": null
+    }
+  }
+]

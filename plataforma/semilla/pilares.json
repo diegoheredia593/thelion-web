@@ -1,0 +1,42 @@
+[
+  {
+    "idOrigen": "pilar-terror",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "titulo": "Un mundo de terror a tu alrededor.",
+      "texto": "Casa del terror, un cementerio convertido en discoteca, zombies y dinosaurios rondando. Aquí el susto no se queda en la puerta."
+    }
+  },
+  {
+    "idOrigen": "pilar-shows",
+    "slug": null,
+    "estado": "visible",
+    "orden": 1,
+    "datos": {
+      "titulo": "Shows en vivo todo el día.",
+      "texto": "Personajes de Toy Story, Beetlejuice y K-pop por la tarde; concierto old school y DJs por la noche."
+    }
+  },
+  {
+    "idOrigen": "pilar-disfraz",
+    "slug": null,
+    "estado": "visible",
+    "orden": 2,
+    "datos": {
+      "titulo": "Tu disfraz puede ganar.",
+      "texto": "$3.000 en premios entre los concursos de día y de noche. Pasarelas, jurado y premiación en vivo."
+    }
+  },
+  {
+    "idOrigen": "pilar-comer",
+    "slug": null,
+    "estado": "visible",
+    "orden": 3,
+    "datos": {
+      "titulo": "Para comer, brindar y bailar.",
+      "texto": "Cerveza artesanal, asados, feria de emprendedores, toro mecánico y una piñata gigante llena de premios."
+    }
+  }
+]

@@ -1,0 +1,64 @@
+{
+  "key": "localidades",
+  "label": "Entradas",
+  "singular": "localidad",
+  "gender": "f",
+  "description": "Tipos de entrada a la venta en Ticketshow. La portada muestra el precio de la más barata visible.",
+  "titleField": "nombre",
+  "searchFields": [
+    "nombre"
+  ],
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "nombre",
+      "control": "text",
+      "label": "Nombre de la localidad",
+      "required": true,
+      "max": 60
+    },
+    {
+      "name": "precio",
+      "control": "number",
+      "label": "Precio (USD)",
+      "required": true,
+      "min": 0
+    },
+    {
+      "name": "incluye",
+      "control": "textList",
+      "label": "Qué incluye",
+      "help": "Un beneficio por línea.",
+      "required": false,
+      "max": 8,
+      "maxItem": 120
+    },
+    {
+      "name": "validez",
+      "control": "text",
+      "label": "Para qué horario vale",
+      "help": "Por ejemplo: «Tarde y noche».",
+      "required": false,
+      "max": 80
+    },
+    {
+      "name": "enlace",
+      "control": "url",
+      "label": "Enlace de compra en Ticketshow",
+      "required": true
+    },
+    {
+      "name": "textoBoton",
+      "control": "text",
+      "label": "Texto del botón",
+      "required": true,
+      "max": 40
+    },
+    {
+      "name": "destacada",
+      "control": "checkbox",
+      "label": "Destacar esta localidad",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "key": "cifras",
+  "label": "Cifras",
+  "singular": "cifra",
+  "gender": "f",
+  "description": "Banda de números grandes con un texto corto debajo.",
+  "titleField": "numero",
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "numero",
+      "control": "text",
+      "label": "Número",
+      "help": "Por ejemplo: «$3.000» o «12 horas».",
+      "required": true,
+      "max": 20
+    },
+    {
+      "name": "texto",
+      "control": "text",
+      "label": "Texto debajo",
+      "required": true,
+      "max": 60
+    }
+  ]
+}

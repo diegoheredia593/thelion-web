@@ -1,0 +1,90 @@
+{
+  "pages": [
+    {
+      "key": "inicio",
+      "name": "Inicio",
+      "route": "/"
+    },
+    {
+      "key": "privacidad",
+      "name": "Política de privacidad",
+      "route": "/privacidad"
+    },
+    {
+      "key": "terminos",
+      "name": "Términos y condiciones",
+      "route": "/terminos"
+    },
+    {
+      "key": "bases",
+      "name": "Bases de los concursos",
+      "route": "/bases-concursos"
+    }
+  ],
+  "collections": [
+    {
+      "collection": "localidades",
+      "page": "inicio"
+    },
+    {
+      "collection": "atracciones",
+      "page": "inicio"
+    },
+    {
+      "collection": "programaDia",
+      "page": "inicio"
+    },
+    {
+      "collection": "destacados",
+      "page": "inicio"
+    },
+    {
+      "collection": "pilares",
+      "page": "inicio"
+    },
+    {
+      "collection": "cifras",
+      "page": "inicio"
+    },
+    {
+      "collection": "concursos",
+      "page": "inicio"
+    },
+    {
+      "collection": "pasos",
+      "page": "inicio"
+    },
+    {
+      "collection": "paquetesStand",
+      "page": "inicio"
+    },
+    {
+      "collection": "paquetesSponsor",
+      "page": "inicio"
+    },
+    {
+      "collection": "razonesSponsor",
+      "page": "inicio"
+    },
+    {
+      "collection": "experienciasPatrocinables",
+      "page": "inicio"
+    },
+    {
+      "collection": "artistas",
+      "page": "inicio"
+    },
+    {
+      "collection": "marcasAliadas",
+      "page": "inicio"
+    },
+    {
+      "collection": "preguntas",
+      "page": "inicio"
+    },
+    {
+      "collection": "fotosGaleria",
+      "page": "inicio"
+    }
+  ]
+}

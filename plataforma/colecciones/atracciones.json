@@ -1,0 +1,159 @@
+{
+  "key": "atracciones",
+  "label": "Atracciones",
+  "singular": "atracción",
+  "gender": "f",
+  "description": "Tarjetas de «Todo lo que te espera», filtrables por De día y De noche.",
+  "titleField": "nombre",
+  "searchFields": [
+    "nombre",
+    "texto"
+  ],
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "nombre",
+      "control": "text",
+      "label": "Nombre",
+      "required": true,
+      "max": 60
+    },
+    {
+      "name": "texto",
+      "control": "textLong",
+      "label": "Texto de la tarjeta",
+      "required": true,
+      "max": 120
+    },
+    {
+      "name": "horario",
+      "control": "option",
+      "label": "Horario",
+      "help": "«Día y noche» aparece en los dos filtros. «Por confirmar» solo en «Todo» y sin etiqueta.",
+      "required": true,
+      "options": [
+        {
+          "value": "dia",
+          "label": "De día"
+        },
+        {
+          "value": "noche",
+          "label": "De noche"
+        },
+        {
+          "value": "ambos",
+          "label": "Día y noche"
+        },
+        {
+          "value": "porConfirmar",
+          "label": "Por confirmar"
+        }
+      ]
+    },
+    {
+      "name": "icono",
+      "control": "option",
+      "label": "Ícono",
+      "help": "Dibujo del set del sitio que acompaña al texto.",
+      "required": true,
+      "options": [
+        {
+          "value": "calabaza",
+          "label": "Calabaza"
+        },
+        {
+          "value": "fantasma",
+          "label": "Fantasma"
+        },
+        {
+          "value": "casa",
+          "label": "Casa embrujada"
+        },
+        {
+          "value": "tienda",
+          "label": "Tienda / feria"
+        },
+        {
+          "value": "mascara",
+          "label": "Máscara / personajes"
+        },
+        {
+          "value": "dulces",
+          "label": "Dulces"
+        },
+        {
+          "value": "dinosaurio",
+          "label": "Dinosaurio"
+        },
+        {
+          "value": "microfono",
+          "label": "Micrófono / concierto"
+        },
+        {
+          "value": "disco",
+          "label": "Disco / DJ"
+        },
+        {
+          "value": "escenario",
+          "label": "Escenario"
+        },
+        {
+          "value": "lapida",
+          "label": "Lápida"
+        },
+        {
+          "value": "bus",
+          "label": "Bus"
+        },
+        {
+          "value": "zombi",
+          "label": "Zombi"
+        },
+        {
+          "value": "toro",
+          "label": "Toro mecánico"
+        },
+        {
+          "value": "pinata",
+          "label": "Piñata"
+        },
+        {
+          "value": "montana",
+          "label": "Juegos mecánicos"
+        },
+        {
+          "value": "cerveza",
+          "label": "Cerveza"
+        },
+        {
+          "value": "trofeo",
+          "label": "Trofeo / premio"
+        },
+        {
+          "value": "estrella",
+          "label": "Estrella / talento"
+        },
+        {
+          "value": "personas",
+          "label": "Público"
+        },
+        {
+          "value": "reloj",
+          "label": "Reloj"
+        },
+        {
+          "value": "megafono",
+          "label": "Megáfono / difusión"
+        }
+      ]
+    },
+    {
+      "name": "foto",
+      "control": "image",
+      "label": "Foto (opcional)",
+      "help": "Si tiene foto, reemplaza al ícono.",
+      "required": false,
+      "aspectRatio": "4:3"
+    }
+  ]
+}

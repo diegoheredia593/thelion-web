@@ -1,0 +1,42 @@
+{
+  "key": "paquetesSponsor",
+  "label": "Paquetes de sponsor",
+  "singular": "paquete de sponsor",
+  "gender": "m",
+  "description": "Paquetes de patrocinio con sus beneficios.",
+  "titleField": "nombre",
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "nombre",
+      "control": "text",
+      "label": "Nombre",
+      "required": true,
+      "max": 40
+    },
+    {
+      "name": "subtitulo",
+      "control": "text",
+      "label": "Subtítulo",
+      "required": false,
+      "max": 80
+    },
+    {
+      "name": "beneficios",
+      "control": "textList",
+      "label": "Beneficios",
+      "help": "Un beneficio por línea.",
+      "required": true,
+      "max": 12,
+      "maxItem": 160
+    },
+    {
+      "name": "precio",
+      "control": "text",
+      "label": "Precio",
+      "help": "Como debe leerse, por ejemplo «$1.500» o «Desde $500».",
+      "required": false,
+      "max": 40
+    }
+  ]
+}

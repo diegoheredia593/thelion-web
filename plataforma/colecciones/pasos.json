@@ -1,0 +1,41 @@
+{
+  "key": "pasos",
+  "label": "Pasos",
+  "singular": "paso",
+  "gender": "m",
+  "description": "Pasos de «Cómo participar» (concursos) y de «Cómo reservar» (stands).",
+  "titleField": "titulo",
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "titulo",
+      "control": "text",
+      "label": "Paso",
+      "required": true,
+      "max": 100
+    },
+    {
+      "name": "detalle",
+      "control": "text",
+      "label": "Detalle",
+      "required": false,
+      "max": 160
+    },
+    {
+      "name": "grupo",
+      "control": "option",
+      "label": "Sección",
+      "required": true,
+      "options": [
+        {
+          "value": "concurso",
+          "label": "Concursos"
+        },
+        {
+          "value": "stand",
+          "label": "Stands"
+        }
+      ]
+    }
+  ]
+}

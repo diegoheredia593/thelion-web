@@ -1,0 +1,55 @@
+[
+  {
+    "idOrigen": "sponsor-rugido",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "nombre": "Rugido",
+      "subtitulo": "Sponsor presentador (1 cupo)",
+      "beneficios": [
+        "«The Lion Halloween Party presentado por tu marca»",
+        "Logo principal en escenario y en todas las piezas",
+        "Menciones del animador",
+        "Espacio de activación",
+        "Entradas de cortesía",
+        "Exclusividad de categoría"
+      ],
+      "precio": "[PENDIENTE: precio]"
+    }
+  },
+  {
+    "idOrigen": "sponsor-garra",
+    "slug": null,
+    "estado": "visible",
+    "orden": 1,
+    "datos": {
+      "nombre": "Garra",
+      "subtitulo": "Sponsor oficial",
+      "beneficios": [
+        "Logo en escenario y en el sitio",
+        "Menciones",
+        "Espacio de activación",
+        "Publicaciones en redes",
+        "Entradas de cortesía"
+      ],
+      "precio": "[PENDIENTE: precio]"
+    }
+  },
+  {
+    "idOrigen": "sponsor-huella",
+    "slug": null,
+    "estado": "visible",
+    "orden": 2,
+    "datos": {
+      "nombre": "Huella",
+      "subtitulo": "Aliado",
+      "beneficios": [
+        "Logo en el sitio y en piezas digitales",
+        "Una publicación en redes",
+        "Entradas de cortesía"
+      ],
+      "precio": "[PENDIENTE: precio]"
+    }
+  }
+]

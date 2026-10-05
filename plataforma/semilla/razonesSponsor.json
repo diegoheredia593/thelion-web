@@ -1,0 +1,42 @@
+[
+  {
+    "idOrigen": "razon-publicos",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "texto": "Dos públicos en un día",
+      "icono": "personas"
+    }
+  },
+  {
+    "idOrigen": "razon-horas",
+    "slug": null,
+    "estado": "visible",
+    "orden": 1,
+    "datos": {
+      "texto": "12 horas de exposición",
+      "icono": "reloj"
+    }
+  },
+  {
+    "idOrigen": "razon-concursos",
+    "slug": null,
+    "estado": "visible",
+    "orden": 2,
+    "datos": {
+      "texto": "Concursos con $3.000 en premios que generan contenido",
+      "icono": "trofeo"
+    }
+  },
+  {
+    "idOrigen": "razon-difusion",
+    "slug": null,
+    "estado": "visible",
+    "orden": 3,
+    "datos": {
+      "texto": "Difusión en @thelionhalloweenparty",
+      "icono": "megafono"
+    }
+  }
+]

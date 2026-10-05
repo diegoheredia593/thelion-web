@@ -1,0 +1,13 @@
+{
+  "key": "avisos",
+  "label": "Avisos de la próxima edición",
+  "active": true,
+  "fields": [
+    {
+      "name": "email",
+      "label": "Correo",
+      "type": "email",
+      "required": true
+    }
+  ]
+}

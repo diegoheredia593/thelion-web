@@ -1,0 +1,28 @@
+{
+  "key": "preguntas",
+  "label": "Preguntas frecuentes",
+  "singular": "pregunta",
+  "gender": "f",
+  "description": "Preguntas frecuentes, en el orden en que se muestran.",
+  "titleField": "pregunta",
+  "searchFields": [
+    "pregunta"
+  ],
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "pregunta",
+      "control": "text",
+      "label": "Pregunta",
+      "required": true,
+      "max": 140
+    },
+    {
+      "name": "respuesta",
+      "control": "rich",
+      "label": "Respuesta",
+      "required": true,
+      "max": 800
+    }
+  ]
+}

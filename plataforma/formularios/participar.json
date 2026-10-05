@@ -1,0 +1,108 @@
+{
+  "key": "participar",
+  "label": "¿Cómo quieres ser parte?",
+  "active": true,
+  "fields": [
+    {
+      "name": "nombre",
+      "label": "Nombre",
+      "type": "text",
+      "required": true,
+      "max": 120
+    },
+    {
+      "name": "telefono",
+      "label": "WhatsApp",
+      "type": "phone",
+      "required": true
+    },
+    {
+      "name": "email",
+      "label": "Correo",
+      "type": "email",
+      "required": false
+    },
+    {
+      "name": "perfil",
+      "label": "Perfil",
+      "type": "option",
+      "required": true,
+      "options": [
+        {
+          "value": "Asistente",
+          "label": "Asistente"
+        },
+        {
+          "value": "Emprendedor (stand)",
+          "label": "Emprendedor (stand)"
+        },
+        {
+          "value": "Sponsor",
+          "label": "Sponsor"
+        },
+        {
+          "value": "Concursante",
+          "label": "Concursante"
+        }
+      ]
+    },
+    {
+      "name": "empresa",
+      "label": "Nombre del emprendimiento o marca",
+      "type": "text",
+      "required": false,
+      "max": 120
+    },
+    {
+      "name": "paquete",
+      "label": "Paquete de interés",
+      "type": "option",
+      "required": false,
+      "options": [
+        {
+          "value": "Paquete 1 · Completo",
+          "label": "Paquete 1 · Completo"
+        },
+        {
+          "value": "Paquete 2 · Solo espacio",
+          "label": "Paquete 2 · Solo espacio"
+        },
+        {
+          "value": "Paquete 1 + extensión nocturna",
+          "label": "Paquete 1 + extensión nocturna"
+        },
+        {
+          "value": "Paquete 2 + extensión nocturna",
+          "label": "Paquete 2 + extensión nocturna"
+        }
+      ]
+    },
+    {
+      "name": "categoria",
+      "label": "Categoría y horario",
+      "type": "option",
+      "required": false,
+      "options": [
+        {
+          "value": "Disfraces de día",
+          "label": "Disfraces de día"
+        },
+        {
+          "value": "Talentos de día",
+          "label": "Talentos de día"
+        },
+        {
+          "value": "Disfraces de noche",
+          "label": "Disfraces de noche"
+        }
+      ]
+    },
+    {
+      "name": "mensaje",
+      "label": "Mensaje",
+      "type": "textLong",
+      "required": false,
+      "max": 1500
+    }
+  ]
+}

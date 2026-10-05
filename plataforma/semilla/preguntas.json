@@ -1,0 +1,192 @@
+[
+  {
+    "idOrigen": "pregunta-entradas",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "pregunta": "¿Dónde compro las entradas?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "Solo en Ticketshow, desde los botones de este sitio. Hay cuatro localidades, de $10 a $40."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-tarde-y-noche",
+    "slug": null,
+    "estado": "hidden",
+    "orden": 1,
+    "datos": {
+      "pregunta": "¿Mi entrada vale para la tarde y la noche?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "[PENDIENTE: respuesta]"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-menores",
+    "slug": null,
+    "estado": "hidden",
+    "orden": 2,
+    "datos": {
+      "pregunta": "¿Pueden entrar menores a la fiesta de noche?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "[PENDIENTE: respuesta]"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-disfraz",
+    "slug": null,
+    "estado": "visible",
+    "orden": 3,
+    "datos": {
+      "pregunta": "¿Es obligatorio ir disfrazado?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "No, pero es Halloween: con disfraz lo vives mejor y puedes concursar."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-concursos",
+    "slug": null,
+    "estado": "visible",
+    "orden": 4,
+    "datos": {
+      "pregunta": "¿Cómo participo en los concursos?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "Inscríbete al inicio de la jornada en la mesa oficial de inscripción. Revisa las bases en la sección Concursos."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-comida",
+    "slug": null,
+    "estado": "visible",
+    "orden": 5,
+    "datos": {
+      "pregunta": "¿Hay comida y bebida?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "Sí: cerveza artesanal, asados y la feria de emprendedores."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-parqueo",
+    "slug": null,
+    "estado": "hidden",
+    "orden": 6,
+    "datos": {
+      "pregunta": "¿Hay parqueo?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "[PENDIENTE: respuesta]"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-reingreso",
+    "slug": null,
+    "estado": "hidden",
+    "orden": 7,
+    "datos": {
+      "pregunta": "¿Puedo salir y volver a entrar?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "[PENDIENTE: respuesta]"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-prohibidos",
+    "slug": null,
+    "estado": "hidden",
+    "orden": 8,
+    "datos": {
+      "pregunta": "¿Qué no puedo llevar?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "[PENDIENTE: objetos prohibidos]"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-stand",
+    "slug": null,
+    "estado": "visible",
+    "orden": 9,
+    "datos": {
+      "pregunta": "¿Cómo reservo un stand?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "Elige tu paquete en la sección Stands y llena el formulario. La reserva se confirma con el pago."
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

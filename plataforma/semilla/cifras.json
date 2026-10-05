@@ -1,0 +1,52 @@
+[
+  {
+    "idOrigen": "cifra-premios",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "numero": "$3.000",
+      "texto": "en premios"
+    }
+  },
+  {
+    "idOrigen": "cifra-horas",
+    "slug": null,
+    "estado": "visible",
+    "orden": 1,
+    "datos": {
+      "numero": "12 horas",
+      "texto": "de Halloween"
+    }
+  },
+  {
+    "idOrigen": "cifra-artistas",
+    "slug": null,
+    "estado": "visible",
+    "orden": 2,
+    "datos": {
+      "numero": "7 artistas",
+      "texto": "en tributo al reggaetón clásico"
+    }
+  },
+  {
+    "idOrigen": "cifra-djs",
+    "slug": null,
+    "estado": "visible",
+    "orden": 3,
+    "datos": {
+      "numero": "3 DJs",
+      "texto": "de latin music"
+    }
+  },
+  {
+    "idOrigen": "cifra-experiencias",
+    "slug": null,
+    "estado": "visible",
+    "orden": 4,
+    "datos": {
+      "numero": "2 experiencias",
+      "texto": "de día y de noche"
+    }
+  }
+]

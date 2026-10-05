@@ -1,0 +1,79 @@
+[
+  {
+    "idOrigen": "paso-concurso-entrada",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "titulo": "Compra tu entrada",
+      "detalle": "Para el horario en que quieres concursar.",
+      "grupo": "concurso"
+    }
+  },
+  {
+    "idOrigen": "paso-concurso-inscripcion",
+    "slug": null,
+    "estado": "visible",
+    "orden": 1,
+    "datos": {
+      "titulo": "Inscríbete",
+      "detalle": "Al llegar, en la mesa oficial de inscripción, o antes con el formulario del sitio.",
+      "grupo": "concurso"
+    }
+  },
+  {
+    "idOrigen": "paso-concurso-pasarela",
+    "slug": null,
+    "estado": "visible",
+    "orden": 2,
+    "datos": {
+      "titulo": "Sube a la pasarela",
+      "detalle": "O al escenario. El jurado elige y la premiación es en vivo.",
+      "grupo": "concurso"
+    }
+  },
+  {
+    "idOrigen": "paso-stand-paquete",
+    "slug": null,
+    "estado": "visible",
+    "orden": 3,
+    "datos": {
+      "titulo": "Elige tu paquete.",
+      "detalle": null,
+      "grupo": "stand"
+    }
+  },
+  {
+    "idOrigen": "paso-stand-formulario",
+    "slug": null,
+    "estado": "visible",
+    "orden": 4,
+    "datos": {
+      "titulo": "Llena el formulario con los datos de tu emprendimiento y lo que vendes.",
+      "detalle": null,
+      "grupo": "stand"
+    }
+  },
+  {
+    "idOrigen": "paso-stand-pago",
+    "slug": null,
+    "estado": "visible",
+    "orden": 5,
+    "datos": {
+      "titulo": "Paga y envía tu comprobante.",
+      "detalle": "[PENDIENTE: método de pago]",
+      "grupo": "stand"
+    }
+  },
+  {
+    "idOrigen": "paso-stand-confirmacion",
+    "slug": null,
+    "estado": "visible",
+    "orden": 6,
+    "datos": {
+      "titulo": "Recibe la confirmación y la ubicación de tu stand.",
+      "detalle": null,
+      "grupo": "stand"
+    }
+  }
+]

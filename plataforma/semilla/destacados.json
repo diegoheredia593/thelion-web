@@ -1,0 +1,178 @@
+[
+  {
+    "idOrigen": "destacado-dia-dulce-o-truco",
+    "slug": null,
+    "estado": "visible",
+    "orden": 0,
+    "datos": {
+      "texto": "Dulce o truco",
+      "experiencia": "dia",
+      "icono": "dulces"
+    }
+  },
+  {
+    "idOrigen": "destacado-dia-personajes",
+    "slug": null,
+    "estado": "visible",
+    "orden": 1,
+    "datos": {
+      "texto": "Personajes en vivo",
+      "experiencia": "dia",
+      "icono": "mascara"
+    }
+  },
+  {
+    "idOrigen": "destacado-dia-zona-jurasica",
+    "slug": null,
+    "estado": "visible",
+    "orden": 2,
+    "datos": {
+      "texto": "Zona Jurásica",
+      "experiencia": "dia",
+      "icono": "dinosaurio"
+    }
+  },
+  {
+    "idOrigen": "destacado-dia-casa-del-terror",
+    "slug": null,
+    "estado": "visible",
+    "orden": 3,
+    "datos": {
+      "texto": "Casa del terror",
+      "experiencia": "dia",
+      "icono": "casa"
+    }
+  },
+  {
+    "idOrigen": "destacado-dia-disfraces",
+    "slug": null,
+    "estado": "visible",
+    "orden": 4,
+    "datos": {
+      "texto": "Concurso de disfraces",
+      "experiencia": "dia",
+      "icono": "calabaza"
+    }
+  },
+  {
+    "idOrigen": "destacado-dia-talentos",
+    "slug": null,
+    "estado": "visible",
+    "orden": 5,
+    "datos": {
+      "texto": "Concurso de talentos",
+      "experiencia": "dia",
+      "icono": "estrella"
+    }
+  },
+  {
+    "idOrigen": "destacado-dia-premios",
+    "slug": null,
+    "estado": "visible",
+    "orden": 6,
+    "datos": {
+      "texto": "$1.000 en premios",
+      "experiencia": "dia",
+      "icono": "trofeo"
+    }
+  },
+  {
+    "idOrigen": "destacado-noche-concierto",
+    "slug": null,
+    "estado": "visible",
+    "orden": 7,
+    "datos": {
+      "texto": "Concierto en vivo: 7 artistas en tributo al reggaetón clásico",
+      "experiencia": "noche",
+      "icono": "microfono"
+    }
+  },
+  {
+    "idOrigen": "destacado-noche-djs",
+    "slug": null,
+    "estado": "visible",
+    "orden": 8,
+    "datos": {
+      "texto": "3 de los mejores DJs de latin music",
+      "experiencia": "noche",
+      "icono": "disco"
+    }
+  },
+  {
+    "idOrigen": "destacado-noche-escenario-360",
+    "slug": null,
+    "estado": "visible",
+    "orden": 9,
+    "datos": {
+      "texto": "Escenario 360",
+      "experiencia": "noche",
+      "icono": "escenario"
+    }
+  },
+  {
+    "idOrigen": "destacado-noche-cementerio",
+    "slug": null,
+    "estado": "visible",
+    "orden": 10,
+    "datos": {
+      "texto": "Cementerio Discoteque",
+      "experiencia": "noche",
+      "icono": "lapida"
+    }
+  },
+  {
+    "idOrigen": "destacado-noche-casa-del-terror",
+    "slug": null,
+    "estado": "visible",
+    "orden": 11,
+    "datos": {
+      "texto": "Casa del terror, mientras rumbeas",
+      "experiencia": "noche",
+      "icono": "casa"
+    }
+  },
+  {
+    "idOrigen": "destacado-noche-party-bus",
+    "slug": null,
+    "estado": "visible",
+    "orden": 12,
+    "datos": {
+      "texto": "Party bus dentro de la fiesta",
+      "experiencia": "noche",
+      "icono": "bus"
+    }
+  },
+  {
+    "idOrigen": "destacado-noche-zombies",
+    "slug": null,
+    "estado": "visible",
+    "orden": 13,
+    "datos": {
+      "texto": "Zombies rondando la fiesta",
+      "experiencia": "noche",
+      "icono": "zombi"
+    }
+  },
+  {
+    "idOrigen": "destacado-noche-premios",
+    "slug": null,
+    "estado": "visible",
+    "orden": 14,
+    "datos": {
+      "texto": "$2.000 en premios para los mejores disfraces",
+      "experiencia": "noche",
+      "icono": "trofeo"
+    }
+  },
+  {
+    "idOrigen": "destacado-noche-cerveza",
+    "slug": null,
+    "estado": "visible",
+    "orden": 15,
+    "datos": {
+      "texto": "Cerveza artesanal y asados",
+      "experiencia": "noche",
+      "icono": "cerveza"
+    }
+  }
+]

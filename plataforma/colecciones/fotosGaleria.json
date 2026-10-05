@@ -1,0 +1,26 @@
+{
+  "key": "fotosGaleria",
+  "label": "Fotos de la galería",
+  "singular": "foto",
+  "gender": "f",
+  "description": "Fotos de la sección «Síguenos». Se muestran hasta 9.",
+  "titleField": "titulo",
+  "sortBy": "order",
+  "fields": [
+    {
+      "name": "titulo",
+      "control": "text",
+      "label": "Nombre interno",
+      "help": "Solo para reconocerla en el portal.",
+      "required": true,
+      "max": 60
+    },
+    {
+      "name": "foto",
+      "control": "image",
+      "label": "Foto",
+      "required": true,
+      "aspectRatio": "1:1"
+    }
+  ]
+}
