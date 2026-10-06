@@ -3,7 +3,6 @@
  * Esqueleto de toda página: `<head>` (SEO y fuentes alojadas en el sitio, con `font-display: swap`
  * de Fontsource), menú fijo y pie. Las páginas le pasan los bloques ya cargados.
  */
-import '@fontsource/rubik-dirt/latin-400.css';
 import '@fontsource/bebas-neue/latin-400.css';
 import '@fontsource-variable/inter/wght.css';
 import '../styles/global.css';
@@ -12,6 +11,7 @@ import Pie from '../components/Pie.astro';
 import WhatsappFlotante from '../components/WhatsappFlotante.astro';
 import type { Bloques } from '../lib/content';
 import { urlFoto } from '../lib/fotos';
+import fuenteDisplay from '../assets/fuentes/rubik-dirt-es.woff2?url';
 
 interface Props {
   b: Bloques;
@@ -53,6 +53,7 @@ const canonica = new URL(Astro.url.pathname, Astro.url.origin).href;
     }
     <meta name="twitter:card" content={imagenCompartir ? 'summary_large_image' : 'summary'} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={fuenteDisplay} as="font" type="font/woff2" crossorigin />
     <slot name="head" />
   </head>
   <body>

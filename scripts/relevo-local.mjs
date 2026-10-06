@@ -17,7 +17,7 @@ createServer(async (req, res) => {
   try {
     const cuerpo = req.method === 'GET' || req.method === 'HEAD' ? undefined : await new Response(req).arrayBuffer();
     const cabeceras = Object.fromEntries(
-      Object.entries(req.headers).filter(([k]) => !['host', 'connection', 'content-length'].includes(k)),
+      Object.entries(req.headers).filter(([k]) => !['host', 'connection', 'content-length', 'accept-encoding'].includes(k)),
     );
     const r = await fetch(DESTINO + req.url, { method: req.method, headers: cabeceras, body: cuerpo });
     res.writeHead(r.status, Object.fromEntries([...r.headers].filter(([k]) => !['content-encoding', 'content-length', 'transfer-encoding'].includes(k))));
