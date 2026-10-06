@@ -8,5 +8,9 @@ FUENTE=semilla
 # En producción es un secreto del Worker: npx wrangler secret put PLATAFORMA_LLAVE
 # PLATAFORMA_LLAVE=pk_...
 #
+# Opcional, solo si la red no deja salir a workerd (sandbox con proxy): `node scripts/relevo-local.mjs`
+# y luego:
+# PLATAFORMA_URL_DEV=http://127.0.0.1:8788/c/thelionhalloween/v1
+#
 # Opcional: clave secreta de Turnstile (si TURNSTILE_SITE_KEY está configurada en wrangler.jsonc).
 # TURNSTILE_SECRET=

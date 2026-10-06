@@ -6,6 +6,8 @@ declare namespace Cloudflare {
     PLATAFORMA: { fetch: typeof fetch };
     /** Llave de la API de la plataforma (alcances contenido:leer y formularios:enviar). Secreto. */
     PLATAFORMA_LLAVE?: string;
+    /** Solo en `npm run dev`: URL base de `/v1` en lugar de la pública (ver `scripts/relevo-local.mjs`). */
+    PLATAFORMA_URL_DEV?: string;
     /** `semilla`: solo en `npm run dev` y sin llave, lee `plataforma/` en vez de la plataforma. */
     FUENTE?: string;
     /** Clave pública de Turnstile (variable). Vacía = sin verificación. */

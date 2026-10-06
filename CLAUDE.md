@@ -23,6 +23,8 @@
   (commit en su cabecera / `LEEME.md`): no los edites aquí; actualízalos desde el origen.
 - Local sin llave: `FUENTE=semilla` en `.dev.vars` (ver `.dev.vars.example`) y `npm run dev`. En
   producción nunca se usa la semilla.
+- Si `npm run dev` con llave da 403 «Host not in allowlist» (sandbox que solo sale por proxy):
+  `NODE_USE_ENV_PROXY=1 node scripts/relevo-local.mjs` y `PLATAFORMA_URL_DEV` en `.dev.vars`.
 - Capturas: `node scripts/capturas.mjs [url] [rutas…]` (390 y 1440 px, en `capturas/`).
 - Comentarios, commits y documentación en español. Detalle y pendientes: `REPORTE-PLATAFORMA.md`;
   pasos en la consola: `PUESTA-EN-MARCHA.md`.

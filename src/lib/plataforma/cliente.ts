@@ -26,8 +26,10 @@ export function plataforma(): Cliente {
   const llave = env.PLATAFORMA_LLAVE;
   if (!llave) throw new Error('Falta el secreto PLATAFORMA_LLAVE (ver .dev.vars.example).');
   const conBinding = !import.meta.env.DEV && env.PLATAFORMA;
+  // Solo en `npm run dev`: otra URL base (p. ej. un relevo local cuando la red no deja salir a workerd).
+  const urlLocal = (import.meta.env.DEV && env.PLATAFORMA_URL_DEV) || URL_PUBLICA;
   cliente = conBinding
     ? crearCliente({ url: URL_BINDING, llave, fetch: env.PLATAFORMA.fetch.bind(env.PLATAFORMA) })
-    : crearCliente({ url: URL_PUBLICA, llave });
+    : crearCliente({ url: urlLocal, llave });
   return cliente;
 }
