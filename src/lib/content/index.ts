@@ -5,7 +5,9 @@
  */
 import { real } from '../pendiente';
 import { textoEnriquecidoAHtml, type Foto } from '../plataforma/sdk';
-import { leerBloques, leerColeccion } from './fuente';
+import { leerBloques, leerColeccion, prepararFuente } from './fuente';
+
+export { prepararFuente };
 import type { ClaveBloque, ClaveColeccion, Colecciones } from './modelo.generado';
 
 export type { ClaveBloque, Colecciones } from './modelo.generado';

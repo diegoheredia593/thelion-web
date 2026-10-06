@@ -17,10 +17,11 @@ import Participar from '../components/secciones/Participar.astro';
 import Ubicacion from '../components/secciones/Ubicacion.astro';
 import Preguntas from '../components/secciones/Preguntas.astro';
 import Final from '../components/secciones/Final.astro';
-import { cargarBloques, coleccion } from '../lib/content';
+import { cargarBloques, coleccion, prepararFuente } from '../lib/content';
 import { dolares } from '../lib/formato';
 
 const url = Astro.url;
+await prepararFuente();
 const [b, localidades, pilares, cifras, destacados, programa, artistas, atracciones, concursos, pasos, paquetesStand, razones, paquetesSponsor, patrocinables, marcas, fotos, preguntas] =
   await Promise.all([
     cargarBloques(url),

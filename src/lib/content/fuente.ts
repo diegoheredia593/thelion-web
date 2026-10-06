@@ -47,6 +47,16 @@ async function vigente(): Promise<Instantanea> {
   return memoria!;
 }
 
+/**
+ * Consulta la versión UNA vez antes de leer en paralelo bloques y colecciones: sin esto, con la
+ * memoria vacía (Worker recién arrancado) cada lectura paralela consultaría `/v1/version` por su
+ * cuenta. En modo semilla no hace nada.
+ */
+export async function prepararFuente(): Promise<void> {
+  if (import.meta.env.DEV && usaSemilla()) return;
+  await vigente();
+}
+
 /** Todos los bloques en una sola petición. `origen` es el de la página (solo lo usa la semilla). */
 export async function leerBloques(origen: string): Promise<Record<string, Bloque>> {
   if (import.meta.env.DEV && usaSemilla()) return (await import('./semilla')).bloquesSemilla(origen);
