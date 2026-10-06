@@ -1,7 +1,7 @@
 # Reporte de plataforma — The Lion Halloween Party 2026
 
-Estado: **Fase 2 terminada** (el sitio lee todo de `plataforma/` en modo semilla). Faltan la Fase 3
-(llave y conexión) y la Fase 4 (despliegue y verificación en producción).
+Estado: **en producción** en `https://thelion-web.herediadiego963.workers.dev` (Fases 0–4). Falta el
+dominio final, la prueba de edición desde el portal y los pendientes del organizador (sección 1).
 
 - Cliente: `thelionhalloween` · Worker: `thelion-web` · Repo: `diegoheredia593/thelion-web`
 - Modelo: `plataforma/` (176 bloques, 16 colecciones, 90 elementos, 2 formularios, 4 páginas).
@@ -154,13 +154,54 @@ Enlaces que el copy no define y elegí:
 
 ## 5. Advertencias del importador
 
-Todavía no se ha importado. Al validar el paquete con los mismos esquemas del importador
-(`npm run verificar-modelo`), no hay errores ni advertencias. Se completará después del paso 2 de
-`PUESTA-EN-MARCHA.md`.
+Paquete importado el 2026-10-06. La plataforma tiene los 176 bloques con los mismos valores que el
+paquete y los elementos esperados (comprobado por `/v1`).
 
 ## 6. Despliegue y verificación en producción (Fase 4)
 
 - **Workers Builds: conectado el 2026-10-06** (rama de producción `main`; build `npm ci && npm run
   build`; deploy `npx wrangler deploy`). El primer build falló a propósito: `main` solo tenía los
   documentos, sin `package.json`.
-- Verificación: pendiente.
+- **Incidente del primer despliegue (500):** el secreto `PLATAFORMA_LLAVE` se había creado en otro
+  lugar del panel y el Worker no lo tenía (`wrangler secret list` vacío). Se configuró con
+  `wrangler secret put` el 2026-10-06 15:05 UTC; desde entonces, 200.
+
+### Verificado en producción (2026-10-06, `https://thelion-web.herediadiego963.workers.dev`)
+
+| Comprobación | Resultado |
+| --- | --- |
+| Rutas | `/` 200 · `/?perfil=sponsor` 200 (perfil preelegido) · `/privacidad`, `/terminos`, `/bases-concursos` 404 (sin texto todavía) · `/no-existe` 404 |
+| Contenido | Sale de la plataforma: el texto y los enlaces son idénticos a los de la semilla; ningún `[PENDIENTE` en el HTML; los bloques que no aparecen son los que dependen de un dato pendiente |
+| Fotos | Todavía no hay ninguna; ningún `src` con el host `agencia-plataforma` |
+| CSS, JS y fuentes | 200; los archivos de `/_astro/` con `Cache-Control: public, max-age=31536000, immutable` |
+| JSON-LD `Event` | Nombre, inicio y fin con -05:00, lugar con dirección y 4 `offers` en USD. **Falta** pasarlo por la prueba de resultados enriquecidos de Google (no tengo acceso desde mi entorno) |
+| Formulario `participar` | Envío real «PRUEBA Claude (borrar)» → 201. 422 con el error junto al campo; sin JavaScript, 303 de vuelta al formulario; origen ajeno, 403 |
+| Formulario `avisos` | Envío real `prueba-avisos@example.com` → 201 |
+| LCP (390 px, 4G 1,6 Mbps / 150 ms, CPU ×4, sin caché) | **~1,4 s** con el Worker en caliente. Con una instancia nueva del Worker, ~3,6 s (ver abajo) |
+| Prueba de edición (< 20 s) | **Pendiente**: hay que cambiar un texto en el portal |
+
+**Primera visita a una instancia nueva.** Con el Worker en caliente, la página se arma en ~20 ms.
+Una instancia nueva tarda 1,4–1,8 s (medido con `wrangler tail`; CPU 36–44 ms): espera a la
+plataforma para la versión, los bloques y 16 colecciones. Ya se quitaron las 16 consultas de versión
+repetidas (`prepararFuente`). Mejora pendiente: **con dominio propio**, guardar las respuestas en la
+Cache API de Cloudflare por versión de contenido. En `*.workers.dev` la Cache API no funciona.
+
+**Fuente display.** Rubik Dirt pesa 247 KB incluso recortada al español (la textura va en cada
+glifo). Se precarga y usa `font-display: swap`: el título aparece al instante con la fuente de
+respaldo.
+
+### Versiones y cómo volver atrás
+
+| Versión | Qué es |
+| --- | --- |
+| `ac86b3cc-147e-4895-aeb4-9e86e936cb07` | **Actual**: commit `d75a606` (una sola consulta de versión) |
+| `4b1cef8d-df0f-4fcb-9610-144783cb69b0` | Commit `6fdd2ae` (fuente recortada y precargada) |
+| `f72789f8-2b2b-4e2d-8d8e-d4bbad40eb73` | Commit `969c98a` + el secreto: la primera versión que funcionó |
+
+```sh
+npx wrangler deployments list --name thelion-web
+npx wrangler rollback <version-id> --name thelion-web --yes
+```
+
+Un rollback no toca el contenido: el contenido vive en la plataforma. Un push a `main` vuelve a
+desplegar la última versión del código.
