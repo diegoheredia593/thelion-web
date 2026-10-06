@@ -160,6 +160,7 @@ Todavía no se ha importado. Al validar el paquete con los mismos esquemas del i
 
 ## 6. Despliegue y verificación en producción (Fase 4)
 
-- **Workers Builds: no está conectado** (confirmado por el usuario el 2026-10-06). El despliegue es
-  manual con `wrangler`, desde `origin/main`.
+- **Workers Builds: conectado el 2026-10-06** (rama de producción `main`; build `npm ci && npm run
+  build`; deploy `npx wrangler deploy`). El primer build falló a propósito: `main` solo tenía los
+  documentos, sin `package.json`.
 - Verificación: pendiente.
