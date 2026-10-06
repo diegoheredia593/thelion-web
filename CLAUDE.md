@@ -1,8 +1,10 @@
 # The Lion Halloween Party 2026 (sitio) — notas para Claude
 
-- **Si el repo tiene Workers Builds, cada push a `main` despliega: configura secretos y bindings ANTES
-  del push.** Hasta confirmar si está conectado, se trabaja en ramas y nunca se hace push a `main`
-  sin pedirlo.
+- **El repo NO está conectado a Workers Builds** (confirmado 2026-10-06): un push no despliega. Se
+  despliega a mano con `wrangler` (`npm run version` sube una vista previa sin promover; `npm run
+  deploy` publica), siempre desde código que ya está en `origin/main`. Los secretos
+  (`PLATAFORMA_LLAVE`) se configuran en el Worker ANTES del primer despliegue que los necesita. Si
+  algún día se conecta Workers Builds, cada push a `main` desplegará: actualiza esta nota.
 - Astro (`output: 'server'`) + `@astrojs/cloudflare`, Worker `thelion-web`. Sin D1, KV ni R2: lee
   contenido y envía formularios a la plataforma (`agencia-plataforma`, cliente `thelionhalloween`)
   por service binding `PLATAFORMA`. La llave es el secreto `PLATAFORMA_LLAVE` (local: `.dev.vars`,

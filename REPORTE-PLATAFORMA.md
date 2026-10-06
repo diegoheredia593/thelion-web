@@ -158,6 +158,8 @@ Todavía no se ha importado. Al validar el paquete con los mismos esquemas del i
 (`npm run verificar-modelo`), no hay errores ni advertencias. Se completará después del paso 2 de
 `PUESTA-EN-MARCHA.md`.
 
-## 6. Verificación en producción (Fase 4)
+## 6. Despliegue y verificación en producción (Fase 4)
 
-Pendiente.
+- **Workers Builds: no está conectado** (confirmado por el usuario el 2026-10-06). El despliegue es
+  manual con `wrangler`, desde `origin/main`.
+- Verificación: pendiente.
