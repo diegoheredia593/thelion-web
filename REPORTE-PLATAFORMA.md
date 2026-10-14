@@ -2,8 +2,8 @@
 
 Estado: **en producción** en `https://thelion-web.herediadiego963.workers.dev` (Fases 0–4). Falta el
 dominio final, la prueba de edición desde el portal y los pendientes del organizador (sección 1).
-**Preventa y venta en el sitio (2026-10-14):** en la rama `claude/new-session-i8x2iw`, sin
-fusionar a `main`; pasos para publicarla en la sección 7.
+**Preventa y venta en el sitio (2026-10-14):** en producción desde el commit `aec6f0a`. Lo que
+falta en la consola y cómo seguir: sección 8.
 
 - Cliente: `thelionhalloween` · Worker: `thelion-web` · Repo: `diegoheredia593/thelion-web`
 - Modelo: `plataforma/` (199 bloques, 16 colecciones, 104 elementos, 2 formularios, 5 páginas).
@@ -211,8 +211,8 @@ desplegar la última versión del código.
 ## 7. Preventa y venta en el sitio (2026-10-14)
 
 Copy nuevo (`docs/COPY-THE-LION-HALLOWEEN-PARTY.md`) y referencias en `docs/referencias/`. Commits
-`1a80863` (copy) y `ce1784a` (sitio y modelo) en `claude/new-session-i8x2iw`. **Sin fusionar a
-`main`**: un push a `main` despliega.
+`1a80863` (copy), `ce1784a` (sitio y modelo) y `aec6f0a` (WhatsApp); en `main` y desplegado el
+2026-10-14 (estado real en la sección 8).
 
 ### Cómo funciona la compra ahora
 
@@ -296,10 +296,66 @@ Después del push a `main` (el sitio nuevo ya no usa el enlace de la ticketera):
 
 ### Despliegue y cómo volver atrás
 
-- **No hace falta ningún secreto, variable ni binding nuevo.**
-- Pendiente de verificar en producción (no se hizo: no está fusionado): todas las URLs dan 200,
-  ningún enlace a la ticketera, cada botón abre WhatsApp con la localidad correcta. La prueba de
-  compra completa con datos «PRUEBA» espera al checkout del portal.
-- Volver atrás: `npx wrangler rollback ac86b3cc-147e-4895-aeb4-9e86e936cb07 --name thelion-web
-  --yes` (la versión actual, commit `d75a606`). Si ya se borró el campo «Enlace de compra» de
-  Entradas, los botones de esa versión quedan sin destino: hay que volver a agregarlo.
+- No hizo falta ningún secreto, variable ni binding nuevo.
+- Volver atrás: `npx wrangler deployments list --name thelion-web` y `npx wrangler rollback
+  ac86b3cc-147e-4895-aeb4-9e86e936cb07 --name thelion-web --yes` (la versión anterior, commit
+  `d75a606`). Si ya se borró el campo «Enlace de compra» de Entradas, los botones de esa versión
+  quedan sin destino: hay que volver a agregarlo.
+
+## 8. Estado al 2026-10-14 y cómo seguir
+
+### En producción (verificado el 2026-10-14)
+
+- `main` = `aec6f0a`, desplegado por Workers Builds unos 60 s después del push. El identificador de
+  versión no se anotó (la sesión no tenía credenciales de Cloudflare): `npx wrangler deployments
+  list --name thelion-web`.
+- `/` y `/?perfil=sponsor` 200; `/privacidad`, `/terminos`, `/terminos-de-compra` y
+  `/bases-concursos` 404 (texto pendiente); ningún `[PENDIENTE` en el HTML.
+- Se ven «Edición Miami Style», «La preventa termina en…», «Preventa desde $10, solo hasta el 28
+  de octubre.», «Elige tu lugar», la etiqueta de preventa, @thelionus, la respuesta nueva de
+  «¿Dónde compro?», el aviso de venta oficial y la meta descripción nueva. JSON-LD con
+  `validThrough` 2026-10-28T23:59:59-05:00.
+- WhatsApp `593987322152` cargado: botón flotante, pie y Stands.
+- **El sitio está en modo checkout:** el bloque «Enlace del checkout de entradas» tiene
+  `https://portal.thelionproductions.com/entradas/halloween-party-2026` (responde 200 y muestra las 4
+  localidades). Los 11 botones de compra van ahí. Ese checkout elige la localidad con su propio
+  identificador (`data-tier`, un UUID por localidad), así que el `?zona=` que manda el sitio no
+  tiene efecto: cada tarjeta abre la página de selección.
+
+### Pendiente en el portal (Mi sitio, en el portal del cliente)
+
+Para entrar: consola → Clientes → The Lion Halloween Party → **Abrir portal** → **Mi sitio**. Los
+textos se cambian en la pestaña **Textos** de cada página y se guardan con **Guardar y publicar**.
+
+1. **Inicio → Textos → tarjeta Entradas → «Entradas: texto bajo el botón del checkout»:** sigue
+   diciendo «Serás redirigido a [la ticketera] para completar tu compra.» y se ve en el sitio. Vaciarlo
+   no se guardó; pegar en su lugar `[PENDIENTE: minutos de reserva] Tus lugares quedan reservados 30
+   minutos mientras completas el pago.` (el sitio oculta todo lo que empieza con `[PENDIENTE`).
+2. **Pasos de «Cómo comprar tu entrada»:** no aparecen; no entraron al importar porque la definición
+   de Pasos no tenía la opción «Entradas». En la consola → ficha del cliente: pegar
+   `plataforma/colecciones/pasos.json` como definición de Pasos y volver a importar el zip
+   (`npm run paquete`); no duplica nada.
+3. **Definición de Entradas y sus 4 localidades:** pegar `plataforma/colecciones/localidades.json` y
+   completar cada localidad según la tabla de la sección 7 (paso 5). Con eso aparecen el mapa, el
+   nombre «The Lion VIP Experience», «3 bebidas» y los botones «Elegir…».
+4. **Ordenar las preguntas frecuentes:** las 9 nuevas van justo después de «¿Dónde compro las
+   entradas?».
+5. Borrar el bloque `global.entradas.enlace` (el enlace de la ticketera; ya no se usa).
+
+### Pendiente en el código (cuando haga falta)
+
+- **Localidad preelegida en el checkout:** saber qué parámetro acepta
+  `portal.thelionproductions.com/entradas/...` y ajustarlo en `enlaceLocalidad` (`src/lib/enlaces.ts`)
+  y en `DatosEvento.astro`.
+- **Disponibilidad en vivo, lugares vendidos en el mapa y precios desde el portal:** cuando el portal
+  los exponga (ninguno existe en `/v1` de `agencia-plataforma` al 2026-10-14). Cada lugar del mapa ya
+  tiene `data-lugar`.
+- Datos del organizador para la venta: lista «Venta en el portal (nuevo)» al final del copy.
+
+### Para seguir en otra sesión
+
+- Todo está en `main` (y en la rama `claude/new-session-i8x2iw`, igual); no hay nada sin subir.
+- Local sin llave: `cp .dev.vars.example .dev.vars` (deja `FUENTE=semilla`), `npm ci`, `npm run dev`.
+  `npm test` antes de cada push. Un push a `main` despliega.
+- Para ver qué tiene la plataforma sin llave: el HTML de producción
+  (`curl -s https://thelion-web.herediadiego963.workers.dev/`) refleja los bloques en ~15 s.
