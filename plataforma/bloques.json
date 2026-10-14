@@ -452,7 +452,7 @@
     "maxLength": null,
     "required": false,
     "order": 34,
-    "value": "[PENDIENTE: número de WhatsApp]"
+    "value": "593987322152"
   },
   {
     "key": "global.whatsapp.general",
