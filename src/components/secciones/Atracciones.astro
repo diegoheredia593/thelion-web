@@ -6,6 +6,7 @@
  */
 import Icono from '../Icono.astro';
 import { atributosFoto } from '../../lib/fotos';
+import { enlaceEntradas } from '../../lib/enlaces';
 import type { Bloques, Colecciones } from '../../lib/content';
 
 interface Props {
@@ -13,7 +14,7 @@ interface Props {
   atracciones: Colecciones['atracciones'][];
 }
 const { b, atracciones } = Astro.props;
-const enlace = b.t('global.entradas.enlace');
+const enlace = enlaceEntradas(b);
 const etiqueta = {
   dia: b.t('inicio.atracciones.filtroDia'),
   noche: b.t('inicio.atracciones.filtroNoche'),

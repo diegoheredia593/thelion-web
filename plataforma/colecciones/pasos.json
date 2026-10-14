@@ -3,7 +3,7 @@
   "label": "Pasos",
   "singular": "paso",
   "gender": "m",
-  "description": "Pasos de «Cómo participar» (concursos) y de «Cómo reservar» (stands).",
+  "description": "Pasos de «Cómo participar» (concursos), «Cómo reservar» (stands) y «Cómo comprar tu entrada».",
   "titleField": "titulo",
   "sortBy": "order",
   "fields": [
@@ -34,6 +34,10 @@
         {
           "value": "stand",
           "label": "Stands"
+        },
+        {
+          "value": "compra",
+          "label": "Entradas"
         }
       ]
     }

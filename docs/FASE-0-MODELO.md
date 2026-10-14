@@ -36,7 +36,7 @@ Valor inicial = texto del copy, tal cual. Todos de nivel `content` salvo donde s
 | `global.marca.logo` | image | vacío — [P] logo |
 | `global.menu.evento` / `dia` / `noche` / `atracciones` / `concursos` / `stands` / `sponsors` / `preguntas` | text | El evento · De día · De noche · Atracciones · Concursos · Stands · Sponsors · Preguntas |
 | `global.menu.entradas` | text | Comprar entradas |
-| `global.entradas.enlace` | url | Ticketshow + `utm_content=general` (botones generales de compra) |
+| `global.entradas.enlace` | url | enlace de la ticketera externa (retirada en octubre; hoy `global.entradas.checkout`) |
 | `global.pie.linea` | text | Este Halloween tiene rey. |
 | `global.pie.evento` / `entradas` / `stands` / `sponsors` / `preguntas` / `contacto` | text | El evento · Entradas · Stands · Sponsors · Preguntas frecuentes · Contacto |
 | `global.pie.privacidad` / `terminos` / `bases` | text | Política de privacidad · Términos y condiciones · Bases de los concursos |
@@ -55,7 +55,7 @@ Valor inicial = texto del copy, tal cual. Todos de nivel `content` salvo donde s
 | Sección (§) | Bloques (control `text` salvo indicación) |
 | --- | --- |
 | `seo` | `titulo`, `descripcion` (textLong), `compartirTitulo`, `compartirDescripcion` (vista previa de WhatsApp/Instagram) |
-| `portada` (§1) | `etiqueta`, `titulo`, `subtitulo`, `texto` (textLong), `botonEntradas`, `botonStand`, `desde` = «Entradas desde {precio} en Ticketshow.» ({precio} lo pone el sitio con la localidad visible más barata), `imagen` (image, vacía), `faltan`, `dias`, `horas`, `min`, `seg` |
+| `portada` (§1) | `etiqueta`, `titulo`, `subtitulo`, `texto` (textLong), `botonEntradas`, `botonStand`, `desde` = «Entradas desde {precio} en [ticketera].» ({precio} lo pone el sitio con la localidad visible más barata), `imagen` (image, vacía), `faltan`, `dias`, `horas`, `min`, `seg` |
 | `datos` (§1, franja) | `fechaEtiqueta`, `fecha`, `lugarEtiqueta`, `lugar`, `verMapa`, `diaEtiqueta`, `dia`, `nocheEtiqueta`, `noche` |
 | `experiencias` (§2) | `titulo`, `diaEtiqueta`, `diaTitulo`, `diaTexto` (textLong), `diaBoton`, `nocheEtiqueta`, `nocheTitulo`, `nocheTexto` (textLong), `nocheBoton` |
 | `vivir` (§3) | `titulo`, `boton` |
@@ -127,7 +127,7 @@ WhatsApp. Ver la pregunta 5.
 - §9 letra pequeña → `letraPequena` + `reglas` [P].
 - §13 texto de ubicación → `direccion`, `referencia` [P] y `parqueo` [P]. No se publica el enlace
   «ficha del lugar» (Vamos Eventos): se lee como fuente para el equipo.
-- §1 «Entradas desde $10 en Ticketshow.» → bloque con `{precio}`, calculado.
+- §1 «Entradas desde $10 en [ticketera].» → bloque con `{precio}`, calculado.
 
 ## 7. Preguntas antes de la Fase 1
 

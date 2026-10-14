@@ -16,6 +16,11 @@
       "route": "/terminos"
     },
     {
+      "key": "compra",
+      "name": "Términos de compra",
+      "route": "/terminos-de-compra"
+    },
+    {
       "key": "bases",
       "name": "Bases de los concursos",
       "route": "/bases-concursos"

@@ -5,6 +5,7 @@ import type { Foto, TextoEnriquecido, VideoYoutube } from '../plataforma/sdk';
 export interface Bloques {
   'global.marca.nombre': string | null;
   'global.marca.logo': Foto | null;
+  'global.marca.edicion': string | null;
   'global.menu.evento': string | null;
   'global.menu.dia': string | null;
   'global.menu.noche': string | null;
@@ -13,24 +14,32 @@ export interface Bloques {
   'global.menu.stands': string | null;
   'global.menu.sponsors': string | null;
   'global.menu.preguntas': string | null;
+  'global.menu.pedidos': string | null;
   'global.menu.entradas': string | null;
-  'global.entradas.enlace': string | null;
+  'global.entradas.checkout': string | null;
+  'global.entradas.pedidos': string | null;
+  'global.entradas.finPreventa': string | null;
   'global.pie.linea': string | null;
   'global.pie.evento': string | null;
   'global.pie.entradas': string | null;
   'global.pie.stands': string | null;
   'global.pie.sponsors': string | null;
   'global.pie.preguntas': string | null;
+  'global.pie.pedidos': string | null;
   'global.pie.contacto': string | null;
   'global.pie.privacidad': string | null;
   'global.pie.terminos': string | null;
+  'global.pie.terminosCompra': string | null;
   'global.pie.bases': string | null;
   'global.pie.copyright': string | null;
   'global.pie.credito': string | null;
   'global.redes.instagram': string | null;
   'global.redes.instagramEnlace': string | null;
+  'global.redes.instagram2': string | null;
+  'global.redes.instagram2Enlace': string | null;
   'global.contacto.whatsapp': string | null;
   'global.whatsapp.general': string | null;
+  'global.whatsapp.entradas': string | null;
   'global.whatsapp.stand': string | null;
   'global.whatsapp.sponsor': string | null;
   'global.whatsapp.concursante': string | null;
@@ -50,6 +59,7 @@ export interface Bloques {
   'inicio.portada.desde': string | null;
   'inicio.portada.imagen': Foto | null;
   'inicio.portada.faltan': string | null;
+  'inicio.portada.faltanPreventa': string | null;
   'inicio.portada.dias': string | null;
   'inicio.portada.horas': string | null;
   'inicio.portada.min': string | null;
@@ -103,11 +113,20 @@ export interface Bloques {
   'inicio.concursos.pasosTitulo': string | null;
   'inicio.concursos.botonInscribir': string | null;
   'inicio.concursos.botonBases': string | null;
+  'inicio.entradas.etiqueta': string | null;
   'inicio.entradas.titulo': string | null;
   'inicio.entradas.texto': string | null;
+  'inicio.entradas.mapa': string | null;
+  'inicio.entradas.escenario': string | null;
+  'inicio.entradas.preventa': string | null;
+  'inicio.entradas.normal': string | null;
   'inicio.entradas.incluye': string | null;
+  'inicio.entradas.whatsapp': string | null;
+  'inicio.entradas.boton': string | null;
   'inicio.entradas.microcopy': string | null;
   'inicio.entradas.aviso': string | null;
+  'inicio.entradas.pasosTitulo': string | null;
+  'inicio.entradas.pedidos': string | null;
   'inicio.stands.etiqueta': string | null;
   'inicio.stands.titulo': string | null;
   'inicio.stands.texto': string | null;
@@ -175,6 +194,10 @@ export interface Bloques {
   'terminos.contenido.texto': TextoEnriquecido | null;
   'terminos.seo.titulo': string | null;
   'terminos.seo.descripcion': string | null;
+  'compra.contenido.titulo': string | null;
+  'compra.contenido.texto': TextoEnriquecido | null;
+  'compra.seo.titulo': string | null;
+  'compra.seo.descripcion': string | null;
   'bases.contenido.titulo': string | null;
   'bases.contenido.texto': TextoEnriquecido | null;
   'bases.seo.titulo': string | null;
@@ -238,10 +261,13 @@ export interface FotosGaleria extends BaseElemento {
 
 export interface Localidades extends BaseElemento {
   nombre: string;
+  zona: 'lion' | 'miami' | 'santaana' | 'preferencia' | null;
+  ubicacion: string | null;
+  lugares: string | null;
   precio: number;
+  precioNormal: number | null;
   incluye: string[];
   validez: string | null;
-  enlace: string;
   textoBoton: string;
   destacada: boolean;
 }
@@ -270,7 +296,7 @@ export interface PaquetesStand extends BaseElemento {
 export interface Pasos extends BaseElemento {
   titulo: string;
   detalle: string | null;
-  grupo: 'concurso' | 'stand';
+  grupo: 'concurso' | 'stand' | 'compra';
 }
 
 export interface Pilares extends BaseElemento {

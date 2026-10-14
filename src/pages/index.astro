@@ -60,7 +60,7 @@ const masBarata = localidades.length ? Math.min(...localidades.map((l) => l.prec
   <Noche b={b} destacados={destacados.filter((d) => d.experiencia === 'noche')} artistas={artistas} />
   <Atracciones b={b} atracciones={atracciones} />
   <Concursos b={b} concursos={concursos} pasos={pasos.filter((p) => p.grupo === 'concurso')} hayBases={!!b.rico('bases.contenido.texto')} />
-  <Entradas b={b} localidades={localidades} />
+  <Entradas b={b} localidades={localidades} pasos={pasos.filter((p) => p.grupo === 'compra')} />
   <Stands b={b} paquetes={paquetesStand} pasos={pasos.filter((p) => p.grupo === 'stand')} />
   <Sponsors b={b} razones={razones} paquetes={paquetesSponsor} patrocinables={patrocinables} marcas={marcas} />
   <Galeria b={b} fotos={fotos} />

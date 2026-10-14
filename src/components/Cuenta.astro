@@ -4,6 +4,9 @@
  *
  * - Fechas de los bloques `global.evento.inicio` / `global.evento.fin`, en ISO con el desfase de
  *   Ecuador (-05:00): se comparan instantes absolutos, nunca la hora local del navegador.
+ * - Opcional, `preventa` + `tituloPreventa`: mientras no llegue ese momento, el estado «antes» cuenta
+ *   hasta el fin de la preventa con su propio título; después, hasta el inicio del evento. Sin
+ *   JavaScript se ve siempre el título del evento y su fecha.
  * - Tres estados (antes, durante, después). El servidor ya renderiza el correcto; el script solo
  *   cambia de estado si el momento llega con la página abierta.
  * - Sin JavaScript, en el estado «antes» se ve la fecha en texto en lugar de los números (unos
@@ -19,9 +22,12 @@ interface Props {
   unidades: [string | null, string | null, string | null, string | null];
   durante: string | null;
   despues: string | null;
+  /** Fin de la preventa (ISO), o null. */
+  preventa?: string | null;
+  tituloPreventa?: string | null;
   class?: string;
 }
-const { variante, inicio, fin, fecha, titulo, unidades, durante, despues, class: clase } = Astro.props;
+const { variante, inicio, fin, fecha, titulo, unidades, durante, despues, preventa = null, tituloPreventa = null, class: clase } = Astro.props;
 
 const tInicio = inicio ? Date.parse(inicio) : NaN;
 const tFin = fin ? Date.parse(fin) : NaN;
@@ -29,7 +35,9 @@ const valida = Number.isFinite(tInicio) && Number.isFinite(tFin);
 const ahora = Date.now();
 const estado = !valida || ahora < tInicio ? 'antes' : ahora < tFin ? 'durante' : 'despues';
 
-const resta = Math.max(0, tInicio - ahora);
+const tPreventa = preventa ? Date.parse(preventa) : NaN;
+const conPreventa = valida && !!tituloPreventa && Number.isFinite(tPreventa) && tPreventa < tInicio;
+const resta = Math.max(0, (conPreventa && ahora < tPreventa ? tPreventa : tInicio) - ahora);
 const inicial = [Math.floor(resta / 86_400_000), Math.floor(resta / 3_600_000) % 24, Math.floor(resta / 60_000) % 60, Math.floor(resta / 1000) % 60];
 const dos = (n: number) => String(n).padStart(2, '0');
 const Titulo = variante === 'grande' ? 'h2' : 'p';
@@ -37,9 +45,10 @@ const Titulo = variante === 'grande' ? 'h2' : 'p';
 
 {
   valida && (
-    <div class:list={['cuenta', `cuenta--${variante}`, clase]} data-cuenta data-inicio={tInicio} data-fin={tFin} data-estado={estado}>
+    <div class:list={['cuenta', `cuenta--${variante}`, clase]} data-cuenta data-inicio={tInicio} data-fin={tFin} data-preventa={conPreventa ? tPreventa : undefined} data-estado={estado}>
       <div data-para="antes" hidden={estado !== 'antes'}>
-        {titulo && <Titulo class:list={['titulo', { h2: variante === 'grande' }]}>{titulo}</Titulo>}
+        {titulo && <Titulo class:list={['titulo', { h2: variante === 'grande' }]} data-titulo="evento">{titulo}</Titulo>}
+        {conPreventa && <Titulo class:list={['titulo', { h2: variante === 'grande' }]} data-titulo="preventa" hidden>{tituloPreventa}</Titulo>}
         {fecha && <p class="fecha" data-sin-js>{fecha}</p>}
         <ol class="unidades" hidden data-con-js role="timer" aria-live="off">
           {unidades.map((u, i) => (
@@ -68,6 +77,8 @@ const Titulo = variante === 'grande' ? 'h2' : 'p';
   for (const cuenta of document.querySelectorAll<HTMLElement>('[data-cuenta]')) {
     const inicio = Number(cuenta.dataset.inicio);
     const fin = Number(cuenta.dataset.fin);
+    const preventa = cuenta.dataset.preventa ? Number(cuenta.dataset.preventa) : null;
+    const titulos = [...cuenta.querySelectorAll<HTMLElement>('[data-titulo]')];
     cuenta.querySelectorAll<HTMLElement>('[data-sin-js]').forEach((el) => (el.hidden = true));
     cuenta.querySelectorAll<HTMLElement>('[data-con-js]').forEach((el) => (el.hidden = false));
     const numeros = [...cuenta.querySelectorAll<HTMLElement>('[data-unidad]')];
@@ -79,7 +90,9 @@ const Titulo = variante === 'grande' ? 'h2' : 'p';
         cuenta.querySelectorAll<HTMLElement>('[data-para]').forEach((el) => (el.hidden = el.dataset.para !== estado));
       }
       if (estado !== 'antes') return false;
-      const resta = inicio - ahora;
+      const enPreventa = preventa !== null && ahora < preventa;
+      titulos.forEach((el) => (el.hidden = (el.dataset.titulo === 'preventa') !== enPreventa));
+      const resta = (enPreventa ? preventa : inicio) - ahora;
       const valores = [Math.floor(resta / 86_400_000), Math.floor(resta / 3_600_000) % 24, Math.floor(resta / 60_000) % 60, Math.floor(resta / 1000) % 60];
       numeros.forEach((el, i) => {
         const texto = i === 0 ? String(valores[i]) : dos(valores[i]!);

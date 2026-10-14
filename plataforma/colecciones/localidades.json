@@ -3,7 +3,7 @@
   "label": "Entradas",
   "singular": "localidad",
   "gender": "f",
-  "description": "Tipos de entrada a la venta en Ticketshow. La portada muestra el precio de la más barata visible.",
+  "description": "Zonas del evento y sus precios de preventa. La portada muestra el precio de la más barata visible.",
   "titleField": "nombre",
   "searchFields": [
     "nombre"
@@ -18,10 +18,59 @@
       "max": 60
     },
     {
+      "name": "zona",
+      "control": "option",
+      "label": "Zona del mapa",
+      "help": "Une la tarjeta con su zona del mapa y le da su color.",
+      "required": false,
+      "options": [
+        {
+          "value": "lion",
+          "label": "The Lion VIP (dorado, frente al escenario)"
+        },
+        {
+          "value": "miami",
+          "label": "Miami Style VIP (magenta, segundo anillo)"
+        },
+        {
+          "value": "santaana",
+          "label": "Santa Ana VIP (naranja, anillo exterior)"
+        },
+        {
+          "value": "preferencia",
+          "label": "Preferencia (cian, lados y fondo)"
+        }
+      ]
+    },
+    {
+      "name": "ubicacion",
+      "control": "text",
+      "label": "Ubicación",
+      "help": "Por ejemplo: «Frente al Escenario 360».",
+      "required": false,
+      "max": 80
+    },
+    {
+      "name": "lugares",
+      "control": "text",
+      "label": "Lugares",
+      "help": "Por ejemplo: «12 numerados (1–12)».",
+      "required": false,
+      "max": 80
+    },
+    {
       "name": "precio",
       "control": "number",
-      "label": "Precio (USD)",
+      "label": "Precio de preventa (USD)",
       "required": true,
+      "min": 0
+    },
+    {
+      "name": "precioNormal",
+      "control": "number",
+      "label": "Precio normal (USD)",
+      "help": "Se muestra tachado junto al de preventa. Vacío = no se muestra.",
+      "required": false,
       "min": 0
     },
     {
@@ -40,12 +89,6 @@
       "help": "Por ejemplo: «Tarde y noche».",
       "required": false,
       "max": 80
-    },
-    {
-      "name": "enlace",
-      "control": "url",
-      "label": "Enlace de compra en Ticketshow",
-      "required": true
     },
     {
       "name": "textoBoton",

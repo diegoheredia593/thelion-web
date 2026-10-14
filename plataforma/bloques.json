@@ -26,6 +26,19 @@
     "value": null
   },
   {
+    "key": "global.marca.edicion",
+    "page": "global",
+    "section": "marca",
+    "label": "Edición",
+    "help": "Se muestra en la portada, bajo el título.",
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 2,
+    "value": "Edición Miami Style"
+  },
+  {
     "key": "global.menu.evento",
     "page": "global",
     "section": "menu",
@@ -35,7 +48,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 2,
+    "order": 3,
     "value": "El evento"
   },
   {
@@ -48,7 +61,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 3,
+    "order": 4,
     "value": "De día"
   },
   {
@@ -61,7 +74,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 4,
+    "order": 5,
     "value": "De noche"
   },
   {
@@ -74,7 +87,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 5,
+    "order": 6,
     "value": "Atracciones"
   },
   {
@@ -87,7 +100,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 6,
+    "order": 7,
     "value": "Concursos"
   },
   {
@@ -100,7 +113,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 7,
+    "order": 8,
     "value": "Stands"
   },
   {
@@ -113,7 +126,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 8,
+    "order": 9,
     "value": "Sponsors"
   },
   {
@@ -126,8 +139,21 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 9,
+    "order": 10,
     "value": "Preguntas"
+  },
+  {
+    "key": "global.menu.pedidos",
+    "page": "global",
+    "section": "menu",
+    "label": "Menú: ¿Ya compraste?",
+    "help": "Solo aparece cuando hay enlace a la consulta de pedidos.",
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 11,
+    "value": "¿Ya compraste?"
   },
   {
     "key": "global.menu.entradas",
@@ -139,21 +165,47 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 10,
+    "order": 12,
     "value": "Comprar entradas"
   },
   {
-    "key": "global.entradas.enlace",
+    "key": "global.entradas.checkout",
     "page": "global",
     "section": "entradas",
-    "label": "Enlace general de compra en Ticketshow",
-    "help": "Lo usan los botones «Comprar entradas» que no son de una localidad concreta.",
+    "label": "Enlace del checkout de entradas",
+    "help": "El checkout del portal. Mientras esté vacío, cada localidad se compra por WhatsApp con un mensaje ya escrito.",
     "control": "url",
     "level": "content",
     "maxLength": null,
-    "required": true,
-    "order": 11,
-    "value": "https://www.ticketshow.com.ec/evento/THE-LION-HALLOWEEN-PARTY-GUAYAQUIL-2026?utm_source=web&utm_medium=landing&utm_campaign=lion2026&utm_content=general"
+    "required": false,
+    "order": 13,
+    "value": null
+  },
+  {
+    "key": "global.entradas.pedidos",
+    "page": "global",
+    "section": "entradas",
+    "label": "Enlace de «¿Ya compraste?»",
+    "help": "La consulta de pedidos del portal. Si está vacío, el enlace no aparece en el menú, en Entradas ni en el pie.",
+    "control": "url",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 14,
+    "value": null
+  },
+  {
+    "key": "global.entradas.finPreventa",
+    "page": "global",
+    "section": "entradas",
+    "label": "Fin de la preventa (contador)",
+    "help": "Formato ISO con la zona de Ecuador (-05:00). Hasta ese momento el contador de la portada cuenta hasta el fin de la preventa.",
+    "control": "text",
+    "level": "system",
+    "maxLength": null,
+    "required": false,
+    "order": 15,
+    "value": "2026-10-28T23:59:59-05:00"
   },
   {
     "key": "global.pie.linea",
@@ -165,7 +217,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 12,
+    "order": 16,
     "value": "Este Halloween tiene rey."
   },
   {
@@ -178,7 +230,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 13,
+    "order": 17,
     "value": "El evento"
   },
   {
@@ -191,7 +243,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 14,
+    "order": 18,
     "value": "Entradas"
   },
   {
@@ -204,7 +256,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 15,
+    "order": 19,
     "value": "Stands"
   },
   {
@@ -217,7 +269,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 16,
+    "order": 20,
     "value": "Sponsors"
   },
   {
@@ -230,8 +282,21 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 17,
+    "order": 21,
     "value": "Preguntas frecuentes"
+  },
+  {
+    "key": "global.pie.pedidos",
+    "page": "global",
+    "section": "pie",
+    "label": "Pie: ¿Ya compraste?",
+    "help": "Solo aparece cuando hay enlace a la consulta de pedidos.",
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 22,
+    "value": "¿Ya compraste?"
   },
   {
     "key": "global.pie.contacto",
@@ -243,7 +308,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 18,
+    "order": 23,
     "value": "Contacto"
   },
   {
@@ -256,7 +321,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 19,
+    "order": 24,
     "value": "Política de privacidad"
   },
   {
@@ -269,8 +334,21 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 20,
+    "order": 25,
     "value": "Términos y condiciones"
+  },
+  {
+    "key": "global.pie.terminosCompra",
+    "page": "global",
+    "section": "pie",
+    "label": "Pie: Términos de compra",
+    "help": null,
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 26,
+    "value": "Términos de compra"
   },
   {
     "key": "global.pie.bases",
@@ -282,7 +360,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 21,
+    "order": 27,
     "value": "Bases de los concursos"
   },
   {
@@ -295,7 +373,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 22,
+    "order": 28,
     "value": "© 2026 The Lion Halloween Party"
   },
   {
@@ -308,7 +386,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 23,
+    "order": 29,
     "value": "[PENDIENTE: Sitio por [agencia]]"
   },
   {
@@ -321,7 +399,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 24,
+    "order": 30,
     "value": "@thelionhalloweenparty"
   },
   {
@@ -334,8 +412,34 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 25,
+    "order": 31,
     "value": "https://www.instagram.com/thelionhalloweenparty/"
+  },
+  {
+    "key": "global.redes.instagram2",
+    "page": "global",
+    "section": "redes",
+    "label": "Segundo usuario de Instagram",
+    "help": null,
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 32,
+    "value": "@thelionus"
+  },
+  {
+    "key": "global.redes.instagram2Enlace",
+    "page": "global",
+    "section": "redes",
+    "label": "Enlace del segundo Instagram",
+    "help": null,
+    "control": "url",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 33,
+    "value": "https://www.instagram.com/thelionus/"
   },
   {
     "key": "global.contacto.whatsapp",
@@ -347,7 +451,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 26,
+    "order": 34,
     "value": "[PENDIENTE: número de WhatsApp]"
   },
   {
@@ -360,8 +464,21 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 27,
+    "order": 35,
     "value": "Hola, quiero información sobre The Lion Halloween Party."
+  },
+  {
+    "key": "global.whatsapp.entradas",
+    "page": "global",
+    "section": "whatsapp",
+    "label": "Mensaje de WhatsApp: entradas",
+    "help": "{localidad} se reemplaza por la localidad elegida. Se usa mientras no haya enlace del checkout.",
+    "control": "textLong",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 36,
+    "value": "Hola, quiero comprar entradas {localidad} para The Lion Halloween Party."
   },
   {
     "key": "global.whatsapp.stand",
@@ -373,7 +490,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 28,
+    "order": 37,
     "value": "Hola, quiero reservar un stand para The Lion Halloween Party. Me interesa el Paquete __ y [sí / no] la extensión nocturna."
   },
   {
@@ -386,7 +503,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 29,
+    "order": 38,
     "value": "Hola, me interesa ser sponsor de The Lion Halloween Party. Mi marca es __."
   },
   {
@@ -399,7 +516,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 30,
+    "order": 39,
     "value": "Hola, quiero inscribirme en el concurso de [disfraces / talentos] de [día / noche]."
   },
   {
@@ -412,7 +529,7 @@
     "level": "system",
     "maxLength": null,
     "required": true,
-    "order": 31,
+    "order": 40,
     "value": "2026-10-31T12:00:00-05:00"
   },
   {
@@ -425,7 +542,7 @@
     "level": "system",
     "maxLength": null,
     "required": true,
-    "order": 32,
+    "order": 41,
     "value": "2026-11-01T02:00:00-05:00"
   },
   {
@@ -438,7 +555,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 33,
+    "order": 42,
     "value": null
   },
   {
@@ -451,7 +568,7 @@
     "level": "content",
     "maxLength": 70,
     "required": false,
-    "order": 34,
+    "order": 43,
     "value": "The Lion Halloween Party 2026 · 31 oct · Guayaquil"
   },
   {
@@ -464,8 +581,8 @@
     "level": "content",
     "maxLength": 170,
     "required": false,
-    "order": 35,
-    "value": "Halloween en familia de 12:00 a 18:00 y fiesta Back to the Old School de 20:00 a 02:00 en Santa Ana Garden. $3.000 en premios. Entradas en Ticketshow."
+    "order": 44,
+    "value": "Halloween en familia de 12:00 a 18:00 y fiesta Back to the Old School de 20:00 a 02:00 en Santa Ana Garden. $3.000 en premios. Preventa desde $10 hasta el 28 de octubre."
   },
   {
     "key": "inicio.seo.compartirTitulo",
@@ -477,7 +594,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 36,
+    "order": 45,
     "value": "The Lion Halloween Party 2026"
   },
   {
@@ -490,7 +607,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 37,
+    "order": 46,
     "value": "Sábado 31 de octubre · De día en familia, de noche old school."
   },
   {
@@ -503,7 +620,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 38,
+    "order": 47,
     "value": "SÁBADO 31 DE OCTUBRE · SANTA ANA GARDEN · GUAYAQUIL"
   },
   {
@@ -516,7 +633,7 @@
     "level": "content",
     "maxLength": null,
     "required": true,
-    "order": 39,
+    "order": 48,
     "value": "The Lion Halloween Party 2026"
   },
   {
@@ -529,7 +646,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 40,
+    "order": 49,
     "value": "Este Halloween tiene rey."
   },
   {
@@ -542,7 +659,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 41,
+    "order": 50,
     "value": "De día, Halloween en familia. De noche, el regreso del reggaetón old school. Disfraces, shows en vivo, casa del terror, dinosaurios, zombies y $3.000 en premios en 12 horas de Halloween."
   },
   {
@@ -555,7 +672,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 42,
+    "order": 51,
     "value": "Comprar entradas"
   },
   {
@@ -568,7 +685,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 43,
+    "order": 52,
     "value": "Reservar un stand"
   },
   {
@@ -581,8 +698,8 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 44,
-    "value": "Entradas desde {precio} en Ticketshow."
+    "order": 53,
+    "value": "Preventa desde {precio}, solo hasta el 28 de octubre."
   },
   {
     "key": "inicio.portada.imagen",
@@ -594,7 +711,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 45,
+    "order": 54,
     "value": null
   },
   {
@@ -607,8 +724,21 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 46,
+    "order": 55,
     "value": "Faltan"
+  },
+  {
+    "key": "inicio.portada.faltanPreventa",
+    "page": "inicio",
+    "section": "portada",
+    "label": "Portada: contador durante la preventa",
+    "help": "Reemplaza a «Faltan» hasta el fin de la preventa.",
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 56,
+    "value": "La preventa termina en…"
   },
   {
     "key": "inicio.portada.dias",
@@ -620,7 +750,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 47,
+    "order": 57,
     "value": "Días"
   },
   {
@@ -633,7 +763,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 48,
+    "order": 58,
     "value": "Horas"
   },
   {
@@ -646,7 +776,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 49,
+    "order": 59,
     "value": "Min"
   },
   {
@@ -659,7 +789,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 50,
+    "order": 60,
     "value": "Seg"
   },
   {
@@ -672,7 +802,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 51,
+    "order": 61,
     "value": "Fecha"
   },
   {
@@ -685,7 +815,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 52,
+    "order": 62,
     "value": "Sábado 31 de octubre de 2026"
   },
   {
@@ -698,7 +828,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 53,
+    "order": 63,
     "value": "Lugar"
   },
   {
@@ -711,7 +841,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 54,
+    "order": 64,
     "value": "Santa Ana Garden, Guayaquil"
   },
   {
@@ -724,7 +854,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 55,
+    "order": 65,
     "value": "Ver mapa"
   },
   {
@@ -737,7 +867,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 56,
+    "order": 66,
     "value": "De día"
   },
   {
@@ -750,7 +880,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 57,
+    "order": 67,
     "value": "12:00 a 18:00 · Familias"
   },
   {
@@ -763,7 +893,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 58,
+    "order": 68,
     "value": "De noche"
   },
   {
@@ -776,7 +906,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 59,
+    "order": 69,
     "value": "20:00 a 02:00 · Fiesta"
   },
   {
@@ -789,7 +919,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 60,
+    "order": 70,
     "value": "Un solo día. Dos maneras de vivir Halloween."
   },
   {
@@ -802,7 +932,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 61,
+    "order": 71,
     "value": "DE DÍA · 12:00 A 18:00"
   },
   {
@@ -815,7 +945,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 62,
+    "order": 72,
     "value": "Halloween en familia"
   },
   {
@@ -828,7 +958,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 63,
+    "order": 73,
     "value": "Para niños, adolescentes y toda la familia. Personajes en vivo, dulce o truco, dinosaurios sueltos, concursos de disfraces y talentos y $1.000 en premios."
   },
   {
@@ -841,7 +971,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 64,
+    "order": 74,
     "value": "Ver programa de día"
   },
   {
@@ -854,7 +984,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 65,
+    "order": 75,
     "value": "DE NOCHE · 20:00 A 02:00"
   },
   {
@@ -867,7 +997,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 66,
+    "order": 76,
     "value": "Back to the Old School"
   },
   {
@@ -880,7 +1010,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 67,
+    "order": 77,
     "value": "La fiesta. 7 artistas en tributo al reggaetón clásico, 3 de los mejores DJs de latin music, escenario 360 y $2.000 en premios para los mejores disfraces."
   },
   {
@@ -893,7 +1023,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 68,
+    "order": 78,
     "value": "Ver la fiesta de noche"
   },
   {
@@ -906,7 +1036,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 69,
+    "order": 79,
     "value": "Más que una fiesta: una experiencia inolvidable."
   },
   {
@@ -919,7 +1049,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 70,
+    "order": 80,
     "value": "Asegurar mi entrada"
   },
   {
@@ -932,7 +1062,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 71,
+    "order": 81,
     "value": "DE DÍA · 12:00 A 18:00 · NIÑOS, ADOLESCENTES Y FAMILIAS"
   },
   {
@@ -945,7 +1075,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 72,
+    "order": 82,
     "value": "Halloween en familia"
   },
   {
@@ -958,7 +1088,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 73,
+    "order": 83,
     "value": "Saca el disfraz del clóset y trae a toda la familia. La tarde arranca con la inscripción de concursantes y no para: personajes de Toy Story, Beetlejuice y K-pop en vivo, dulce o truco, dinosaurios sueltos y $1.000 en premios para los mejores disfraces y talentos."
   },
   {
@@ -971,7 +1101,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 74,
+    "order": 84,
     "value": "Programa de la tarde"
   },
   {
@@ -984,7 +1114,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 75,
+    "order": 85,
     "value": "Toda la tarde: dulce o truco, Zona Jurásica, casa del terror y DJ."
   },
   {
@@ -997,7 +1127,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 76,
+    "order": 86,
     "value": "Comprar entradas"
   },
   {
@@ -1010,7 +1140,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 77,
+    "order": 87,
     "value": "DE NOCHE · 20:00 A 02:00"
   },
   {
@@ -1023,7 +1153,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 78,
+    "order": 88,
     "value": "[PENDIENTE: edad mínima]"
   },
   {
@@ -1036,7 +1166,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 79,
+    "order": 89,
     "value": "Back to the Old School"
   },
   {
@@ -1049,7 +1179,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 80,
+    "order": 90,
     "value": "La fiesta de Halloween que trae de vuelta el reggaetón clásico."
   },
   {
@@ -1062,7 +1192,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 81,
+    "order": 91,
     "value": "Cuando cae el sol, Santa Ana Garden se transforma. Siete artistas en vivo rinden tributo al reggaetón que marcó una época, tres de los mejores DJs de latin music mantienen la pista encendida y un escenario 360 te pone en el centro del show. Entre canción y canción: un cementerio hecho discoteca, una casa del terror para entrar mientras rumbeas y un party bus dentro de la fiesta."
   },
   {
@@ -1075,7 +1205,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 82,
+    "order": 92,
     "value": "Line-up"
   },
   {
@@ -1088,7 +1218,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 83,
+    "order": 93,
     "value": "Ven disfrazado. La pista es tuya y el premio puede ser tuyo también."
   },
   {
@@ -1101,7 +1231,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 84,
+    "order": 94,
     "value": "Comprar entradas"
   },
   {
@@ -1114,7 +1244,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 85,
+    "order": 95,
     "value": "Todo lo que te espera"
   },
   {
@@ -1127,7 +1257,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 86,
+    "order": 96,
     "value": "12 horas, dos experiencias y sustos en cada rincón."
   },
   {
@@ -1140,7 +1270,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 87,
+    "order": 97,
     "value": "Todo"
   },
   {
@@ -1153,7 +1283,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 88,
+    "order": 98,
     "value": "De día"
   },
   {
@@ -1166,7 +1296,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 89,
+    "order": 99,
     "value": "De noche"
   },
   {
@@ -1179,7 +1309,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 90,
+    "order": 100,
     "value": "Día y noche"
   },
   {
@@ -1192,7 +1322,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 91,
+    "order": 101,
     "value": "Comprar entradas"
   },
   {
@@ -1205,7 +1335,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 92,
+    "order": 102,
     "value": "Tu disfraz puede ganar"
   },
   {
@@ -1218,7 +1348,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 93,
+    "order": 103,
     "value": "Hay $3.000 en premios repartidos en tres concursos. De día compiten disfraces y talentos; de noche, el mejor disfraz de la fiesta. Prepárate, inscríbete y sube a la pasarela."
   },
   {
@@ -1231,7 +1361,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 94,
+    "order": 104,
     "value": "Cuándo"
   },
   {
@@ -1244,7 +1374,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 95,
+    "order": 105,
     "value": "Premios"
   },
   {
@@ -1257,7 +1387,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 96,
+    "order": 106,
     "value": "Cómo participar"
   },
   {
@@ -1270,7 +1400,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 97,
+    "order": 107,
     "value": "Cómo participar"
   },
   {
@@ -1283,7 +1413,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 98,
+    "order": 108,
     "value": "Inscribirme"
   },
   {
@@ -1296,8 +1426,21 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 99,
+    "order": 109,
     "value": "Ver bases del concurso"
+  },
+  {
+    "key": "inicio.entradas.etiqueta",
+    "page": "inicio",
+    "section": "entradas",
+    "label": "Entradas: etiqueta",
+    "help": null,
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 110,
+    "value": "PREVENTA · SOLO HASTA EL 28 DE OCTUBRE"
   },
   {
     "key": "inicio.entradas.titulo",
@@ -1309,8 +1452,8 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 100,
-    "value": "Elige tu experiencia"
+    "order": 111,
+    "value": "Elige tu lugar"
   },
   {
     "key": "inicio.entradas.texto",
@@ -1322,8 +1465,60 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 101,
-    "value": "Las entradas se venden solo en Ticketshow, el canal oficial. Elige tu localidad y asegura tu lugar."
+    "order": 112,
+    "value": "Los precios de preventa valen solo hasta el 28 de octubre; después regresan a su valor normal. Elige tu zona en el mapa y asegura tu lugar."
+  },
+  {
+    "key": "inicio.entradas.mapa",
+    "page": "inicio",
+    "section": "entradas",
+    "label": "Entradas: nombre del mapa",
+    "help": "Lo leen los lectores de pantalla.",
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 113,
+    "value": "Mapa del evento"
+  },
+  {
+    "key": "inicio.entradas.escenario",
+    "page": "inicio",
+    "section": "entradas",
+    "label": "Entradas: escenario en el mapa",
+    "help": null,
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 114,
+    "value": "Escenario 360°"
+  },
+  {
+    "key": "inicio.entradas.preventa",
+    "page": "inicio",
+    "section": "entradas",
+    "label": "Entradas: rótulo del precio",
+    "help": null,
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 115,
+    "value": "Preventa"
+  },
+  {
+    "key": "inicio.entradas.normal",
+    "page": "inicio",
+    "section": "entradas",
+    "label": "Entradas: rótulo del precio normal",
+    "help": "Acompaña al precio normal tachado, cuando la localidad lo tiene.",
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 116,
+    "value": "Precio normal"
   },
   {
     "key": "inicio.entradas.incluye",
@@ -1335,34 +1530,86 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 102,
+    "order": 117,
     "value": "Incluye"
+  },
+  {
+    "key": "inicio.entradas.whatsapp",
+    "page": "inicio",
+    "section": "entradas",
+    "label": "Entradas: texto bajo los botones (WhatsApp)",
+    "help": "Solo aparece mientras no hay enlace del checkout.",
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 118,
+    "value": "Te atendemos por WhatsApp para completar tu compra."
+  },
+  {
+    "key": "inicio.entradas.boton",
+    "page": "inicio",
+    "section": "entradas",
+    "label": "Entradas: botón del checkout",
+    "help": "Solo aparece cuando hay enlace del checkout.",
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 119,
+    "value": "Comprar entradas"
   },
   {
     "key": "inicio.entradas.microcopy",
     "page": "inicio",
     "section": "entradas",
-    "label": "Entradas: texto bajo los botones",
-    "help": null,
+    "label": "Entradas: texto bajo el botón del checkout",
+    "help": "Solo aparece cuando hay enlace del checkout.",
     "control": "text",
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 103,
-    "value": "Serás redirigido a Ticketshow para completar tu compra."
+    "order": 120,
+    "value": "[PENDIENTE: minutos de reserva] Tus lugares quedan reservados 30 minutos mientras completas el pago."
   },
   {
     "key": "inicio.entradas.aviso",
     "page": "inicio",
     "section": "entradas",
-    "label": "Entradas: aviso de seguridad",
-    "help": null,
+    "label": "Entradas: aviso de venta oficial",
+    "help": "Solo aparece cuando hay enlace del checkout.",
     "control": "textLong",
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 104,
-    "value": "Compra solo en Ticketshow. No nos hacemos responsables por entradas compradas a terceros."
+    "order": 121,
+    "value": "Las entradas se venden solo en este sitio. Tus QR llegan desde un correo @thelionproductions.com y cada uno se puede usar una sola vez. No compres a revendedores."
+  },
+  {
+    "key": "inicio.entradas.pasosTitulo",
+    "page": "inicio",
+    "section": "entradas",
+    "label": "Entradas: título de los pasos",
+    "help": "Los pasos aparecen cuando hay enlace del checkout.",
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 122,
+    "value": "Cómo comprar tu entrada"
+  },
+  {
+    "key": "inicio.entradas.pedidos",
+    "page": "inicio",
+    "section": "entradas",
+    "label": "Entradas: enlace «¿Ya compraste?»",
+    "help": "Solo aparece cuando hay enlace a la consulta de pedidos.",
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 123,
+    "value": "¿Ya compraste? Revisa tu pedido"
   },
   {
     "key": "inicio.stands.etiqueta",
@@ -1374,7 +1621,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 105,
+    "order": 124,
     "value": "PAQUETES PARA EMPRENDEDORES"
   },
   {
@@ -1387,7 +1634,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 106,
+    "order": 125,
     "value": "Vende en el Halloween de Guayaquil"
   },
   {
@@ -1400,7 +1647,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 107,
+    "order": 126,
     "value": "Pon tu emprendimiento frente a familias por la tarde y, si quieres, frente a la fiesta por la noche. Elige tu paquete, reserva tu espacio y nosotros ponemos la gente."
   },
   {
@@ -1413,7 +1660,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 108,
+    "order": 127,
     "value": "100"
   },
   {
@@ -1426,7 +1673,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 109,
+    "order": 128,
     "value": "Quedan {n} stands disponibles."
   },
   {
@@ -1439,7 +1686,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 110,
+    "order": 129,
     "value": "Espacio"
   },
   {
@@ -1452,7 +1699,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 111,
+    "order": 130,
     "value": "Incluye"
   },
   {
@@ -1465,7 +1712,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 112,
+    "order": 131,
     "value": "Adicional a cualquier paquete"
   },
   {
@@ -1478,7 +1725,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 113,
+    "order": 132,
     "value": "Horario base: 12:00 a 18:00. Con la extensión nocturna, tu stand se traslada al área de emprendedores de la entrada principal y atiende hasta las 02:00."
   },
   {
@@ -1491,7 +1738,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 114,
+    "order": 133,
     "value": "Cómo reservar"
   },
   {
@@ -1504,7 +1751,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 115,
+    "order": 134,
     "value": "Reservar mi stand"
   },
   {
@@ -1517,7 +1764,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 116,
+    "order": 135,
     "value": "Preguntar por WhatsApp"
   },
   {
@@ -1530,7 +1777,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 117,
+    "order": 136,
     "value": "Cupos limitados. La reserva se confirma con el pago."
   },
   {
@@ -1543,7 +1790,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 118,
+    "order": 137,
     "value": "[PENDIENTE: rubros permitidos y reglas, por ejemplo venta de alcohol]"
   },
   {
@@ -1556,7 +1803,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 119,
+    "order": 138,
     "value": "Pon tu marca en el centro de Halloween"
   },
   {
@@ -1569,7 +1816,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 120,
+    "order": 139,
     "value": "Un solo día te da dos públicos: familias con niños y adolescentes por la tarde, y adultos de fiesta por la noche. Tu marca puede estar en los dos, durante 12 horas, en el escenario, en los concursos y en las redes del evento."
   },
   {
@@ -1582,7 +1829,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 121,
+    "order": 140,
     "value": "Por qué patrocinar"
   },
   {
@@ -1595,7 +1842,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 122,
+    "order": 141,
     "value": "Paquetes"
   },
   {
@@ -1608,7 +1855,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 123,
+    "order": 142,
     "value": "Patrocina una atracción"
   },
   {
@@ -1621,7 +1868,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 124,
+    "order": 143,
     "value": "Pon tu nombre en una experiencia concreta, por ejemplo «Party Bus by tu marca»."
   },
   {
@@ -1634,7 +1881,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 125,
+    "order": 144,
     "value": "Quiero ser sponsor"
   },
   {
@@ -1647,7 +1894,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 126,
+    "order": 145,
     "value": "Descargar media kit"
   },
   {
@@ -1660,7 +1907,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 127,
+    "order": 146,
     "value": null
   },
   {
@@ -1673,7 +1920,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 128,
+    "order": 147,
     "value": "Ya confían en nosotros"
   },
   {
@@ -1686,7 +1933,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 129,
+    "order": 148,
     "value": "Síguenos y no te pierdas nada"
   },
   {
@@ -1699,7 +1946,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 130,
+    "order": 149,
     "value": "Line-up, anuncios y sorpresas salen primero en Instagram."
   },
   {
@@ -1712,7 +1959,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 131,
+    "order": 150,
     "value": "Seguir en Instagram"
   },
   {
@@ -1725,7 +1972,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 132,
+    "order": 151,
     "value": "¿Cómo quieres ser parte?"
   },
   {
@@ -1738,7 +1985,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 133,
+    "order": 152,
     "value": "Elige tu perfil y déjanos tus datos. Te escribimos por WhatsApp."
   },
   {
@@ -1751,7 +1998,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 134,
+    "order": 153,
     "value": "Enviar"
   },
   {
@@ -1764,7 +2011,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 135,
+    "order": 154,
     "value": "Al enviar, aceptas que usemos tus datos para contactarte sobre este evento, según la Política de privacidad."
   },
   {
@@ -1777,7 +2024,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 136,
+    "order": 155,
     "value": "¡Listo! Recibimos tus datos. Pronto te escribimos por WhatsApp."
   },
   {
@@ -1790,7 +2037,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 137,
+    "order": 156,
     "value": "Algo salió mal. Inténtalo de nuevo o escríbenos por WhatsApp."
   },
   {
@@ -1803,7 +2050,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 138,
+    "order": 157,
     "value": "Cómo llegar"
   },
   {
@@ -1816,7 +2063,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 139,
+    "order": 158,
     "value": "Santa Ana Garden"
   },
   {
@@ -1829,7 +2076,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 140,
+    "order": 159,
     "value": "4to Callejón 11 NE, Guayaquil"
   },
   {
@@ -1842,7 +2089,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 141,
+    "order": 160,
     "value": "Referencia:"
   },
   {
@@ -1855,7 +2102,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 142,
+    "order": 161,
     "value": "[PENDIENTE: referencia del lugar]"
   },
   {
@@ -1868,7 +2115,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 143,
+    "order": 162,
     "value": "Parqueo:"
   },
   {
@@ -1881,7 +2128,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 144,
+    "order": 163,
     "value": "[PENDIENTE: parqueo]"
   },
   {
@@ -1894,7 +2141,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 145,
+    "order": 164,
     "value": "https://www.google.com/maps?q=Santa%20Ana%20Garden%2C%204to%20Callej%C3%B3n%2011%20NE%2C%20Guayaquil&output=embed"
   },
   {
@@ -1907,7 +2154,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 146,
+    "order": 165,
     "value": "https://www.google.com/maps/search/?api=1&query=Santa%20Ana%20Garden%2C%204to%20Callej%C3%B3n%2011%20NE%2C%20Guayaquil"
   },
   {
@@ -1920,7 +2167,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 147,
+    "order": 166,
     "value": "https://waze.com/ul?q=Santa%20Ana%20Garden%2C%204to%20Callej%C3%B3n%2011%20NE%2C%20Guayaquil&navigate=yes"
   },
   {
@@ -1933,7 +2180,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 148,
+    "order": 167,
     "value": "Abrir en Google Maps"
   },
   {
@@ -1946,7 +2193,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 149,
+    "order": 168,
     "value": "Abrir en Waze"
   },
   {
@@ -1959,7 +2206,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 150,
+    "order": 169,
     "value": "Preguntas frecuentes"
   },
   {
@@ -1972,7 +2219,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 151,
+    "order": 170,
     "value": "Faltan"
   },
   {
@@ -1985,7 +2232,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 152,
+    "order": 171,
     "value": "Días"
   },
   {
@@ -1998,7 +2245,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 153,
+    "order": 172,
     "value": "Horas"
   },
   {
@@ -2011,7 +2258,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 154,
+    "order": 173,
     "value": "Minutos"
   },
   {
@@ -2024,7 +2271,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 155,
+    "order": 174,
     "value": "Segundos"
   },
   {
@@ -2037,7 +2284,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 156,
+    "order": 175,
     "value": "El 31 de octubre, Halloween tiene rey. ¿Ya tienes tu entrada?"
   },
   {
@@ -2050,7 +2297,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 157,
+    "order": 176,
     "value": "Comprar entradas"
   },
   {
@@ -2063,7 +2310,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 158,
+    "order": 177,
     "value": "¡Ya empezó! Te esperamos en Santa Ana Garden."
   },
   {
@@ -2076,7 +2323,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 159,
+    "order": 178,
     "value": "Cómo llegar"
   },
   {
@@ -2089,7 +2336,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 160,
+    "order": 179,
     "value": "Gracias por rugir con nosotros. Nos vemos en 2027."
   },
   {
@@ -2102,7 +2349,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 161,
+    "order": 180,
     "value": "Ver fotos del evento"
   },
   {
@@ -2115,7 +2362,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 162,
+    "order": 181,
     "value": "[PENDIENTE: rótulo del campo de correo]"
   },
   {
@@ -2128,7 +2375,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 163,
+    "order": 182,
     "value": "[PENDIENTE: texto del botón]"
   },
   {
@@ -2141,7 +2388,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 164,
+    "order": 183,
     "value": "Política de privacidad"
   },
   {
@@ -2154,7 +2401,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 165,
+    "order": 184,
     "value": [
       {
         "type": "paragraph",
@@ -2176,7 +2423,7 @@
     "level": "content",
     "maxLength": 70,
     "required": false,
-    "order": 166,
+    "order": 185,
     "value": "Política de privacidad · The Lion Halloween Party 2026"
   },
   {
@@ -2189,7 +2436,7 @@
     "level": "content",
     "maxLength": 170,
     "required": false,
-    "order": 167,
+    "order": 186,
     "value": "[PENDIENTE: descripción de política de privacidad]"
   },
   {
@@ -2202,7 +2449,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 168,
+    "order": 187,
     "value": "Términos y condiciones"
   },
   {
@@ -2215,7 +2462,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 169,
+    "order": 188,
     "value": [
       {
         "type": "paragraph",
@@ -2237,7 +2484,7 @@
     "level": "content",
     "maxLength": 70,
     "required": false,
-    "order": 170,
+    "order": 189,
     "value": "Términos y condiciones · The Lion Halloween Party 2026"
   },
   {
@@ -2250,8 +2497,69 @@
     "level": "content",
     "maxLength": 170,
     "required": false,
-    "order": 171,
+    "order": 190,
     "value": "[PENDIENTE: descripción de términos y condiciones]"
+  },
+  {
+    "key": "compra.contenido.titulo",
+    "page": "compra",
+    "section": "contenido",
+    "label": "Términos de compra: título",
+    "help": null,
+    "control": "text",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 191,
+    "value": "Términos de compra"
+  },
+  {
+    "key": "compra.contenido.texto",
+    "page": "compra",
+    "section": "contenido",
+    "label": "Términos de compra: texto",
+    "help": "Mientras esté vacío, la página no existe y no aparecen los enlaces a ella.",
+    "control": "rich",
+    "level": "content",
+    "maxLength": null,
+    "required": false,
+    "order": 192,
+    "value": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "text": "[PENDIENTE: reembolsos, transferencia de entradas y venta en la puerta]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "compra.seo.titulo",
+    "page": "compra",
+    "section": "seo",
+    "label": "Términos de compra: título en Google",
+    "help": null,
+    "control": "text",
+    "level": "content",
+    "maxLength": 70,
+    "required": false,
+    "order": 193,
+    "value": "Términos de compra · The Lion Halloween Party 2026"
+  },
+  {
+    "key": "compra.seo.descripcion",
+    "page": "compra",
+    "section": "seo",
+    "label": "Términos de compra: descripción en Google",
+    "help": null,
+    "control": "textLong",
+    "level": "content",
+    "maxLength": 170,
+    "required": false,
+    "order": 194,
+    "value": "[PENDIENTE: descripción de los términos de compra]"
   },
   {
     "key": "bases.contenido.titulo",
@@ -2263,7 +2571,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 172,
+    "order": 195,
     "value": "Bases de los concursos"
   },
   {
@@ -2276,7 +2584,7 @@
     "level": "content",
     "maxLength": null,
     "required": false,
-    "order": 173,
+    "order": 196,
     "value": [
       {
         "type": "paragraph",
@@ -2298,7 +2606,7 @@
     "level": "content",
     "maxLength": 70,
     "required": false,
-    "order": 174,
+    "order": 197,
     "value": "Bases de los concursos · The Lion Halloween Party 2026"
   },
   {
@@ -2311,7 +2619,7 @@
     "level": "content",
     "maxLength": 170,
     "required": false,
-    "order": 175,
+    "order": 198,
     "value": "[PENDIENTE: descripción de bases de los concursos]"
   }
 ]

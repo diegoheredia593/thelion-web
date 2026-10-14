@@ -1,19 +1,34 @@
 ---
 /**
- * §8 Entradas: una tarjeta por localidad visible; cada botón va al `enlace` de su localidad en
- * Ticketshow. «Incluye» y la validez se muestran solo cuando tienen datos reales.
+ * §8 Entradas: etiqueta de preventa, mapa por zonas y una tarjeta por localidad visible (precio de
+ * preventa, precio normal tachado si lo hay, qué incluye y botón).
+ *
+ * La compra depende del bloque `global.entradas.checkout`:
+ * - con checkout: cada botón abre el checkout con la zona elegida; debajo, «Cómo comprar tu entrada»,
+ *   el botón general, la reserva y el aviso de venta oficial (todo eso describe el checkout);
+ * - sin checkout: cada botón abre WhatsApp con un mensaje que nombra la localidad.
+ * «¿Ya compraste?» aparece solo con el enlace a la consulta de pedidos.
  */
 import Icono from '../Icono.astro';
+import MapaEvento, { type Zona } from '../MapaEvento.astro';
 import { dolares } from '../../lib/formato';
+import { enlaceLocalidad } from '../../lib/enlaces';
 import { real } from '../../lib/pendiente';
 import type { Bloques, Colecciones } from '../../lib/content';
 
 interface Props {
   b: Bloques;
   localidades: Colecciones['localidades'][];
+  pasos: Colecciones['pasos'][];
 }
-const { b, localidades } = Astro.props;
+const { b, localidades, pasos } = Astro.props;
 const rotuloIncluye = b.t('inicio.entradas.incluye');
+const checkout = b.t('global.entradas.checkout');
+const pedidos = b.t('global.entradas.pedidos');
+const tarjetas = localidades.map((l) => ({ ...l, zona: (l.zona ?? null) as Zona | null, enlace: enlaceLocalidad(b, l) }));
+// El mapa aparece cuando al menos una localidad tiene su zona.
+const zonas = tarjetas.flatMap((l) => (l.zona ? [{ zona: l.zona, nombre: l.nombre }] : []));
+const porWhatsapp = !checkout && tarjetas.some((l) => l.enlace);
 ---
 
 {
@@ -21,44 +36,108 @@ const rotuloIncluye = b.t('inicio.entradas.incluye');
     <section class="seccion" id="entradas" aria-labelledby="titulo-entradas">
       <div class="contenedor">
         <header class="cabeza">
+          {b.t('inicio.entradas.etiqueta') && <p class="rotulo etiqueta">{b.t('inicio.entradas.etiqueta')}</p>}
           <h2 class="h2" id="titulo-entradas">{b.t('inicio.entradas.titulo')}</h2>
           {b.t('inicio.entradas.texto') && <p class="lead">{b.t('inicio.entradas.texto')}</p>}
         </header>
 
-        <ul class="tarjetas" role="list">
-          {localidades.map((l) => {
-            const incluye = real(l.incluye);
-            const validez = real(l.validez);
-            return (
-              <li class:list={['tarjeta', { destacada: l.destacada }]}>
-                <h3 class="nombre">{l.nombre}</h3>
-                <p class="precio">{dolares(l.precio)}</p>
-                {validez && <p class="validez">{validez}</p>}
-                {incluye && (
-                  <div class="incluye">
-                    {rotuloIncluye && <p class="rotulo">{rotuloIncluye}</p>}
-                    <ul>
-                      {incluye.map((i) => (
-                        <li>{i}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                <a class="boton noche" href={l.enlace}>
-                  {l.textoBoton}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        <div class:list={['cuerpo', { 'con-mapa': zonas.length > 0 }]}>
+          {zonas.length > 0 && <MapaEvento titulo={b.t('inicio.entradas.mapa')} escenario={b.t('inicio.entradas.escenario')} zonas={zonas} />}
 
-        {b.t('inicio.entradas.microcopy') && <p class="microcopy">{b.t('inicio.entradas.microcopy')}</p>}
-        {b.t('inicio.entradas.aviso') && (
-          <p class="aviso">
-            <Icono nombre="escudo" tamano={22} />
-            <span>{b.t('inicio.entradas.aviso')}</span>
-          </p>
-        )}
+          <ul class="tarjetas" role="list">
+            {tarjetas.map((l) => {
+              const incluye = real(l.incluye);
+              const validez = real(l.validez);
+              const ubicacion = real(l.ubicacion);
+              const lugares = real(l.lugares);
+              const normal = typeof l.precioNormal === 'number' && l.precioNormal > l.precio ? l.precioNormal : null;
+              return (
+                <li class:list={['tarjeta', l.zona && `zona-${l.zona}`, { destacada: l.destacada }]} id={l.zona ? `localidad-${l.zona}` : undefined}>
+                  <h3 class="nombre">{l.nombre}</h3>
+                  {(ubicacion || lugares) && (
+                    <p class="donde">
+                      {ubicacion}
+                      {ubicacion && lugares && <br />}
+                      {lugares}
+                    </p>
+                  )}
+                  <div class="precios">
+                    {b.t('inicio.entradas.preventa') && <p class="rotulo rotulo-precio">{b.t('inicio.entradas.preventa')}</p>}
+                    <p class="precio">{dolares(l.precio)}</p>
+                    {normal !== null && (
+                      <p class="normal">
+                        {b.t('inicio.entradas.normal') && <span>{b.t('inicio.entradas.normal')} </span>}
+                        <s>{dolares(normal)}</s>
+                      </p>
+                    )}
+                  </div>
+                  {validez && <p class="validez">{validez}</p>}
+                  {incluye && (
+                    <div class="incluye">
+                      {rotuloIncluye && <p class="rotulo-incluye">{rotuloIncluye}</p>}
+                      <ul>
+                        {incluye.map((i) => (
+                          <li>{i}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {l.enlace && (
+                    <a class="boton noche" href={l.enlace} {...(checkout ? {} : { rel: 'noopener', target: '_blank' })}>
+                      {!checkout && <Icono nombre="whatsapp" tamano={20} />}
+                      {l.textoBoton}
+                    </a>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        {porWhatsapp && b.t('inicio.entradas.whatsapp') && <p class="microcopy">{b.t('inicio.entradas.whatsapp')}</p>}
+
+        {
+          checkout && (
+            <>
+              {pasos.length > 0 && (
+                <div class="pasos">
+                  {b.t('inicio.entradas.pasosTitulo') && <h3 class="rotulo subtitulo">{b.t('inicio.entradas.pasosTitulo')}</h3>}
+                  <ol role="list">
+                    {pasos.map((p, i) => (
+                      <li>
+                        <span class="n" aria-hidden="true">{i + 1}</span>
+                        <p>
+                          <strong>{p.titulo}</strong>
+                          {real(p.detalle) && <span class="detalle"> {p.detalle}</span>}
+                        </p>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              )}
+              {b.t('inicio.entradas.boton') && (
+                <a class="boton noche principal" href={checkout}>
+                  {b.t('inicio.entradas.boton')}
+                </a>
+              )}
+              {b.t('inicio.entradas.microcopy') && <p class="microcopy">{b.t('inicio.entradas.microcopy')}</p>}
+              {b.t('inicio.entradas.aviso') && (
+                <p class="aviso">
+                  <Icono nombre="escudo" tamano={22} />
+                  <span>{b.t('inicio.entradas.aviso')}</span>
+                </p>
+              )}
+            </>
+          )
+        }
+
+        {
+          pedidos && b.t('inicio.entradas.pedidos') && (
+            <p class="pedidos">
+              <a href={pedidos}>{b.t('inicio.entradas.pedidos')}</a>
+            </p>
+          )
+        }
       </div>
     </section>
   )
@@ -70,6 +149,18 @@ const rotuloIncluye = b.t('inicio.entradas.incluye');
     gap: 1rem;
     margin-bottom: clamp(2rem, 5vw, 3rem);
   }
+  .etiqueta {
+    color: var(--cian);
+  }
+  .cuerpo {
+    display: grid;
+    gap: 2.5rem;
+  }
+  .cuerpo :global(.mapa) {
+    width: 100%;
+    max-width: 30rem;
+    justify-self: center;
+  }
   .tarjetas {
     list-style: none;
     margin: 0;
@@ -78,17 +169,32 @@ const rotuloIncluye = b.t('inicio.entradas.incluye');
     gap: 1rem;
   }
   .tarjeta {
+    --zona: var(--magenta);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     padding: 1.5rem;
     border: 1px solid var(--linea);
+    border-top: 3px solid var(--zona);
     border-radius: var(--radio);
     background: var(--superficie);
+    scroll-margin-top: calc(var(--alto-menu) + 1rem);
+  }
+  .tarjeta.zona-lion {
+    --zona: var(--dorado);
+  }
+  .tarjeta.zona-santaana {
+    --zona: var(--naranja);
+  }
+  .tarjeta.zona-preferencia {
+    --zona: var(--cian);
   }
   .tarjeta.destacada {
-    border-color: var(--magenta);
-    box-shadow: 0 0 2.5rem -1rem var(--magenta);
+    border-color: var(--zona);
+    box-shadow: 0 0 2.5rem -1rem var(--zona);
+  }
+  .tarjeta:target {
+    box-shadow: 0 0 2.5rem -0.6rem var(--zona);
   }
   .nombre {
     font-family: var(--f-rotulo);
@@ -96,12 +202,27 @@ const rotuloIncluye = b.t('inicio.entradas.incluye');
     font-size: 1.7rem;
     letter-spacing: 0.03em;
     line-height: 1;
+    color: var(--zona);
+  }
+  .donde {
+    color: var(--texto-2);
+    font-size: 0.95rem;
+  }
+  .precios {
+    margin-block: 0.25rem 1rem;
+  }
+  .rotulo-precio {
+    color: var(--texto-3);
+    font-size: 0.95rem;
   }
   .precio {
     font-family: var(--f-display);
     font-size: 3.4rem;
     line-height: 1;
-    margin-block: 0.25rem 1.25rem;
+  }
+  .normal {
+    color: var(--texto-3);
+    font-size: 0.95rem;
   }
   .validez {
     color: var(--texto-2);
@@ -113,11 +234,12 @@ const rotuloIncluye = b.t('inicio.entradas.incluye');
     color: var(--texto-2);
     font-size: 0.95rem;
   }
-  .incluye .rotulo {
+  .rotulo-incluye {
     font-size: 0.95rem;
     color: var(--texto-3);
   }
-  .boton {
+  .tarjeta .boton {
+    --acento-boton: var(--zona);
     margin-top: auto;
     align-self: stretch;
     font-size: 1.1rem;
@@ -128,6 +250,48 @@ const rotuloIncluye = b.t('inicio.entradas.incluye');
     margin-top: 1.5rem;
     color: var(--texto-3);
     font-size: 0.95rem;
+  }
+  .pasos {
+    margin-top: clamp(3rem, 7vw, 4rem);
+  }
+  .subtitulo {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--magenta);
+    margin-bottom: 1.25rem;
+  }
+  .pasos ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .pasos li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .n {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: var(--magenta);
+    color: var(--fondo);
+    font-family: var(--f-display);
+    font-size: 1.2rem;
+  }
+  .pasos p {
+    padding-top: 0.35rem;
+  }
+  .detalle {
+    color: var(--texto-2);
+  }
+  .principal {
+    margin-top: 2.5rem;
   }
   .aviso {
     display: flex;
@@ -144,14 +308,41 @@ const rotuloIncluye = b.t('inicio.entradas.incluye');
     flex: none;
     color: var(--cian);
   }
+  .pedidos {
+    margin-top: 1.5rem;
+  }
+  .pedidos a {
+    color: var(--cian);
+    text-underline-offset: 3px;
+  }
   @media (min-width: 640px) {
     .tarjetas {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
+  @media (min-width: 800px) {
+    .pasos ol {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+    .pasos li {
+      flex-direction: column;
+    }
+    .pasos p {
+      padding-top: 0;
+    }
+  }
   @media (min-width: 1100px) {
     .tarjetas {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .cuerpo.con-mapa {
+      grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
+      align-items: start;
+      gap: 3rem;
+    }
+    .con-mapa .tarjetas {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 </style>

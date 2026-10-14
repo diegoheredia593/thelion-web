@@ -5,14 +5,17 @@
     "estado": "visible",
     "orden": 0,
     "datos": {
-      "nombre": "The Lion Experience VIP",
+      "nombre": "The Lion VIP Experience",
+      "zona": "lion",
+      "ubicacion": "Frente al Escenario 360",
+      "lugares": "12 numerados (1–12)",
       "precio": 40,
+      "precioNormal": null,
       "incluye": [
-        "[PENDIENTE: beneficios]"
+        "3 bebidas"
       ],
       "validez": "[PENDIENTE: tarde, noche o ambas]",
-      "enlace": "https://www.ticketshow.com.ec/evento/THE-LION-HALLOWEEN-PARTY-GUAYAQUIL-2026?utm_source=web&utm_medium=landing&utm_campaign=lion2026&utm_content=lion-experience-vip",
-      "textoBoton": "Comprar Lion Experience VIP",
+      "textoBoton": "Elegir The Lion VIP",
       "destacada": false
     }
   },
@@ -23,13 +26,16 @@
     "orden": 1,
     "datos": {
       "nombre": "Miami Style VIP",
+      "zona": "miami",
+      "ubicacion": "Segundo anillo",
+      "lugares": "18 numerados (1–18)",
       "precio": 30,
+      "precioNormal": null,
       "incluye": [
-        "[PENDIENTE: beneficios]"
+        "3 bebidas"
       ],
       "validez": "[PENDIENTE: tarde, noche o ambas]",
-      "enlace": "https://www.ticketshow.com.ec/evento/THE-LION-HALLOWEEN-PARTY-GUAYAQUIL-2026?utm_source=web&utm_medium=landing&utm_campaign=lion2026&utm_content=miami-style-vip",
-      "textoBoton": "Comprar Miami Style VIP",
+      "textoBoton": "Elegir Miami Style VIP",
       "destacada": false
     }
   },
@@ -40,13 +46,16 @@
     "orden": 2,
     "datos": {
       "nombre": "Santa Ana VIP",
+      "zona": "santaana",
+      "ubicacion": "Anillo exterior",
+      "lugares": "30 numerados (1–30)",
       "precio": 20,
+      "precioNormal": null,
       "incluye": [
-        "[PENDIENTE: beneficios]"
+        "3 bebidas"
       ],
       "validez": "[PENDIENTE: tarde, noche o ambas]",
-      "enlace": "https://www.ticketshow.com.ec/evento/THE-LION-HALLOWEEN-PARTY-GUAYAQUIL-2026?utm_source=web&utm_medium=landing&utm_campaign=lion2026&utm_content=santa-ana-vip",
-      "textoBoton": "Comprar Santa Ana VIP",
+      "textoBoton": "Elegir Santa Ana VIP",
       "destacada": false
     }
   },
@@ -57,13 +66,16 @@
     "orden": 3,
     "datos": {
       "nombre": "Preferencia",
+      "zona": "preferencia",
+      "ubicacion": "Zonas laterales y del fondo",
+      "lugares": "General, sin numerar",
       "precio": 10,
+      "precioNormal": null,
       "incluye": [
-        "[PENDIENTE: beneficios]"
+        "Entrada general"
       ],
       "validez": "[PENDIENTE: tarde, noche o ambas]",
-      "enlace": "https://www.ticketshow.com.ec/evento/THE-LION-HALLOWEEN-PARTY-GUAYAQUIL-2026?utm_source=web&utm_medium=landing&utm_campaign=lion2026&utm_content=preferencia",
-      "textoBoton": "Comprar Preferencia",
+      "textoBoton": "Elegir Preferencia",
       "destacada": false
     }
   }

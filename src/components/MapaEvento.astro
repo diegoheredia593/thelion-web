@@ -1,0 +1,219 @@
+---
+/**
+ * Mapa del evento por zonas (SVG), según el mapa oficial (`docs/referencias/mapa-localidades.jpg`):
+ * Escenario 360 al centro; The Lion VIP (dorado, 12 lugares) pegada al escenario; Miami Style VIP
+ * (magenta, 18) alrededor; Santa Ana VIP (naranja, 30) en el anillo exterior; Preferencia (cian) a
+ * los lados y al fondo. Los lugares se numeran como en el mapa: bajan por la izquierda, cruzan por
+ * abajo y suben por la derecha.
+ *
+ * Cada zona con localidad visible enlaza a su tarjeta (`#localidad-<zona>`). Los nombres salen de la
+ * colección, en la leyenda. Cuando el portal dé la disponibilidad, cada lugar ya tiene su
+ * `data-lugar` para apagar los vendidos.
+ */
+export type Zona = 'lion' | 'miami' | 'santaana' | 'preferencia';
+
+interface Props {
+  titulo: string | null;
+  escenario: string | null;
+  zonas: { zona: Zona; nombre: string }[];
+}
+const { titulo, escenario, zonas } = Astro.props;
+const nombre = (z: Zona) => zonas.find((x) => x.zona === z)?.nombre ?? null;
+
+type Lugar = { n: number; x: number; y: number };
+/** Lugares de una «U»: `izq` bajando, `abajo` de izquierda a derecha, `der` subiendo. */
+function u(izq: { x: number; ys: number[] }, abajo: { y: number; xs: number[] }, der: { x: number }): Lugar[] {
+  const a = izq.ys.map((y, i) => ({ n: i + 1, x: izq.x, y }));
+  const b = abajo.xs.map((x, i) => ({ n: a.length + i + 1, x, y: abajo.y }));
+  const c = [...izq.ys].reverse().map((y, i) => ({ n: a.length + b.length + i + 1, x: der.x, y }));
+  return [...a, ...b, ...c];
+}
+const paso = (desde: number, hasta: number, n: number) => Array.from({ length: n }, (_, i) => Math.round(desde + ((hasta - desde) * i) / (n - 1)));
+
+const zonasU: { zona: Exclude<Zona, 'preferencia'>; caja: [number, number, number, number]; r: number; lugares: Lugar[] }[] = [
+  { zona: 'santaana', caja: [48, 2, 304, 352], r: 11, lugares: u({ x: 66, ys: paso(22, 292, 10) }, { y: 334, xs: paso(66, 334, 10) }, { x: 334 }) },
+  { zona: 'miami', caja: [88, 12, 224, 306], r: 10, lugares: u({ x: 106, ys: paso(34, 234, 6) }, { y: 296, xs: paso(128, 272, 6) }, { x: 294 }) },
+  { zona: 'lion', caja: [126, 24, 148, 250], r: 10, lugares: u({ x: 144, ys: paso(112, 214, 4) }, { y: 252, xs: paso(160, 240, 4) }, { x: 256 }) },
+];
+const preferencia: [number, number, number, number][] = [
+  [0, 2, 38, 398],
+  [362, 2, 38, 398],
+  [48, 364, 148, 36],
+  [204, 364, 148, 36],
+];
+// «Escenario 360°» en dos líneas: la última palabra abajo.
+const partes = (escenario ?? '').trim().split(/\s+/);
+const lineasEscenario = partes.length > 1 ? [partes.slice(0, -1).join(' '), partes.at(-1)!] : partes.filter(Boolean);
+
+// Una zona con localidad visible es un enlace a su tarjeta; sin ella, se ve apagada.
+const etiqueta = (z: Zona) => (nombre(z) ? 'a' : 'g');
+const envoltura = (z: Zona) => {
+  const n = nombre(z);
+  return n ? { href: `#localidad-${z}`, 'aria-label': n, class: `zona zona-${z}` } : { class: `zona zona-${z} sin-venta` };
+};
+const Preferencia = etiqueta('preferencia');
+---
+
+<figure class="mapa">
+  <svg viewBox="0 0 400 402" role="group" aria-labelledby="mapa-titulo" xmlns="http://www.w3.org/2000/svg">
+    {titulo && <title id="mapa-titulo">{titulo}</title>}
+    <defs>
+      <pattern id="mapa-sillas" width="9" height="9" patternUnits="userSpaceOnUse">
+        <rect x="1.5" y="1.5" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1" />
+      </pattern>
+      <radialGradient id="mapa-luz" cx="50%" cy="35%" r="65%">
+        <stop offset="0" stop-color="#2ee6ff" stop-opacity="0.45" />
+        <stop offset="1" stop-color="#2ee6ff" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+
+    <Preferencia {...envoltura('preferencia')}>
+      {
+        preferencia.map(([x, y, w, h]) => (
+          <>
+            <rect class="caja" x={x} y={y} width={w} height={h} rx="6" />
+            <rect class="sillas" x={x + 3} y={y + 3} width={w - 6} height={h - 6} fill="url(#mapa-sillas)" />
+          </>
+        ))
+      }
+    </Preferencia>
+
+    {
+      zonasU.map(({ zona, caja: [x, y, w, h], r, lugares }) => {
+        const Envoltura = etiqueta(zona);
+        return (
+          <Envoltura {...envoltura(zona)}>
+            <rect class="caja" x={x} y={y} width={w} height={h} rx="10" />
+            {lugares.map((l) => (
+              <g class="lugar" data-lugar={l.n}>
+                <circle cx={l.x} cy={l.y} r={r} />
+                <text x={l.x} y={l.y} dy="0.36em">{l.n}</text>
+              </g>
+            ))}
+          </Envoltura>
+        );
+      })
+    }
+
+    <g class="escenario" aria-hidden="true">
+      <circle cx="200" cy="74" r="58" fill="url(#mapa-luz)" />
+      <circle cx="200" cy="80" r="38" class="aro" />
+      <text x="200" y="80" text-anchor="middle">
+        {lineasEscenario.map((t, i) => (
+          <tspan x="200" dy={i === 0 ? (lineasEscenario.length > 1 ? '-0.25em' : '0.36em') : '1.1em'}>{t}</tspan>
+        ))}
+      </text>
+    </g>
+  </svg>
+
+  {
+    zonas.length > 0 && (
+      <figcaption>
+        <ul class="leyenda" role="list">
+          {zonas.map((z) => (
+            <li class={`zona-${z.zona}`}>
+              <a href={`#localidad-${z.zona}`}>{z.nombre}</a>
+            </li>
+          ))}
+        </ul>
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .mapa {
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .zona-lion {
+    --zona: var(--dorado);
+  }
+  .zona-miami {
+    --zona: var(--magenta);
+  }
+  .zona-santaana {
+    --zona: var(--naranja);
+  }
+  .zona-preferencia {
+    --zona: var(--cian);
+  }
+  .caja {
+    fill: color-mix(in srgb, var(--zona) 7%, transparent);
+    stroke: var(--zona);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 4px color-mix(in srgb, var(--zona) 70%, transparent));
+  }
+  .sillas {
+    color: color-mix(in srgb, var(--zona) 75%, transparent);
+  }
+  .lugar circle {
+    fill: var(--fondo);
+    stroke: var(--zona);
+    stroke-width: 1.6;
+  }
+  .lugar text {
+    fill: var(--texto);
+    font-family: var(--f-rotulo);
+    font-size: 11px;
+    text-anchor: middle;
+  }
+  a.zona {
+    cursor: pointer;
+    outline: none;
+  }
+  a.zona:hover .caja,
+  a.zona:focus-visible .caja {
+    fill: color-mix(in srgb, var(--zona) 20%, transparent);
+    stroke-width: 3;
+  }
+  .sin-venta {
+    opacity: 0.35;
+  }
+  .escenario .aro {
+    fill: #0b0a12;
+    stroke: var(--cian);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 6px var(--cian));
+  }
+  .escenario text {
+    fill: var(--texto);
+    font-family: var(--f-rotulo);
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .leyenda {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+  }
+  .leyenda li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .leyenda li::before {
+    content: '';
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 3px;
+    border: 2px solid var(--zona);
+    box-shadow: 0 0 6px var(--zona);
+  }
+  .leyenda a {
+    color: var(--texto-2);
+    font-size: 0.95rem;
+    text-underline-offset: 3px;
+  }
+</style>

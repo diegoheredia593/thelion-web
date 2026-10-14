@@ -1,9 +1,11 @@
 ---
 /**
  * JSON-LD `Event` de schema.org armado desde bloques y colecciones: nombre, fechas, lugar con
- * dirección, un `offers` por localidad visible (precio en USD y enlace) e imagen.
+ * dirección, un `offers` por localidad visible (precio de preventa en USD, válido hasta el fin de la
+ * preventa, y enlace de compra) e imagen.
  */
 import { urlFoto } from '../lib/fotos';
+import { enlaceEntradas } from '../lib/enlaces';
 import type { Bloques, Colecciones } from '../lib/content';
 
 interface Props {
@@ -13,6 +15,13 @@ interface Props {
 const { b, localidades } = Astro.props;
 const direccion = b.t('inicio.ubicacion.direccion') ?? '';
 const partes = direccion.split(',').map((p) => p.trim());
+const finPreventa = b.t('global.entradas.finPreventa');
+// Con checkout, el de cada zona; sin él, la sección Entradas (un enlace de WhatsApp no es una oferta).
+const compra = (zona: string | null) => {
+  const url = new URL(enlaceEntradas(b), Astro.url.origin);
+  if (url.hash !== '#entradas' && zona) url.searchParams.set('zona', zona);
+  return url.href;
+};
 const imagen = b.foto('inicio.portada.imagen') ?? b.foto('global.seo.imagen');
 const datos = {
   '@context': 'https://schema.org',
@@ -40,7 +49,8 @@ const datos = {
     name: l.nombre,
     price: l.precio,
     priceCurrency: 'USD',
-    url: l.enlace,
+    validThrough: finPreventa ?? undefined,
+    url: compra(l.zona ?? null),
     availability: 'https://schema.org/InStock',
   })),
   organizer: { '@type': 'Organization', name: b.t('global.marca.nombre'), url: b.t('global.redes.instagramEnlace') ?? undefined },

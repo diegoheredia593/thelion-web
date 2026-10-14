@@ -2,6 +2,7 @@
 /** §4 De día: Halloween en familia. Destacados con ícono, programa de la tarde y nota. */
 import Icono from '../Icono.astro';
 import { real } from '../../lib/pendiente';
+import { enlaceEntradas } from '../../lib/enlaces';
 import type { Bloques, Colecciones } from '../../lib/content';
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
   programa: Colecciones['programaDia'][];
 }
 const { b, destacados, programa } = Astro.props;
-const enlace = b.t('global.entradas.enlace');
+const enlace = enlaceEntradas(b);
 ---
 
 <section class="seccion dia" id="dia" aria-labelledby="titulo-dia">

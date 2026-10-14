@@ -11,7 +11,178 @@
           "type": "paragraph",
           "content": [
             {
-              "text": "Solo en Ticketshow, desde los botones de este sitio. Hay cuatro localidades, de $10 a $40."
+              "text": "Solo en este sitio, con el botón «Comprar entradas». Hay cuatro localidades, de $10 a $40 en preventa hasta el 28 de octubre."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-verificacion",
+    "slug": null,
+    "estado": "hidden",
+    "orden": 1,
+    "datos": {
+      "pregunta": "¿Cuánto tarda la verificación de mi pago?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "[PENDIENTE: tiempo de verificación] Cuando verificamos, te llegan tus QR por correo."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-correo",
+    "slug": null,
+    "estado": "hidden",
+    "orden": 2,
+    "datos": {
+      "pregunta": "No me llegó el correo, ¿qué hago?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "Revisa spam o promociones. Si no está, entra a «¿Ya compraste?» con tu código para reenviarlos, o escríbenos por WhatsApp."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-qr",
+    "slug": null,
+    "estado": "visible",
+    "orden": 3,
+    "datos": {
+      "pregunta": "¿Cada persona necesita su propio QR?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "Sí. Recibes un QR por cada entrada que compres, y cada uno se usa una sola vez."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-imprimir",
+    "slug": null,
+    "estado": "visible",
+    "orden": 4,
+    "datos": {
+      "pregunta": "¿Tengo que imprimir mi entrada?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "No. Basta con mostrar el QR en tu celular."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-bebidas",
+    "slug": null,
+    "estado": "hidden",
+    "orden": 5,
+    "datos": {
+      "pregunta": "¿Qué incluyen las bebidas de las localidades VIP?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "[PENDIENTE: qué bebidas y dónde se canjean] 3 bebidas por persona."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-transferir",
+    "slug": null,
+    "estado": "hidden",
+    "orden": 6,
+    "datos": {
+      "pregunta": "¿Puedo pasarle mi entrada a otra persona?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "[PENDIENTE: si se puede transferir una entrada]"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-reembolsos",
+    "slug": null,
+    "estado": "hidden",
+    "orden": 7,
+    "datos": {
+      "pregunta": "¿Hay reembolsos?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "[PENDIENTE: política de reembolsos] Revisa los Términos de compra."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-puerta",
+    "slug": null,
+    "estado": "hidden",
+    "orden": 8,
+    "datos": {
+      "pregunta": "¿Puedo comprar en la puerta?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "[PENDIENTE: si hay venta en la puerta y a qué precio]"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "idOrigen": "pregunta-preventa",
+    "slug": null,
+    "estado": "visible",
+    "orden": 9,
+    "datos": {
+      "pregunta": "¿Qué pasa después del 28 de octubre?",
+      "respuesta": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "Termina la preventa y las entradas regresan a su valor normal."
             }
           ]
         }
@@ -22,7 +193,7 @@
     "idOrigen": "pregunta-tarde-y-noche",
     "slug": null,
     "estado": "hidden",
-    "orden": 1,
+    "orden": 10,
     "datos": {
       "pregunta": "¿Mi entrada vale para la tarde y la noche?",
       "respuesta": [
@@ -41,7 +212,7 @@
     "idOrigen": "pregunta-menores",
     "slug": null,
     "estado": "hidden",
-    "orden": 2,
+    "orden": 11,
     "datos": {
       "pregunta": "¿Pueden entrar menores a la fiesta de noche?",
       "respuesta": [
@@ -60,7 +231,7 @@
     "idOrigen": "pregunta-disfraz",
     "slug": null,
     "estado": "visible",
-    "orden": 3,
+    "orden": 12,
     "datos": {
       "pregunta": "¿Es obligatorio ir disfrazado?",
       "respuesta": [
@@ -79,7 +250,7 @@
     "idOrigen": "pregunta-concursos",
     "slug": null,
     "estado": "visible",
-    "orden": 4,
+    "orden": 13,
     "datos": {
       "pregunta": "¿Cómo participo en los concursos?",
       "respuesta": [
@@ -98,7 +269,7 @@
     "idOrigen": "pregunta-comida",
     "slug": null,
     "estado": "visible",
-    "orden": 5,
+    "orden": 14,
     "datos": {
       "pregunta": "¿Hay comida y bebida?",
       "respuesta": [
@@ -117,7 +288,7 @@
     "idOrigen": "pregunta-parqueo",
     "slug": null,
     "estado": "hidden",
-    "orden": 6,
+    "orden": 15,
     "datos": {
       "pregunta": "¿Hay parqueo?",
       "respuesta": [
@@ -136,7 +307,7 @@
     "idOrigen": "pregunta-reingreso",
     "slug": null,
     "estado": "hidden",
-    "orden": 7,
+    "orden": 16,
     "datos": {
       "pregunta": "¿Puedo salir y volver a entrar?",
       "respuesta": [
@@ -155,7 +326,7 @@
     "idOrigen": "pregunta-prohibidos",
     "slug": null,
     "estado": "hidden",
-    "orden": 8,
+    "orden": 17,
     "datos": {
       "pregunta": "¿Qué no puedo llevar?",
       "respuesta": [
@@ -174,7 +345,7 @@
     "idOrigen": "pregunta-stand",
     "slug": null,
     "estado": "visible",
-    "orden": 9,
+    "orden": 18,
     "datos": {
       "pregunta": "¿Cómo reservo un stand?",
       "respuesta": [

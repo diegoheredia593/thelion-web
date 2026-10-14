@@ -75,5 +75,60 @@
       "detalle": null,
       "grupo": "stand"
     }
+  },
+  {
+    "idOrigen": "paso-compra-1",
+    "slug": null,
+    "estado": "visible",
+    "orden": 7,
+    "datos": {
+      "titulo": "Elige",
+      "detalle": "Tu zona y tus lugares en el mapa.",
+      "grupo": "compra"
+    }
+  },
+  {
+    "idOrigen": "paso-compra-2",
+    "slug": null,
+    "estado": "visible",
+    "orden": 8,
+    "datos": {
+      "titulo": "Deja tus datos",
+      "detalle": "Nombre, cédula, correo y WhatsApp.",
+      "grupo": "compra"
+    }
+  },
+  {
+    "idOrigen": "paso-compra-3",
+    "slug": null,
+    "estado": "visible",
+    "orden": 9,
+    "datos": {
+      "titulo": "Transfiere",
+      "detalle": "El monto exacto a la cuenta que te mostramos, con tu código de pedido en el concepto.",
+      "grupo": "compra"
+    }
+  },
+  {
+    "idOrigen": "paso-compra-4",
+    "slug": null,
+    "estado": "visible",
+    "orden": 10,
+    "datos": {
+      "titulo": "Sube tu comprobante",
+      "detalle": null,
+      "grupo": "compra"
+    }
+  },
+  {
+    "idOrigen": "paso-compra-5",
+    "slug": null,
+    "estado": "visible",
+    "orden": 11,
+    "datos": {
+      "titulo": "Recibe tus QR por correo",
+      "detalle": "Cuando verifiquemos tu pago: uno por cada entrada.",
+      "grupo": "compra"
+    }
   }
 ]

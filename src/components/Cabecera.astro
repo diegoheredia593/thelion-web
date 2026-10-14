@@ -21,7 +21,9 @@ const enlaces = [
   { href: '/#stands', texto: b.t('global.menu.stands') },
   { href: '/#sponsors', texto: b.t('global.menu.sponsors') },
   { href: '/#preguntas', texto: b.t('global.menu.preguntas') },
-].filter((e) => e.texto);
+  // «¿Ya compraste?»: la consulta de pedidos del portal, solo cuando existe.
+  { href: b.t('global.entradas.pedidos'), texto: b.t('global.menu.pedidos') },
+].filter((e): e is { href: string; texto: string } => !!e.href && !!e.texto);
 const entradas = b.t('global.menu.entradas');
 ---
 

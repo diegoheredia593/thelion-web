@@ -6,13 +6,14 @@
  */
 import Cuenta from '../Cuenta.astro';
 import avisos from '../../../plataforma/formularios/avisos.json';
+import { enlaceEntradas } from '../../lib/enlaces';
 import type { Bloques } from '../../lib/content';
 
 interface Props {
   b: Bloques;
 }
 const { b } = Astro.props;
-const enlace = b.t('global.entradas.enlace');
+const enlace = enlaceEntradas(b);
 const correo = avisos.fields[0]!;
 const rotuloCorreo = b.t('inicio.final.avisosCorreo');
 const botonCorreo = b.t('inicio.final.avisosBoton');

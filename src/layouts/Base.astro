@@ -62,7 +62,7 @@ const canonica = new URL(Astro.url.pathname, Astro.url.origin).href;
     <main id="contenido">
       <slot />
     </main>
-    <Pie b={b} legales={{ privacidad: !!b.rico('privacidad.contenido.texto'), terminos: !!b.rico('terminos.contenido.texto'), bases: !!b.rico('bases.contenido.texto') }} />
+    <Pie b={b} legales={{ privacidad: !!b.rico('privacidad.contenido.texto'), terminos: !!b.rico('terminos.contenido.texto'), compra: !!b.rico('compra.contenido.texto'), bases: !!b.rico('bases.contenido.texto') }} />
     <WhatsappFlotante b={b} />
   </body>
 </html>

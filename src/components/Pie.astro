@@ -8,7 +8,7 @@ import type { Bloques } from '../lib/content';
 interface Props {
   b: Bloques;
   /** Páginas legales con texto real (las demás no existen todavía). */
-  legales: { privacidad: boolean; terminos: boolean; bases: boolean };
+  legales: { privacidad: boolean; terminos: boolean; compra: boolean; bases: boolean };
 }
 const { b, legales } = Astro.props;
 const menu = [
@@ -17,15 +17,19 @@ const menu = [
   { href: '/#stands', texto: b.t('global.pie.stands') },
   { href: '/#sponsors', texto: b.t('global.pie.sponsors') },
   { href: '/#preguntas', texto: b.t('global.pie.preguntas') },
+  { href: b.t('global.entradas.pedidos'), texto: b.t('global.pie.pedidos') },
   { href: '/#participar', texto: b.t('global.pie.contacto') },
-].filter((e) => e.texto);
+].filter((e): e is { href: string; texto: string } => !!e.href && !!e.texto);
 const legal = [
   { href: '/privacidad', texto: b.t('global.pie.privacidad'), hay: legales.privacidad },
   { href: '/terminos', texto: b.t('global.pie.terminos'), hay: legales.terminos },
+  { href: '/terminos-de-compra', texto: b.t('global.pie.terminosCompra'), hay: legales.compra },
   { href: '/bases-concursos', texto: b.t('global.pie.bases'), hay: legales.bases },
 ].filter((e) => e.texto && e.hay);
-const instagram = b.t('global.redes.instagramEnlace');
-const usuario = b.t('global.redes.instagram');
+const instagrams = [
+  { enlace: b.t('global.redes.instagramEnlace'), usuario: b.t('global.redes.instagram') },
+  { enlace: b.t('global.redes.instagram2Enlace'), usuario: b.t('global.redes.instagram2') },
+].filter((i) => i.enlace && i.usuario);
 const numero = b.t('global.contacto.whatsapp');
 const whatsapp = enlaceWhatsapp(numero, b.t('global.whatsapp.general'));
 ---
@@ -41,12 +45,12 @@ const whatsapp = enlaceWhatsapp(numero, b.t('global.whatsapp.general'));
     </nav>
     <div class="redes">
       {
-        instagram && (
-          <a href={instagram} rel="noopener" target="_blank">
+        instagrams.map((i) => (
+          <a href={i.enlace} rel="noopener" target="_blank">
             <Icono nombre="instagram" tamano={22} />
-            <span><span class="sr-only">Instagram </span>{usuario}</span>
+            <span><span class="sr-only">Instagram </span>{i.usuario}</span>
           </a>
-        )
+        ))
       }
       {
         whatsapp && (

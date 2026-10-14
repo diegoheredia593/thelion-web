@@ -1,11 +1,13 @@
 ---
 /**
- * §1 Portada: etiqueta, H1, subtítulo, texto, botones, «Entradas desde…», contador corto y franja de
- * datos. La imagen de fondo es la del bloque `inicio.portada.imagen` (sin lazy: es el LCP); mientras
- * no exista, el fondo es de diseño (degradados y grano).
+ * §1 Portada: etiqueta, H1, edición, subtítulo, texto, botones, «Preventa desde…», contador corto
+ * (hasta el fin de la preventa y luego hasta el evento) y franja de datos. La imagen de fondo es la
+ * del bloque `inicio.portada.imagen` (sin lazy: es el LCP); mientras no exista, el fondo es de
+ * diseño (degradados y grano).
  */
 import Cuenta from '../Cuenta.astro';
 import { atributosFoto } from '../../lib/fotos';
+import { enlaceEntradas } from '../../lib/enlaces';
 import type { Bloques } from '../../lib/content';
 
 interface Props {
@@ -15,7 +17,7 @@ interface Props {
 }
 const { b, desde } = Astro.props;
 const imagen = b.foto('inicio.portada.imagen');
-const enlaceEntradas = b.t('global.entradas.enlace');
+const entradas = enlaceEntradas(b);
 const fraseDesde = b.plantilla('inicio.portada.desde', { precio: desde });
 const datos = [
   { clase: '', rotulo: b.t('inicio.datos.fechaEtiqueta'), valor: b.t('inicio.datos.fecha') },
@@ -33,10 +35,11 @@ const datos = [
     <div class="texto">
       {b.t('inicio.portada.etiqueta') && <p class="rotulo etiqueta">{b.t('inicio.portada.etiqueta')}</p>}
       <h1 id="titulo-portada">{b.t('inicio.portada.titulo')}</h1>
+      {b.t('global.marca.edicion') && <p class="edicion">{b.t('global.marca.edicion')}</p>}
       {b.t('inicio.portada.subtitulo') && <p class="subtitulo">{b.t('inicio.portada.subtitulo')}</p>}
       {b.t('inicio.portada.texto') && <p class="lead">{b.t('inicio.portada.texto')}</p>}
       <div class="botones">
-        {enlaceEntradas && b.t('inicio.portada.botonEntradas') && <a class="boton noche" href={enlaceEntradas}>{b.t('inicio.portada.botonEntradas')}</a>}
+        {b.t('inicio.portada.botonEntradas') && <a class="boton noche" href={entradas}>{b.t('inicio.portada.botonEntradas')}</a>}
         {b.t('inicio.portada.botonStand') && <a class="boton boton--contorno dia" href="#stands">{b.t('inicio.portada.botonStand')}</a>}
       </div>
       {fraseDesde && <p class="desde">{fraseDesde}</p>}
@@ -49,6 +52,8 @@ const datos = [
       fin={b.t('global.evento.fin')}
       fecha={b.t('inicio.datos.fecha')}
       titulo={b.t('inicio.portada.faltan')}
+      preventa={b.t('global.entradas.finPreventa')}
+      tituloPreventa={b.t('inicio.portada.faltanPreventa')}
       unidades={[b.t('inicio.portada.dias'), b.t('inicio.portada.horas'), b.t('inicio.portada.min'), b.t('inicio.portada.seg')]}
       durante={b.t('inicio.final.durante')}
       despues={b.t('inicio.final.despues')}
@@ -145,6 +150,15 @@ const datos = [
     text-transform: uppercase;
     text-wrap: balance;
     text-shadow: 0 0 2.2rem rgb(255 107 18 / 0.4);
+  }
+  .edicion {
+    margin-top: -0.5rem;
+    font-family: var(--f-rotulo);
+    font-size: clamp(1.3rem, 4vw, 1.7rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cian);
+    text-shadow: var(--brillo-cian);
   }
   .subtitulo {
     font-family: var(--f-rotulo);
