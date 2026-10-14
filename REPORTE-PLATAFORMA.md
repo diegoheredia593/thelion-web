@@ -2,9 +2,11 @@
 
 Estado: **en producción** en `https://thelion-web.herediadiego963.workers.dev` (Fases 0–4). Falta el
 dominio final, la prueba de edición desde el portal y los pendientes del organizador (sección 1).
+**Preventa y venta en el sitio (2026-10-14):** en la rama `claude/new-session-i8x2iw`, sin
+fusionar a `main`; pasos para publicarla en la sección 7.
 
 - Cliente: `thelionhalloween` · Worker: `thelion-web` · Repo: `diegoheredia593/thelion-web`
-- Modelo: `plataforma/` (176 bloques, 16 colecciones, 90 elementos, 2 formularios, 4 páginas).
+- Modelo: `plataforma/` (199 bloques, 16 colecciones, 104 elementos, 2 formularios, 5 páginas).
 - `npm test` = `verificar-modelo` + `astro check`: en verde.
 
 ## 1. Lista de pendientes para el organizador
@@ -68,10 +70,9 @@ Pendientes que no están en esa lista:
 - **Crédito del sitio**: «Sitio por [agencia]» («Pie: crédito del sitio»).
 - **Textos del correo para avisos** (rótulo del campo y del botón), que solo aparece después del
   evento, desde el 1 de noviembre.
-- **Ticketshow con UTM:** no pude comprobar desde mi entorno (la red bloquea Ticketshow) que el
-  evento abre bien con `?utm_source=web&utm_medium=landing&utm_campaign=lion2026&utm_content=…`.
-  Hay que probarlo en un navegador. Si falla, se cambian los enlaces en Entradas y en «Enlace
-  general de compra en Ticketshow».
+- **Venta (nuevo, ver sección 7):** número de WhatsApp (sin él no hay botón de compra), enlace del
+  checkout y de la consulta de pedidos del portal, precios normales, cupo de Preferencia, minutos de
+  reserva, tiempo de verificación, bebidas VIP y la política para los Términos de compra.
 - **Mapa:** la URL del mapa incrustado y los enlaces de Google Maps y Waze buscan la dirección
   del copy. Conviene cambiarlos por los enlaces exactos del lugar.
 
@@ -90,12 +91,12 @@ Pendientes que no están en esa lista:
 | §10 Beneficios | Una frase separada por comas | Un beneficio por línea, con mayúscula inicial | Formato de lista. |
 | Varios | Etiquetas en negrita (Programa de la tarde, Line-up, Cómo participar, Cómo reservar, Por qué patrocinar, Paquetes, Patrocina una atracción, Ya confían en nosotros, Cuándo, Premios, Espacio, Incluye) | Publicadas como subtítulos y rótulos | Aprobado en la Fase 0 (pregunta 1). |
 | §13 | «(ficha del lugar)» con enlace a Vamos Eventos | No se publica | Se leyó como fuente para el equipo. |
-| §1 | «Entradas desde $10 en Ticketshow.» | Igual, pero el precio sale solo de la localidad visible más barata | Pedido del prompt. |
+| §1 | «Preventa desde $10, solo hasta el 28 de octubre.» | Igual, pero el precio sale solo de la localidad visible más barata | Pedido del prompt. |
 
 Enlaces que el copy no define y elegí:
 
 - «Comprar entradas» del menú baja a la sección Entradas, para elegir localidad. Los demás «Comprar
-  entradas» van directo a Ticketshow.
+  entradas» van al checkout del portal o, mientras no exista, a la sección Entradas.
 - «Ver mapa» y «Cómo llegar» bajan a Ubicación.
 - «Ver fotos del evento» baja a la galería.
 - «Contacto» del pie lleva al formulario.
@@ -106,7 +107,7 @@ Enlaces que el copy no define y elegí:
 
 | Sección | Bloques | Colecciones |
 | --- | --- | --- |
-| Menú, pie, WhatsApp, SEO común | `global.marca.*`, `global.menu.*`, `global.entradas.enlace`, `global.pie.*`, `global.redes.*`, `global.contacto.whatsapp`, `global.whatsapp.*`, `global.evento.*` (system), `global.seo.imagen` | — |
+| Menú, pie, WhatsApp, SEO común | `global.marca.*`, `global.menu.*`, `global.entradas.*` (checkout, pedidos y fin de la preventa, este último system), `global.pie.*`, `global.redes.*`, `global.contacto.whatsapp`, `global.whatsapp.*`, `global.evento.*` (system), `global.seo.imagen` | — |
 | SEO | `inicio.seo.*` | `localidades` (JSON-LD `Event` con un `offers` por localidad) |
 | 1 Portada + franja | `inicio.portada.*`, `inicio.datos.*` | `localidades` (precio «desde») |
 | 2 Dos experiencias | `inicio.experiencias.*` | — |
@@ -115,7 +116,7 @@ Enlaces que el copy no define y elegí:
 | 5 De noche | `inicio.noche.*` | `destacados` (Noche), `artistas` |
 | 6 Atracciones | `inicio.atracciones.*` | `atracciones` |
 | 7 Concursos | `inicio.concursos.*` | `concursos`, `pasos` (Concurso) |
-| 8 Entradas | `inicio.entradas.*` | `localidades` |
+| 8 Entradas | `inicio.entradas.*` | `localidades`, `pasos` (Entradas) |
 | 9 Stands | `inicio.stands.*` | `paquetesStand`, `pasos` (Stand) |
 | 10 Sponsors | `inicio.sponsors.*` | `razonesSponsor`, `paquetesSponsor`, `experienciasPatrocinables`, `marcasAliadas` |
 | 11 Galería | `inicio.galeria.*` | `fotosGaleria` |
@@ -124,7 +125,8 @@ Enlaces que el copy no define y elegí:
 | 14 Preguntas | `inicio.preguntas.titulo` | `preguntas` |
 | 15 Cuenta final | `inicio.final.*` | formulario `avisos` |
 
-**Privacidad (`/privacidad`), Términos (`/terminos`) y Bases (`/bases-concursos`):** cada una usa
+**Privacidad (`/privacidad`), Términos (`/terminos`), Términos de compra (`/terminos-de-compra`,
+página `compra`) y Bases (`/bases-concursos`):** cada una usa
 `<pagina>.contenido.titulo`, `<pagina>.contenido.texto` (texto enriquecido) y `<pagina>.seo.*`.
 
 **Cambios de modelo frente a la Fase 0** (antes de importar, sin costo):
@@ -205,3 +207,99 @@ npx wrangler rollback <version-id> --name thelion-web --yes
 
 Un rollback no toca el contenido: el contenido vive en la plataforma. Un push a `main` vuelve a
 desplegar la última versión del código.
+
+## 7. Preventa y venta en el sitio (2026-10-14)
+
+Copy nuevo (`docs/COPY-THE-LION-HALLOWEEN-PARTY.md`) y referencias en `docs/referencias/`. Commits
+`1a80863` (copy) y `ce1784a` (sitio y modelo) en `claude/new-session-i8x2iw`. **Sin fusionar a
+`main`**: un push a `main` despliega.
+
+### Cómo funciona la compra ahora
+
+El módulo de boletería del portal todavía no existe (revisado en `agencia-plataforma` el
+2026-10-14: `/v1` no expone localidades, cupos ni checkout). Mientras tanto:
+
+- Precios, zonas y textos salen de la colección **Entradas** (`localidades`), como antes.
+- Cada tarjeta abre **WhatsApp** con «Hola, quiero comprar entradas {localidad}…»
+  (`global.whatsapp.entradas`). **Sin número de WhatsApp no aparece ningún botón de compra.**
+- Los «Comprar entradas» generales (portada, menú, secciones) bajan a Entradas.
+- Al poner el enlace del checkout (`global.entradas.checkout`), sin tocar código: cada botón abre
+  `checkout?zona=<zona>&origen=sitio`, los generales van al checkout y aparecen «Cómo comprar tu
+  entrada» (5 pasos), el botón «Comprar entradas», la reserva y el aviso de venta oficial. Los
+  nombres de los parámetros se ajustan en `lib/enlaces.ts` cuando el módulo los defina.
+- «¿Ya compraste?» (menú, Entradas, pie) aparece al poner `global.entradas.pedidos`.
+- **Falta para conectar el módulo:** disponibilidad en vivo («Quedan {n}», «Últimos lugares»,
+  «Agotado» y botón desactivado), lugares vendidos apagados en el mapa (cada lugar ya tiene
+  `data-lugar`), precios leídos del portal con respaldo de los últimos datos guardados, y las
+  `offers` del JSON-LD desde el portal. Nada de eso se simuló.
+
+### Qué cambió en el sitio
+
+| Sección | Cambio |
+| --- | --- |
+| Portada | «Edición Miami Style» bajo el título; «Preventa desde $10, solo hasta el 28 de octubre.»; el contador corto dice «La preventa termina en…» y cuenta hasta `2026-10-28T23:59:59-05:00` (`global.entradas.finPreventa`), después hasta el evento. Sin JavaScript se ve la fecha del evento, como antes. |
+| Entradas | Etiqueta «PREVENTA · SOLO HASTA EL 28 DE OCTUBRE», «Elige tu lugar», mapa SVG por zonas (`components/MapaEvento.astro`, colores dorado, magenta, naranja y cian; cada zona enlaza a su tarjeta) y tarjetas con ubicación, lugares, precio de preventa, precio normal tachado (cuando exista) y botón del color de la zona. El mapa aparece cuando las localidades tienen su «Zona del mapa». |
+| Preguntas | Nueva respuesta de «¿Dónde compro las entradas?» y 9 preguntas nuevas; 3 visibles (QR por persona, no imprimir, después del 28) y 6 ocultas hasta tener respuesta. «No me llegó el correo» va oculta: habla de «¿Ya compraste?», que aún no existe. |
+| Pie | @thelionus junto a @thelionhalloweenparty; «Términos de compra» (página `/terminos-de-compra`, 404 mientras su texto esté pendiente); «¿Ya compraste?». |
+| SEO | Meta descripción nueva; `offers` con `validThrough` de la preventa y enlace de compra (el checkout o, sin él, la sección Entradas). |
+
+Ningún otro cambio visible: medí alto y texto de cada sección antes y después (390 y 1440 px) y
+solo cambian portada, Entradas, Preguntas y el pie. La ticketera externa ya no aparece en el repo (solo en el
+historial de git). Se borró `scripts/generar-modelo.mjs`, el generador de un solo uso, que la citaba.
+
+### Pasos en la consola, en este orden
+
+Antes del push a `main` (nada de esto rompe el sitio publicado hoy):
+
+1. **Definición de Pasos** ← pegar `plataforma/colecciones/pasos.json`: agrega la opción
+   «Entradas» a «Sección». Va antes de importar, para que los 5 pasos nuevos entren bien.
+2. **Importar el paquete nuevo** (`npm run paquete` → `paquete/migracion-thelionhalloween.zip`).
+   Debe decir: **24 bloques nuevos**, **14 elementos nuevos** (9 preguntas y 5 pasos) y **1
+   colección distinta que se omite con aviso** (Entradas: paso 5). Los bloques que ya existen no
+   cambian de valor; solo se actualizan etiqueta, ayuda y orden.
+3. **Páginas y contenido:** pegar `plataforma/paginas.json` → Validar → Guardar. Agrega «Términos de
+   compra» (`/terminos-de-compra`).
+4. **Bloques que ya existen: cambiar el valor** (justo antes del push: el texto nuevo ya no nombra a
+   la ticketera y el sitio publicado todavía lleva allí):
+
+   | Bloque | Valor nuevo |
+   | --- | --- |
+   | `inicio.seo.descripcion` | Halloween en familia de 12:00 a 18:00 y fiesta Back to the Old School de 20:00 a 02:00 en Santa Ana Garden. $3.000 en premios. Preventa desde $10 hasta el 28 de octubre. |
+   | `inicio.portada.desde` | Preventa desde {precio}, solo hasta el 28 de octubre. |
+   | `inicio.entradas.titulo` | Elige tu lugar |
+   | `inicio.entradas.texto` | Los precios de preventa valen solo hasta el 28 de octubre; después regresan a su valor normal. Elige tu zona en el mapa y asegura tu lugar. |
+   | `inicio.entradas.microcopy` | [PENDIENTE: minutos de reserva] Tus lugares quedan reservados 30 minutos mientras completas el pago. |
+   | `inicio.entradas.aviso` | Las entradas se venden solo en este sitio. Tus QR llegan desde un correo @thelionproductions.com y cada uno se puede usar una sola vez. No compres a revendedores. |
+   | `global.contacto.whatsapp` | **El número, con código de país (593…). Sin él no hay botón de compra.** |
+
+   Y la respuesta de la pregunta «¿Dónde compro las entradas?» → «Solo en este sitio, con el botón
+   «Comprar entradas». Hay cuatro localidades, de $10 a $40 en preventa hasta el 28 de octubre.».
+   Luego ordenar las preguntas: las 9 nuevas llegan con orden 1–9 y chocan con las de antes; van
+   justo después de «¿Dónde compro las entradas?», como en la semilla.
+
+Después del push a `main` (el sitio nuevo ya no usa el enlace de la ticketera):
+
+5. **Definición de Entradas** ← pegar `plataforma/colecciones/localidades.json`: agrega «Zona del
+   mapa», «Ubicación», «Lugares» y «Precio normal»; quita «Enlace de compra»; el precio pasa a
+   llamarse «Precio de preventa». Luego, en cada localidad:
+
+   | Elemento | Nombre | Zona | Ubicación | Lugares | Qué incluye | Texto del botón |
+   | --- | --- | --- | --- | --- | --- | --- |
+   | The Lion Experience VIP | **The Lion VIP Experience** | The Lion VIP | Frente al Escenario 360 | 12 numerados (1–12) | 3 bebidas | Elegir The Lion VIP |
+   | Miami Style VIP | (igual) | Miami Style VIP | Segundo anillo | 18 numerados (1–18) | 3 bebidas | Elegir Miami Style VIP |
+   | Santa Ana VIP | (igual) | Santa Ana VIP | Anillo exterior | 30 numerados (1–30) | 3 bebidas | Elegir Santa Ana VIP |
+   | Preferencia | (igual) | Preferencia | Zonas laterales y del fondo | General, sin numerar | Entrada general | Elegir Preferencia |
+
+   «Precio normal» queda vacío hasta que se confirme; los precios ($40, $30, $20, $10) no cambian.
+   Hasta este paso el sitio nuevo muestra las tarjetas sin mapa.
+6. Borrar el bloque `global.entradas.enlace` (el enlace general de la ticketera).
+
+### Despliegue y cómo volver atrás
+
+- **No hace falta ningún secreto, variable ni binding nuevo.**
+- Pendiente de verificar en producción (no se hizo: no está fusionado): todas las URLs dan 200,
+  ningún enlace a la ticketera, cada botón abre WhatsApp con la localidad correcta. La prueba de
+  compra completa con datos «PRUEBA» espera al checkout del portal.
+- Volver atrás: `npx wrangler rollback ac86b3cc-147e-4895-aeb4-9e86e936cb07 --name thelion-web
+  --yes` (la versión actual, commit `d75a606`). Si ya se borró el campo «Enlace de compra» de
+  Entradas, los botones de esa versión quedan sin destino: hay que volver a agregarlo.
