@@ -4,12 +4,12 @@ Oct 5, 2026 · @Diego
 
 ## Resumen
 
-El sitio es una landing de una sola página que vende tres cosas: **entradas** (en Ticketshow), **stands** y **sponsors**. El eje del mensaje es que el evento son dos experiencias en un mismo día:
+El sitio es una landing de una sola página que vende tres cosas: **entradas** (en el checkout del portal, por transferencia), **stands** y **sponsors**. El eje del mensaje es que el evento son dos experiencias en un mismo día:
 
 - **De día, 12:00–18:00:** Halloween en familia, para niños, adolescentes y familias. Personajes en vivo, dulce o truco, concursos y $1.000 en premios.
 - **De noche, 20:00–02:00:** *Back to the Old School*, fiesta con 7 artistas en tributo al reggaetón clásico, 3 DJs y $2.000 en premios al mejor disfraz.
 
-**Datos fijos:** sábado 31 de octubre de 2026 · Santa Ana Garden, Guayaquil · entradas en [Ticketshow](https://www.ticketshow.com.ec/evento/THE-LION-HALLOWEEN-PARTY-GUAYAQUIL-2026) · 100 stands disponibles · Instagram [@thelionhalloweenparty](https://www.instagram.com/thelionhalloweenparty/).
+**Datos fijos:** sábado 31 de octubre de 2026 · Santa Ana Garden, Guayaquil · edición *Miami Style* · preventa hasta el 28 de octubre · entradas en el checkout del portal, por transferencia · 100 stands disponibles · Instagram [@thelionhalloweenparty](https://www.instagram.com/thelionhalloweenparty/) y [@thelionus](https://www.instagram.com/thelionus/).
 
 **Línea de marca propuesta:** *Este Halloween tiene rey.* (alternativas: *Este Halloween, ruge.* / *Más que una fiesta, una experiencia inolvidable.*, que ya usan en los flyers).
 
@@ -19,7 +19,7 @@ Todo lo que va entre corchetes, como **\[precio\]**, es un dato que falta confir
 
 La estructura sigue la de [Wine & Beer Fest](https://www.wineandbeerfest.com.ec/): portada con contador, franja de datos, concepto, beneficios en columnas, cifras, galería y un formulario donde cada persona elige su perfil (sponsor, expositor o asistente). Se añaden las piezas propias de este evento: día y noche, concursos y stands.
 
-**Menú fijo (arriba):** Logo · El evento · De día · De noche · Atracciones · Concursos · Stands · Sponsors · Preguntas · botón **Comprar entradas**. En celular: logo + botón de entradas visible siempre + menú hamburguesa. Botón flotante de WhatsApp en todas las secciones.
+**Menú fijo (arriba):** Logo · El evento · De día · De noche · Atracciones · Concursos · Stands · Sponsors · Preguntas · ¿Ya compraste? · botón **Comprar entradas**. En celular: logo + botón de entradas visible siempre + menú hamburguesa. Botón flotante de WhatsApp en todas las secciones.
 
 | # | Sección | Qué logra | Botón principal |
 | --- | --- | --- | --- |
@@ -30,7 +30,7 @@ La estructura sigue la de [Wine & Beer Fest](https://www.wineandbeerfest.com.ec/
 | 5 | De noche: Back to the Old School | Line-up y atracciones 20:00–02:00 | Comprar entradas |
 | 6 | Atracciones | Todo el contenido en tarjetas con su horario | Comprar entradas |
 | 7 | Concursos: $3.000 en premios | Atraer concursantes de disfraces y talentos | Inscribirme |
-| 8 | Entradas | Llevar a Ticketshow con el tipo de entrada elegido | Comprar en Ticketshow |
+| 8 | Entradas | Mapa de zonas, preventa y paso a paso de la compra | Comprar entradas |
 | 9 | Stands para emprendedores | Vender los 100 stands disponibles | Reservar mi stand |
 | 10 | Sponsors | Captar marcas | Quiero ser sponsor / Descargar media kit |
 | 11 | Galería / Instagram | Prueba social con el feed de @thelionhalloweenparty | Seguir en Instagram |
@@ -50,9 +50,9 @@ La estructura sigue la de [Wine & Beer Fest](https://www.wineandbeerfest.com.ec/
 
 **Texto:** De día, Halloween en familia. De noche, el regreso del reggaetón old school. Disfraces, shows en vivo, casa del terror, dinosaurios, zombies y $3.000 en premios en 12 horas de Halloween.
 
-**Botones:** «Comprar entradas» (principal, a Ticketshow) · «Reservar un stand» (secundario, baja a la sección Stands)
+**Botones:** «Comprar entradas» (principal, al checkout del portal) · «Reservar un stand» (secundario, baja a la sección Stands)
 
-**Bajo los botones:** Entradas desde $10 en Ticketshow.
+**Bajo los botones:** Preventa desde $10, solo hasta el 28 de octubre.
 
 **Contador corto:** Faltan — Días · Horas · Min · Seg
 
@@ -206,24 +206,38 @@ En el sitio van como tarjetas con ícono o foto, filtrables por **Todo · De dí
 
 ## 8. Entradas
 
-**Título (H2):** Elige tu experiencia
+**Etiqueta:** PREVENTA · SOLO HASTA EL 28 DE OCTUBRE
 
-**Texto:** Las entradas se venden solo en Ticketshow, el canal oficial. Elige tu localidad y asegura tu lugar.
+**Título (H2):** Elige tu lugar
 
-| Localidad | Precio | Incluye | Botón |
-| --- | --- | --- | --- |
-| The Lion Experience VIP | $40 | \[beneficios\] | «Comprar Lion Experience VIP» |
-| Miami Style VIP | $30 | \[beneficios\] | «Comprar Miami Style VIP» |
-| Santa Ana VIP | $20 | \[beneficios\] | «Comprar Santa Ana VIP» |
-| Preferencia | $10 | \[beneficios\] | «Comprar Preferencia» |
+**Texto:** Los precios de preventa valen solo hasta el 28 de octubre; después regresan a su valor normal. Elige tu zona en el mapa y asegura tu lugar.
 
-Por confirmar: qué incluye cada localidad y si vale para la tarde, la noche o ambas.
+**Mapa del evento:** plano por zonas basado en el mapa oficial: Escenario 360 al centro; The Lion VIP Experience pegada al escenario; Miami Style VIP alrededor; Santa Ana VIP en el anillo exterior; Preferencia a los lados y al fondo. Cada zona con su color (dorado, magenta, naranja y cian, como en el mapa) y los lugares disponibles en vivo desde el portal. Los lugares vendidos se ven apagados.
 
-Todos los botones llevan a [Ticketshow](https://www.ticketshow.com.ec/evento/THE-LION-HALLOWEEN-PARTY-GUAYAQUIL-2026). Para medir cuántas ventas salen del sitio, agregar al enlace: `?utm_source=web&utm_medium=landing&utm_campaign=lion2026` (y probar que Ticketshow lo acepta).
+| Localidad | Ubicación | Lugares | Incluye | Preventa (hasta el 28 oct) | Precio normal | Botón |
+| --- | --- | --- | --- | --- | --- | --- |
+| The Lion VIP Experience | Frente al Escenario 360 | 12 numerados (1–12) | 3 bebidas | $40 | \[precio normal\] | «Elegir The Lion VIP» |
+| Miami Style VIP | Segundo anillo | 18 numerados (1–18) | 3 bebidas | $30 | \[precio normal\] | «Elegir Miami Style VIP» |
+| Santa Ana VIP | Anillo exterior | 30 numerados (1–30) | 3 bebidas | $20 | \[precio normal\] | «Elegir Santa Ana VIP» |
+| Preferencia | Zonas laterales y del fondo | General, sin numerar · \[cupo\] | Entrada general | $10 | \[precio normal\] | «Elegir Preferencia» |
 
-**Microcopy bajo los botones:** Serás redirigido a Ticketshow para completar tu compra.
+**Disponibilidad en cada tarjeta (desde el portal):** Quedan {n} · Últimos lugares · Agotado
 
-**Aviso de seguridad:** Compra solo en Ticketshow. No nos hacemos responsables por entradas compradas a terceros.
+**Bloque «Cómo comprar tu entrada» (5 pasos):**
+
+1. **Elige** tu zona y tus lugares en el mapa.
+2. **Deja tus datos:** nombre, cédula, correo y WhatsApp.
+3. **Transfiere** el monto exacto a la cuenta que te mostramos y escribe tu código de pedido en el concepto.
+4. **Sube tu comprobante.**
+5. **Recibe tus QR por correo** cuando verifiquemos tu pago: uno por cada entrada.
+
+**Microcopy bajo el botón:** Tus lugares quedan reservados \[30\] minutos mientras completas el pago.
+
+**Aviso de venta oficial:** Las entradas se venden solo en este sitio. Tus QR llegan desde un correo @thelionproductions.com y cada uno se puede usar una sola vez. No compres a revendedores.
+
+**Botón principal:** «Comprar entradas» (abre el checkout del portal, \[enlace del checkout\], con la zona ya elegida si se llegó desde una tarjeta)
+
+**Enlace secundario:** «¿Ya compraste? Revisa tu pedido» (consulta por código o correo y reenvío de los QR)
 
 ## 9. Stands para emprendedores
 
@@ -316,7 +330,7 @@ Todos los botones llevan a [Ticketshow](https://www.ticketshow.com.ec/evento/THE
 
 **Título (H2):** Preguntas frecuentes
 
-- **¿Dónde compro las entradas?** Solo en Ticketshow, desde los botones de este sitio. Hay cuatro localidades, de $10 a $40.
+- **¿Dónde compro las entradas?** Solo en este sitio, con el botón «Comprar entradas». Hay cuatro localidades, de $10 a $40 en preventa hasta el 28 de octubre.
 - **¿Mi entrada vale para la tarde y la noche?** \[Confirmar.\]
 - **¿Pueden entrar menores a la fiesta de noche?** \[Confirmar edad mínima.\]
 - **¿Es obligatorio ir disfrazado?** No, pero es Halloween: con disfraz lo vives mejor y puedes concursar.
@@ -327,6 +341,16 @@ Todos los botones llevan a [Ticketshow](https://www.ticketshow.com.ec/evento/THE
 - **¿Qué no puedo llevar?** \[Confirmar objetos prohibidos.\]
 - **¿Cómo reservo un stand?** Elige tu paquete en la sección Stands y llena el formulario. La reserva se confirma con el pago.
 
+* **¿Cuánto tarda la verificación de mi pago?** \[Confirmar tiempo.\] Cuando verificamos, te llegan tus QR por correo.
+* **No me llegó el correo, ¿qué hago?** Revisa spam o promociones. Si no está, entra a «¿Ya compraste?» con tu código para reenviarlos, o escríbenos por WhatsApp.
+* **¿Cada persona necesita su propio QR?** Sí. Recibes un QR por cada entrada que compres, y cada uno se usa una sola vez.
+* **¿Tengo que imprimir mi entrada?** No. Basta con mostrar el QR en tu celular.
+* **¿Qué incluyen las bebidas de las localidades VIP?** 3 bebidas por persona. \[Confirmar cuáles y dónde se canjean.\]
+* **¿Puedo pasarle mi entrada a otra persona?** \[Confirmar.\]
+* **¿Hay reembolsos?** \[Confirmar política.\] Revisa los Términos de compra.
+* **¿Puedo comprar en la puerta?** \[Confirmar, y a qué precio.\]
+* **¿Qué pasa después del 28 de octubre?** Termina la preventa y las entradas regresan a su valor normal.
+
 ## 15. Cuenta regresiva final
 
 **Antes del evento**
@@ -336,6 +360,8 @@ Todos los botones llevan a [Ticketshow](https://www.ticketshow.com.ec/evento/THE
 - Texto: El 31 de octubre, Halloween tiene rey. ¿Ya tienes tu entrada?
 - Botón: «Comprar entradas»
 
+**Hasta el 28 de octubre (23:59):** el contador corto de la portada cuenta hasta el fin de la preventa, con el texto «La preventa termina en…». Después cuenta hasta el evento.
+
 **Durante el evento (desde las 12:00 del 31):** ¡Ya empezó! Te esperamos en Santa Ana Garden. Botón: «Cómo llegar»
 
 **Después del evento (desde las 02:00 del 1 de noviembre):** Gracias por rugir con nosotros. Nos vemos en 2027. Botón: «Ver fotos del evento» + campo de correo para avisos de la próxima edición.
@@ -343,8 +369,8 @@ Todos los botones llevan a [Ticketshow](https://www.ticketshow.com.ec/evento/THE
 ## 16. Footer
 
 - Logo + línea: Este Halloween tiene rey.
-- Menú: El evento · Entradas · Stands · Sponsors · Preguntas frecuentes · Contacto
-- Legal: Política de privacidad · Términos y condiciones · Bases de los concursos
+- Menú: El evento · Entradas · Stands · Sponsors · Preguntas frecuentes · ¿Ya compraste? · Contacto
+- Legal: Política de privacidad · Términos y condiciones · Términos de compra · Bases de los concursos
 - Redes: Instagram @thelionhalloweenparty · WhatsApp \[número\]
 - © 2026 The Lion Halloween Party · Sitio por \[agencia\]
 
@@ -352,7 +378,7 @@ Todos los botones llevan a [Ticketshow](https://www.ticketshow.com.ec/evento/THE
 
 **Por confirmar con el organizador**
 
-- [ ] Qué incluye cada localidad y si vale para la tarde, la noche o ambas
+- [ ] Si las localidades valen para la tarde, la noche o ambas
 - [ ] Edad mínima de la fiesta de noche
 - [ ] Premios: confirmar que son $1.000 de día más $2.000 de noche ($3.000 en total) y cómo se reparten
 - [ ] Nombres y fotos de los 7 artistas y los 3 DJs
@@ -365,12 +391,24 @@ Todos los botones llevan a [Ticketshow](https://www.ticketshow.com.ec/evento/THE
 - [ ] Bases de los concursos y política de privacidad (el formulario recoge datos personales)
 - [ ] Fotos y video para la portada y la galería
 
+**Venta en el portal (nuevo)**
+
+- [ ] Precios normales de cada localidad después del 28 de octubre
+- [ ] Si cada número del mapa es un asiento o una mesa (y para cuántas personas)
+- [ ] Cupo de Preferencia
+- [ ] Cuentas bancarias y titular para las transferencias
+- [ ] Tiempo máximo de verificación que el organizador puede cumplir
+- [ ] Enlace del checkout del portal
+- [ ] Política de reembolsos, transferencia de entradas y venta en la puerta (para los Términos de compra)
+- [ ] Qué bebidas incluyen las localidades VIP y dónde se canjean
+- [ ] Nombre oficial: el flyer dice «Santana VIP» y el mapa «Santa Ana VIP»; aquí se usa Santa Ana VIP
+
 **Marcas:** Toy Story, Beetlejuice y Jurassic World son marcas registradas. En el sitio conviene usar fotos propias de los shows y no logos ni imágenes oficiales; por eso el copy dice «Zona Jurásica» en lugar de «Área Jurassic World».
 
 **SEO y textos para compartir**
 
 - Título de la página: The Lion Halloween Party 2026 · 31 oct · Guayaquil
-- Meta descripción: Halloween en familia de 12:00 a 18:00 y fiesta Back to the Old School de 20:00 a 02:00 en Santa Ana Garden. $3.000 en premios. Entradas en Ticketshow.
+- Meta descripción: Halloween en familia de 12:00 a 18:00 y fiesta Back to the Old School de 20:00 a 02:00 en Santa Ana Garden. $3.000 en premios. Preventa desde $10 hasta el 28 de octubre.
 - Vista previa en WhatsApp e Instagram (imagen de 1200 × 630): *The Lion Halloween Party 2026* · Sábado 31 de octubre · De día en familia, de noche old school.
 
 **Mensajes prellenados de WhatsApp**
@@ -381,4 +419,4 @@ Todos los botones llevan a [Ticketshow](https://www.ticketshow.com.ec/evento/THE
 
 **Para el desarrollo:** el contador apunta a `2026-10-31T12:00:00-05:00` (hora de Ecuador fija, para que marque bien desde cualquier país). Cambia de estado a las 12:00 del 31 y a las 02:00 del 1 de noviembre.
 
-**Fuentes:** [Wine & Beer Fest](https://www.wineandbeerfest.com.ec/) (estructura de referencia) · [Ticketshow, evento](https://www.ticketshow.com.ec/evento/THE-LION-HALLOWEEN-PARTY-GUAYAQUIL-2026) · [Santa Ana Garden en Vamos Eventos](https://www.vamoseventos.com/venue/8611168c-c104-485b-be42-936b12ffd779) · flyers del evento enviados por Diego.
+**Fuentes:** [Wine & Beer Fest](https://www.wineandbeerfest.com.ec/) (estructura de referencia) · [Santa Ana Garden en Vamos Eventos](https://www.vamoseventos.com/venue/8611168c-c104-485b-be42-936b12ffd779) · flyers del evento enviados por Diego.
